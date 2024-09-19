@@ -1,0 +1,45 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: "Gateway"
+  cloud:
+    consul:
+      host: localhost  # Replace with your Consul host if it's not localhost
+      port: 8500
+      discovery:
+        enabled: true
+        instance-id: ${spring.application.name}-${server.port}  # Unique instance ID
+        service-name: Gateway  # Service name registered in Consul
+    gateway:
+      routes:
+        - id: ongoing
+          uri: lb:/ongoing
+          predicates:
+            - Path=/round,round/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins:
+              - "http://localhost:3000"
+            allowed-headers:
+              - "*"
+            allowed-methods:
+              - "GET"
+              - "POST"
+              - "OPTIONS"
+              - "DELETE"
+              - "PUT"
+              - "PATCH"
+      default-filters:
+        - name: Retry
+          args:
+            retries: 3
+            methods: GET, POST
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info

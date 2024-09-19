@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  property-manager:
+    build:
+      context: ./companyManager
+      dockerfile: Dockerfile
+    image: galovex/company-manager:latest
+    container_name: microservicesCompanyManager
+    ports:
+      - "8081:8081"  # Exposing the service on port 8081 externally
+    networks:
+      - microservices-network
+    depends_on: [microservicePostgres]
+  microservicePostgres:
+    image: postgres:15-alpine
+    container_name: microservicePostgres
+    environment:
+      POSTGRES_DB: proptools
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge

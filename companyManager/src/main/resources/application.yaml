@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: "CompanyManager"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/proptools
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: false
+  cloud:
+    consul:
+      host: localhost  # Replace with your Consul host if it's not localhost
+      port: 8500
+      discovery:
+        enabled: true
+        instance-id: ${spring.application.name}-${server.port}  # Unique instance ID
+        service-name: CompanyManager  # Service name registered in Consul
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+
+
+# Production profile:
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+  datasource:
+    url: jdbc:postgresql://microservicePostgres:5432/proptools
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8081
