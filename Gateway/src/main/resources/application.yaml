@@ -17,7 +17,7 @@ spring:
         - id: ongoing
           uri: lb:/ongoing
           predicates:
-            - Path=/round,round/**
+            - Path=/api/v1,api/v1/**
       globalcors:
         cors-configurations:
           '[/**]':
