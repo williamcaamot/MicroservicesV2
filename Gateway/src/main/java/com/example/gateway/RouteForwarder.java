@@ -7,5 +7,13 @@ import org.springframework.context.annotation.Bean;
 
 public class RouteForwarder {
 
-
+    @Bean
+    public RouteLocator myRoutes(RouteLocatorBuilder builder) {
+        return builder.routes()
+                .route(p -> p
+                        .path("/get")
+                        .filters(f -> f.rewritePath("/get", "/api/v1/workspace"))
+                        .uri("lb://CompanyManager"))  // Load-balanced URI
+                .build();
+    }
 }

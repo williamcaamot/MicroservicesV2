@@ -8,6 +8,9 @@ Docker compose will run all the services.
 There are a few services necessary for developmnet. Run the following command to run RabbitMQ, Consul and Postgres;
 > docker compose -f docker-compose.dev.yml up -d
 
+# Useful URLs
+ - Consul: http://localhost:8500/ui/dc1/services
+
 # Services
 
 - Running RabbitMQ:

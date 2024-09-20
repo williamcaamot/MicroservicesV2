@@ -6,18 +6,19 @@ spring:
     name: "Gateway"
   cloud:
     consul:
-      host: localhost  # Replace with your Consul host if it's not localhost
+      host: localhost
       port: 8500
       discovery:
         enabled: true
-        instance-id: ${spring.application.name}-${server.port}  # Unique instance ID
-        service-name: Gateway  # Service name registered in Consul
+        instance-id: ${spring.application.name}-${server.port}
+        service-name: Gateway
     gateway:
       routes:
-        - id: ongoing
-          uri: lb:/ongoing
+        - id: CompanyManager
+          uri: lb://CompanyManager
           predicates:
-            - Path=/api/v1,api/v1/**
+            - Path=/api/v1/workspace/**
+            - Path=/api/v1/workspace
       globalcors:
         cors-configurations:
           '[/**]':
@@ -37,6 +38,10 @@ spring:
           args:
             retries: 3
             methods: GET, POST
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    com.ecwid.consul: DEBUG
 
 management:
   endpoints:
