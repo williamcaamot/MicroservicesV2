@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 0  # This tells Spring Boot to use a random available port
 
 spring:
   application:
@@ -17,19 +17,21 @@ spring:
       enabled: false
   cloud:
     consul:
-      host: localhost  # Replace with your Consul host if it's not localhost
+      host: localhost
       port: 8500
       discovery:
         enabled: true
-        instance-id: ${spring.application.name}-${server.port}  # Unique instance ID
-        service-name: CompanyManager  # Service name registered in Consul
+        instance-id: ${spring.application.name}:${random.value}  # Unique instance ID
+        service-name: CompanyManager
+        prefer-ip-address: true
+        health-check-path: /actuator/health
+        health-check-interval: 15s
 
 management:
   endpoints:
     web:
       exposure:
         include: health, info
-
 
 # Production profile:
 ---
@@ -45,4 +47,4 @@ spring:
     hibernate:
       ddl-auto: update
 server:
-  port: 8081
+  port: 0  # Use random port in production as well
