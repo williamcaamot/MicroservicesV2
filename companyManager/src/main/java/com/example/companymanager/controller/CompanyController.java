@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/workspace/{workspaceId}/company")
-@CrossOrigin(origins = "*") // Enable CORS for this controller from any origin
 public class CompanyController {
 
 

@@ -9,12 +9,15 @@ There are a few services necessary for developmnet. Run the following command to
 > docker compose -f docker-compose.dev.yml up -d
 
 # Useful URLs
- - Consul: http://localhost:8500/ui/dc1/services
+> - Consul: http://localhost:8500/ui/dc1/services
+> - RabbitMQ: http://localhost:15672
 
 # Services
 
 - Running RabbitMQ:
 - [ ] docker run -d --hostname my-rabbit -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13.7-management
+- [ ] Consul for Load Balancing, Service Discovery and configuration
+- [ ] API Gateway
 
 - [ ] companyManager
 - [ ] AI sales communication recommender

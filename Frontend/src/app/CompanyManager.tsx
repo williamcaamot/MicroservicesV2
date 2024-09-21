@@ -18,7 +18,7 @@ export default function CompanyManager() {
 
     async function fetchCompanies() {
         try {
-            const result = await fetch("http://localhost:8080/api/v1/company");
+            const result = await fetch("/api/v1/company");
             const data = await result.json();
             console.log(data);
             setCompanies(data);
@@ -34,7 +34,7 @@ export default function CompanyManager() {
 
     async function handleSelectCompany(company) {
         try {
-            const result = await fetch("http://localhost:8080/api/v1/company", {
+            const result = await fetch("/api/v1/company", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

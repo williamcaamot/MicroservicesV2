@@ -12,7 +12,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/api/v1/workspace")
-@CrossOrigin(origins = "*") // Enable CORS for this controller from any origin
 public class WorkspaceController {
 
 
@@ -32,6 +31,7 @@ public class WorkspaceController {
 
     @GetMapping(path = "")
     public ResponseEntity<List<Workspace>> getWorkspaces() {
+        System.out.println("Hitting get /api/v1/workspace");
         return ResponseEntity.status(HttpStatus.OK).body(workspaceService.getWorkspaces());
     }
 

@@ -11,7 +11,8 @@ export function SelectWorkspace() {
     async function fetchWorkspaces() {
         setIsLoading(true);
         try {
-            const result = await fetch("http://localhost:8080/api/v1/workspace")
+            const result = await fetch("/api/v1/workspace")
+            console.log(result)
 
             if (result.ok) {
                 const data = await result.json();
@@ -36,7 +37,7 @@ export function SelectWorkspace() {
 
     async function saveNewWorkspace() {
         try {
-            const result = await fetch("http://localhost:8080/api/v1/workspace", {
+            const result = await fetch("/api/v1/workspace", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
