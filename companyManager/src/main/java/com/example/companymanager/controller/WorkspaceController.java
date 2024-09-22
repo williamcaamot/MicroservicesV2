@@ -20,7 +20,6 @@ public class WorkspaceController {
     @Autowired
     public WorkspaceController(WorkspaceService workspaceService) {
         this.workspaceService = workspaceService;
-        System.out.println("Lol");
     }
 
     @PostMapping(path = "")

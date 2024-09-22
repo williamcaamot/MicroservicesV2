@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import CompanyList from "../components/common/Company.tsx";
 import {useParams} from "react-router-dom";
 import Layout from "../Layout.tsx";
+import {c} from "vite/dist/node/types.d-aGj9QkWt";
 
 
 export interface Company {
@@ -36,6 +37,7 @@ export default function CompanyManager() {
 
 
     async function handleSelectCompany(company) {
+        console.log(company);
         try {
             const result = await fetch(`/api/v1/workspace/${workspaceId}/company`, {
                 method: "POST",

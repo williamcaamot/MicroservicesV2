@@ -1,4 +1,5 @@
 import {Company} from "../../app/CompanyManager.tsx";
+import {useNavigate, useParams} from "react-router-dom";
 
 type CompanyListProps = {
     companies: Company[];
@@ -8,6 +9,9 @@ type CompanyListProps = {
 };
 
 export default function CompanyList({ companies, onViewDetails, onUpdate, onDelete }){
+    const navigate = useNavigate();
+    const {workspaceId} = useParams();
+
     if(companies.length > 0) return (
         <div className="container mx-auto px-4 py-8">
             <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -22,7 +26,9 @@ export default function CompanyList({ companies, onViewDetails, onUpdate, onDele
                         </thead>
                         <tbody className="divide-y divide-gray-200">
                         {companies && companies.map((company) => (
-                            <tr key={company.id} className="hover:bg-gray-50">
+                            <tr key={company.id} className="hover:bg-gray-50"
+                            onClick={() => {navigate(`/app/workspace/${workspaceId}/company/${company.id}`)}}
+                            >
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900">{company.navn}</div>
                                 </td>

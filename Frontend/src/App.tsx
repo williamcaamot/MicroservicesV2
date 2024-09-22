@@ -4,6 +4,7 @@ import CompanyManager from "./app/CompanyManager.tsx";
 import {useState} from "react";
 import {SelectWorkspace} from "./components/SelectWorkspace.tsx";
 import {ReRoute} from "./ReRoute.tsx";
+import {Company} from "./Company.tsx";
 
 function Dashboard() {
     let {workspaceId} = useParams();
@@ -36,7 +37,8 @@ export default function App() {
                 <Route path={""} Component={ReRoute}/>
                 <Route path={"/app"} Component={SelectWorkspace}/>
                 <Route path={"/app/workspace/:workspaceId"} Component={Dashboard}/>
-                <Route path={"/app/workspace/:workspaceId/selskaper"} Component={CompanyManager}/>
+                <Route path={"/app/workspace/:workspaceId/company"} Component={CompanyManager}/>
+                <Route path={"/app/workspace/:workspaceId/company/:companyId"} Component={Company}/>
                 <Route path={"/app/workspace/:workspaceId/leads"} Component={Leads} />
                 <Route path={"/app/workspace/:workspaceId/aileadassist"} Component={AILeadAssist}/>
             </Routes>
