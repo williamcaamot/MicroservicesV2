@@ -29,6 +29,10 @@ public class WorkspaceService {
         return workspaceRepository.save(workspace);
     }
 
+    public boolean workspaceExists(Long workspaceId){
+        return workspaceRepository.existsById(workspaceId);
+    }
+
 
 
 }

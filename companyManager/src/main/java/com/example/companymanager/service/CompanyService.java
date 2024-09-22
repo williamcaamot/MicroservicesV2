@@ -28,8 +28,8 @@ public class CompanyService {
         return companyRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Could not find Company with ID " + id));
     }
 
-    public List<Company> getAllCompanies(){
-        return companyRepository.findAll();
+    public List<Company> getAllCompanies(Long workspaceId){
+        return companyRepository.getCompaniesByWorkspaceId(workspaceId);
     }
 
     public Company updateCompany(Company company){

@@ -57,27 +57,46 @@ export function SelectWorkspace() {
     }
 
 
-    return <>
-        <h2>Select workspace from this list</h2>
-        <label>Name for workspace: </label><input value={newWorkspaceName} onChange={(event) => {
-        setNewWorkspaceName(event.target.value)
-    }} className={"border p-2"}/>
-        <button onClick={() => saveNewWorkspace()} className={"bg-purple-800 text-white rounded p-2"}>Save new
-            workspace
-        </button>
-
-        <div className={"flex flex-wrap"}>
-        {workspaces && workspaces.map((workspace, index) => {
-            return <div onClick={() => navigate(`/app/workspace/${workspace.workspaceId}`)}
-                        className={"w-72 rounded border px-2 py-4 m-2 bg-gray-50 cursor-pointer"}
-                        key={index}>{workspace.name}
-                <br/>
-                <span className={"text-zinc-500 text-sm"}>ID: {workspace.workspaceId}</span>
-
+    return (
+        <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+            <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl font-bold text-gray-800">Select Workspace</h2>
+                <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
             </div>
-        })
-        }
-        </div>
 
-    </>
-}
+            <div className="mb-6">
+                <label htmlFor="workspaceName" className="block text-sm font-medium text-gray-700 mb-2">
+                    Name for new workspace:
+                </label>
+                <div className="flex gap-2">
+                    <input
+                        id="workspaceName"
+                        value={newWorkspaceName}
+                        onChange={(event) => setNewWorkspaceName(event.target.value)}
+                        className="flex-grow border border-gray-300 rounded-md shadow-sm px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        placeholder="Enter workspace name"
+                    />
+                    <button
+                        onClick={() => saveNewWorkspace()}
+                        className="bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-md px-4 py-2 transition duration-300 ease-in-out"
+                    >
+                        Save
+                    </button>
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {workspaces && workspaces.map((workspace, index) => (
+                    <div
+                        key={index}
+                        onClick={() => navigate(`/app/workspace/${workspace.workspaceId}`)}
+                        className="bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-4 cursor-pointer transition duration-300 ease-in-out"
+                    >
+                        <h3 className="font-semibold text-lg text-gray-800 mb-2">{workspace.name}</h3>
+                        <span className="text-sm text-gray-500">ID: {workspace.workspaceId}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};

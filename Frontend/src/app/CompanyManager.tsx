@@ -17,9 +17,11 @@ export default function CompanyManager() {
     const [searchTerm, setSearchTerm] = useState("")
     const [companies, setCompanies] = useState<Company[]>([])
 
+    const {workspaceId} = useParams();
+
     async function fetchCompanies() {
         try {
-            const result = await fetch("/api/v1/company");
+            const result = await fetch(`/api/v1/workspace/${workspaceId}/company`);
             const data = await result.json();
             console.log(data);
             setCompanies(data);
@@ -35,7 +37,7 @@ export default function CompanyManager() {
 
     async function handleSelectCompany(company) {
         try {
-            const result = await fetch("/api/v1/company", {
+            const result = await fetch(`/api/v1/workspace/${workspaceId}/company`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -59,7 +61,7 @@ export default function CompanyManager() {
     async function handleDeleteCompany(id: number) {
         console.log("Deleting company");
         try {
-            const result = await fetch(`http://localhost:8080/api/v1/company/${id}`, {method: "DELETE"})
+            const result = await fetch(`/api/v1/workspace/${workspaceId}/company/${id}`, {method: "DELETE"})
             if (result.ok) {
                 setCompanies(companies.filter(company => company.id !== id));
             }

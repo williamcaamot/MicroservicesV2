@@ -18,7 +18,6 @@ spring:
           uri: lb://CompanyManager
           predicates:
             - Path=/api/v1/workspace/**
-            - Path=/api/v1/workspace
       globalcors:
         cors-configurations:
           '[/**]':

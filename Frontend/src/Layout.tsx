@@ -12,6 +12,7 @@ import IconSecurePaymentFill from "./components/icons/IconSecurePaymentFill.tsx"
 import IconBusiness from "./components/icons/IconBusiness.tsx";
 import IconAccountPlus from "./components/icons/IconAccountPlus.tsx";
 import IconNotification from "./components/icons/IconNotification.tsx";
+import IconAddressCard from "./components/icons/IconAddressCard.tsx";
 
 const tabs = [
     {
@@ -57,7 +58,7 @@ export default function Layout({children}) {
         <div className="w-full flex justify-center">
             <div className="flex w-full h-screen bg-gray-100">
                 {/* Vertical Menu */}
-                <nav className="w-52 bg-white borde-r shadow-sms">
+                <nav className="w-64 bg-white borde-r shadow-sms">
                     <div className="p-4">
                         <img src={"/logo.png"}/>
                     </div>
@@ -66,6 +67,7 @@ export default function Layout({children}) {
                         <li onClick={() => {navigate(`/app/workspace/${workspaceId}/selskaper`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconListCircleOutline width={"1.4em"} height={"1.4em"}/></span>Selskaper</a></li>
                         <li onClick={() => {navigate(`/app/workspace/${workspaceId}/leads`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconAccountPlus width={"1.4em"} height={"1.4em"}/></span>Leads</a></li>
                         <li onClick={() => {navigate(`/app/workspace/${workspaceId}/aileadassist`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconNotification width={"1.4em"} height={"1.4em"}/></span>AI Lead assist</a></li>
+                        <li onClick={() => {navigate(`/app`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconAddressCard width={"1.4em"} height={"1.4em"}/></span>Change workspace</a></li>
                     </ul>
                 </nav>
 
