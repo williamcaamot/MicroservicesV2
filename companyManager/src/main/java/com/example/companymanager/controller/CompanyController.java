@@ -23,13 +23,16 @@ public class CompanyController {
 
     @PostMapping(path = "")
     public ResponseEntity<Company> saveCompany(@PathVariable Long workspaceId, @RequestBody Company company) {
-        System.out.println("Saving new company");
+
         company.setWorkspaceId(workspaceId);
         return ResponseEntity.status(HttpStatus.CREATED).body(companyService.saveCompany(company));
     }
 
     @GetMapping(path = "")
     public ResponseEntity<List<Company>> getCompanies(@PathVariable Long workspaceId) {
+        System.out.println("Workspace ID");
+        System.out.println(workspaceId);
+
         return ResponseEntity.status(HttpStatus.OK).body(companyService.getAllCompanies(workspaceId));
     }
 
