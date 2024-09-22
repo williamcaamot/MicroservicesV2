@@ -2,6 +2,7 @@ import CompanySearchV2 from "../CompanySearchV2.tsx";
 import {useEffect, useState} from "react";
 import CompanyList from "../components/common/Company.tsx";
 import {useParams} from "react-router-dom";
+import Layout from "../Layout.tsx";
 
 
 export interface Company {
@@ -59,7 +60,7 @@ export default function CompanyManager() {
         console.log("Deleting company");
         try {
             const result = await fetch(`http://localhost:8080/api/v1/company/${id}`, {method: "DELETE"})
-            if(result.ok){
+            if (result.ok) {
                 setCompanies(companies.filter(company => company.id !== id));
             }
         } catch (e) {
@@ -68,18 +69,23 @@ export default function CompanyManager() {
     }
 
 
-    if (companies) return <><h1 className={"pb-4"}>Selskaper</h1>
-        <CompanySearchV2 handleSelectCompany={handleSelectCompany} setSearchTerm={setSearchTerm}
-                         searchTerm={searchTerm}/>
+    if (companies) return <Layout>
+        <h1 className={"pb-4"}>Selskaper</h1>
+        <CompanySearchV2
+            handleSelectCompany={handleSelectCompany}
+            setSearchTerm={setSearchTerm}
+            searchTerm={searchTerm}
+        />
         <div>
-            <CompanyList companies={companies} onViewDetails={handleSelectCompany} onUpdate={handleUpdateCompany}
-                         onDelete={handleDeleteCompany}/>
-
-
+            <CompanyList
+                companies={companies}
+                onViewDetails={handleSelectCompany}
+                onUpdate={handleUpdateCompany}
+                onDelete={handleDeleteCompany}
+            />
         </div>
 
-
-    </>
+    </Layout>
 
 
 }

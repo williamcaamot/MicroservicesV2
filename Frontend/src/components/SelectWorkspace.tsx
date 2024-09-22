@@ -66,16 +66,18 @@ export function SelectWorkspace() {
             workspace
         </button>
 
-
+        <div className={"flex flex-wrap"}>
         {workspaces && workspaces.map((workspace, index) => {
-            return <div onClick={() => navigate(`/app/${workspace.workspaceId}`)}
-                        className={"border p-2 m-2 bg-gray-50 cursor-pointer"}
-                        key={index}>{workspace.workspaceId} {workspace.name}
+            return <div onClick={() => navigate(`/app/workspace/${workspace.workspaceId}`)}
+                        className={"w-72 rounded border px-2 py-4 m-2 bg-gray-50 cursor-pointer"}
+                        key={index}>{workspace.name}
+                <br/>
+                <span className={"text-zinc-500 text-sm"}>ID: {workspace.workspaceId}</span>
 
             </div>
         })
         }
-
+        </div>
 
     </>
 }

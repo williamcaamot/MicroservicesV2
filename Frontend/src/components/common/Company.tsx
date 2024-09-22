@@ -1,4 +1,4 @@
-import {Company} from "@/app/CompanyManager.tsx";
+import {Company} from "../../app/CompanyManager.tsx";
 
 type CompanyListProps = {
     companies: Company[];
@@ -8,7 +8,7 @@ type CompanyListProps = {
 };
 
 export default function CompanyList({ companies, onViewDetails, onUpdate, onDelete }){
-    return (
+    if(companies.length > 0) return (
         <div className="container mx-auto px-4 py-8">
             <div className="bg-white shadow-md rounded-lg overflow-hidden">
                 <div className="overflow-x-auto">
@@ -21,7 +21,7 @@ export default function CompanyList({ companies, onViewDetails, onUpdate, onDele
                         </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200">
-                        {companies.map((company) => (
+                        {companies && companies.map((company) => (
                             <tr key={company.id} className="hover:bg-gray-50">
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900">{company.navn}</div>
