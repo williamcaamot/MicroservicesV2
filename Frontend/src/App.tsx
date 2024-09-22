@@ -19,6 +19,12 @@ function Leads() {
     </Layout>
 }
 
+function AILeadAssist() {
+    return<Layout>
+        <h1>AI Lead Assistant</h1>
+    </Layout>
+}
+
 export default function App() {
 
     const [workspace, setWorkspace] = useState<Workspace | undefined>(undefined);
@@ -32,11 +38,9 @@ export default function App() {
                 <Route path={"/app/workspace/:workspaceId"} Component={Dashboard}/>
                 <Route path={"/app/workspace/:workspaceId/selskaper"} Component={CompanyManager}/>
                 <Route path={"/app/workspace/:workspaceId/leads"} Component={Leads} />
+                <Route path={"/app/workspace/:workspaceId/aileadassist"} Component={AILeadAssist}/>
             </Routes>
-
         </BrowserRouter>
-
-
     );
 }
 

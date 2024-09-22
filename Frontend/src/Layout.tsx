@@ -11,12 +11,13 @@ export default function Layout({children}) {
                 {/* Vertical Menu */}
                 <nav className="w-52 bg-white borde-r shadow-sms">
                     <div className="p-4">
-                        <h1 className="text-xl font-bold text-gray-800">DealFlow</h1>
+                        <img src={"/logo.png"}/>
                     </div>
                     <ul className="space-y-2 p-4">
-                        <li onClick={() => {navigate("/app")}}><a className="block py-2 px-4 text-gray-700 hover:bg-gray-200 rounded">Dashboard</a></li>
+                        <li onClick={() => {navigate(`/app/workspace/${workspaceId}`)}}><a className="block py-2 px-4 text-gray-700 hover:bg-gray-200 rounded">Dashboard</a></li>
                         <li onClick={() => {navigate(`/app/workspace/${workspaceId}/selskaper`)}}><a className="block py-2 px-4 text-gray-700 hover:bg-gray-200 rounded">Selskaper</a></li>
-                        <li onClick={() => {navigate(`/app/workspace/${workspaceId}/selskaper`)}}><a className="block py-2 px-4 text-gray-700 hover:bg-gray-200 rounded">Leads</a></li>
+                        <li onClick={() => {navigate(`/app/workspace/${workspaceId}/leads`)}}><a className="block py-2 px-4 text-gray-700 hover:bg-gray-200 rounded">Leads</a></li>
+                        <li onClick={() => {navigate(`/app/workspace/${workspaceId}/aileadassist`)}}><a className="block py-2 px-4 text-gray-700 hover:bg-gray-200 rounded">AI Lead assist</a></li>
                     </ul>
                 </nav>
 
