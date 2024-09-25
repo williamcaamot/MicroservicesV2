@@ -1,10 +1,11 @@
 import Layout from "./Layout.tsx";
 import {BrowserRouter, Route, Routes, useParams} from "react-router-dom";
 import CompanyManager from "./app/CompanyManager.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {SelectWorkspace} from "./components/SelectWorkspace.tsx";
 import {ReRoute} from "./ReRoute.tsx";
 import {Company} from "./Company.tsx";
+import {LoadingScreen} from "./app/LoadingScreen.tsx";
 
 function Dashboard() {
     let {workspaceId} = useParams();
@@ -29,8 +30,25 @@ function AILeadAssist() {
 export default function App() {
 
     const [workspace, setWorkspace] = useState<Workspace | undefined>(undefined);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    return (
+
+    async function fetchDetails(){
+        setTimeout(() => {
+            setIsLoading(false)
+        },500)
+    }
+
+    useEffect(() => {
+        fetchDetails()
+    }, []);
+
+
+    if(isLoading) return (
+        <LoadingScreen/>
+    )
+
+    if(!isLoading) return (
 
         <BrowserRouter>
             <Routes>
