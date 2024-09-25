@@ -31,5 +31,5 @@ There are a few services necessary for developmnet. Run the following command to
 # User stories and features
 - [ ] Authentication, Email and password for this simple project in the course.
 - [ ] Products selling, used for prompts to generate pitches
-- [ ] 
+- [ ] Global exception handling using the same DTO in ALL microservices
 
