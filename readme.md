@@ -28,3 +28,8 @@ There are a few services necessary for developmnet. Run the following command to
  - Unique ID service account: 108969935334828963980
  - Google custom search API key:  AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow 
 
+# User stories and features
+- [ ] Authentication, Email and password for this simple project in the course.
+- [ ] Products selling, used for prompts to generate pitches
+- [ ] 
+
