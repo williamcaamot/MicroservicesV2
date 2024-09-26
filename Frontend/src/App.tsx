@@ -35,14 +35,23 @@ export default function App() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
 
-    async function fetchDetails(){
+    async function fetchAccount(){
+        try{
+            const result = await fetch("/api/v1/auth/account");
+            const data = await result.json();
+            if(result.ok){
+                console.log(data);
+            }
+        }catch (e) {
+
+        }
         setTimeout(() => {
             setIsLoading(false)
         },250)
     }
 
     useEffect(() => {
-        fetchDetails()
+        fetchAccount()
     }, []);
 
 

@@ -1,27 +1,56 @@
 import AuthLayout from "../../components/common/AuthLayout.tsx";
 import {useNavigate} from "react-router-dom";
+import {useState} from "react";
 
 export default function Login() {
     const navigate = useNavigate();
 
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+
+    async function handleLogin(event){
+        event.preventDefault();
+        try{
+            const result = await fetch("/api/v1/auth/login", {
+                method: "POST",
+                headers: {
+                    "content-type":"Application/JSON"
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            })
+            if(result.ok){
+                const data = await result.json();
+                console.log(data);
+            }
+        }catch (e) {
+            console.log(e);
+        }
+    }
+
 
     return (
         <AuthLayout>
-            <form className="mt-8 space-y-6" action="#" method="POST">
+            <form onSubmit={(event) => handleLogin(event)} className="mt-8 space-y-6" action="#" method="POST">
                 <input type="hidden" name="remember" value="true" />
                 <div className="rounded-md shadow-sm -space-y-px">
                     <div>
                         <label htmlFor="email-address" className="sr-only">
-                            Email address
+                            Username
                         </label>
                         <input
-                            id="email-address"
-                            name="email"
-                            type="email"
-                            autoComplete="email"
+                            id="username"
+                            name="username"
+                            type="text"
+                            autoComplete="username"
                             required
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                            placeholder="Email address"
+                            placeholder="Username"
+                            value={username}
+                            onChange={(event) => {setUsername(event.target.value)}}
                         />
                     </div>
                     <div>
@@ -36,6 +65,8 @@ export default function Login() {
                             required
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             placeholder="Password"
+                            value={password}
+                            onChange={(event) => {setPassword(event.target.value)}}
                         />
                     </div>
                 </div>

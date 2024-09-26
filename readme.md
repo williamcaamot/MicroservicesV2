@@ -33,6 +33,9 @@ There are a few services necessary for developmnet. Run the following command to
 - [ ] Products selling, used for prompts to generate pitches
 - [ ] Global exception handling using the same DTO in ALL microservices
 
+## Gateway requirements
+- [ ] Circuit breaker - A dependency that should be added.
+- [ ] Load balancing
 
 # Exam grades
 ## E Requirements:

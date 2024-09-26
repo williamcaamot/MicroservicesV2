@@ -3,11 +3,17 @@ package com.example.authentication.controller;
 import com.example.authentication.entity.Account;
 import com.example.authentication.repository.AccountRepository;
 import com.example.authentication.utility.JwtUtil;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.PublicKey;
 import java.util.Optional;
 
 @RestController
@@ -37,12 +43,44 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody Account account) {
+    public ResponseEntity<?> loginUser(@RequestBody Account account, HttpServletResponse response) {
         Optional<Account> dbAccount = accountRepository.findByUsername(account.getUsername());
         if (dbAccount.isPresent() && passwordEncoder.matches(account.getPassword(), dbAccount.get().getPassword())) {
             String token = jwtUtil.generateToken(account.getUsername());
-            return ResponseEntity.ok(token);
+
+            // Set the JWT as a cookie
+            Cookie cookie = new Cookie("jwt", token);
+            cookie.setHttpOnly(true); // Make it HTTP-only
+            cookie.setPath("/"); // Cookie is available across the entire site
+            cookie.setMaxAge(60 * 60 * 10); // Cookie expires in 10 hours
+            response.addCookie(cookie); // Add cookie to response
+
+            return ResponseEntity.ok("Login successful");
         }
         return ResponseEntity.badRequest().body("Invalid username or password");
     }
+
+    @GetMapping("/account")
+    public ResponseEntity<Account> getAccount() {
+        System.out.println("getting account");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // Check if the authentication is valid
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        String username = authentication.getName(); // Get username from the authentication token
+        System.out.println(username);
+
+        // Fetch the account from the database using the username
+        Optional<Account> account = accountRepository.findByUsername(username);
+
+        if (account.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(account.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 }
