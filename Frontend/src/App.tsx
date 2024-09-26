@@ -10,19 +10,23 @@ import Register from "./app/auth/Register.tsx";
 import {Leads} from "./app/Leads.tsx";
 import {AILeadAssist} from "./app/AILeadAssist.tsx";
 import {Dashboard} from "./app/Dashboard.tsx";
+import {AppContext} from "./context/AppContext.ts";
 
 
 export default function App() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    async function fetchAccount(){
-        try{
+    const [account, setAccount] = useState<object>({})
+
+    async function fetchAccount() {
+        try {
             const result = await fetch("/api/v1/auth/account");
             const data = await result.json();
-            if(result.ok){
+            if (result.ok) {
                 console.log(data);
+                setAccount(data);
             }
-        }catch (e) {
+        } catch (e) {
             console.log(e)
         }
         setIsLoading(false);
@@ -33,25 +37,27 @@ export default function App() {
     }, []);
 
 
-    if(isLoading) return (
+    if (isLoading) return (
         <LoadingScreen/>
     )
 
-    if(!isLoading) return (
+    if (!isLoading) return (
 
-        <BrowserRouter>
-            <Routes>
-                <Route path={""} Component={ReRoute}/>
-                <Route path={"/auth/login"} Component={Login}/>
-                <Route path={"/auth/register"} Component={Register}/>
-                <Route path={"/app"} Component={SelectWorkspace}/>
-                <Route path={"/app/workspace/:workspaceId"} Component={Dashboard}/>
-                <Route path={"/app/workspace/:workspaceId/company"} Component={CompanyManager}/>
-                <Route path={"/app/workspace/:workspaceId/company/:companyId"} Component={Company}/>
-                <Route path={"/app/workspace/:workspaceId/leads"} Component={Leads} />
-                <Route path={"/app/workspace/:workspaceId/aileadassist"} Component={AILeadAssist}/>
-            </Routes>
-        </BrowserRouter>
+        <AppContext.Provider value={{account: account}}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path={""} Component={ReRoute}/>
+                    <Route path={"/auth/login"} Component={Login}/>
+                    <Route path={"/auth/register"} Component={Register}/>
+                    <Route path={"/app"} Component={SelectWorkspace}/>
+                    <Route path={"/app/workspace/:workspaceId"} Component={Dashboard}/>
+                    <Route path={"/app/workspace/:workspaceId/company"} Component={CompanyManager}/>
+                    <Route path={"/app/workspace/:workspaceId/company/:companyId"} Component={Company}/>
+                    <Route path={"/app/workspace/:workspaceId/leads"} Component={Leads}/>
+                    <Route path={"/app/workspace/:workspaceId/aileadassist"} Component={AILeadAssist}/>
+                </Routes>
+            </BrowserRouter>
+        </AppContext.Provider>
     );
 }
 
