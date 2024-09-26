@@ -57,14 +57,28 @@ public class AuthController {
             cookie.setMaxAge(60 * 60 * 10); // Cookie expires in 10 hours
             response.addCookie(cookie); // Add cookie to response
 
-            return ResponseEntity.ok("Login successful");
+            AccountDTO accountDTO = AccountMapper.mapToAccountDTO(dbAccount.get(), new AccountDTO());
+
+            return ResponseEntity.status(HttpStatus.OK).body(accountDTO);
         }
         return ResponseEntity.badRequest().body("Invalid username or password");
     }
 
+    @PostMapping(path = "/signout")
+    public ResponseEntity<?> signout(HttpServletResponse response){
+        System.out.println("Signing out");
+        Cookie cookie = new Cookie("jwt", null);
+        cookie.setHttpOnly(true); // Make it HTTP-only
+        cookie.setPath("/"); // Cookie is available across the entire site
+        cookie.setMaxAge(60 * 60 * 10); // Cookie expires in 10 hours
+        response.addCookie(cookie); // Add cookie to response
+
+        return ResponseEntity.status(HttpStatus.OK).body(null);
+    }
+
+
     @GetMapping("/account")
     public ResponseEntity<AccountDTO> getAccount() {
-        System.out.println("getting account");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         // Check if the authentication is valid
@@ -85,4 +99,6 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+
 }

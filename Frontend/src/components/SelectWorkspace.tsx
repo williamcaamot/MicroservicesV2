@@ -1,6 +1,8 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import InformationPopup from "./common/InformationPopup.tsx";
+import SignoutButton from "./common/SignoutButton.tsx";
+import {AppContext} from "../context/AppContext.ts";
 
 export function SelectWorkspace() {
     const [workspaces, setWorkspaces] = useState<Workspace[] | undefined>(undefined)
@@ -8,6 +10,7 @@ export function SelectWorkspace() {
     const [error, setError] = useState<string | undefined>(undefined)
 
     const navigate = useNavigate()
+
 
     async function fetchWorkspaces() {
         setIsLoading(true);
@@ -59,8 +62,8 @@ export function SelectWorkspace() {
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-            <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl font-bold text-gray-800 flex">Select Workspace <InformationPopup>Hello </InformationPopup></h2>
+            <div className="flex items-center justify-between mb-8 flex">
+                <h2 className="text-2xl font-bold text-gray-800">Select Workspace </h2><InformationPopup>Create a workspace to use the application. All information is stored in association to a workspace.</InformationPopup>
                 <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
             </div>
 
@@ -97,6 +100,7 @@ export function SelectWorkspace() {
                     </div>
                 ))}
             </div>
+            <SignoutButton/>
         </div>
     );
 };

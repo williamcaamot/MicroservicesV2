@@ -1,12 +1,12 @@
 import AuthLayout from "../../components/common/AuthLayout.tsx";
 import {useNavigate} from "react-router-dom";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AppContext} from "../../context/AppContext.ts";
 
 export default function Login() {
     const navigate = useNavigate();
 
-    const {account} = useContext(AppContext);
+    const {account, setAccount} = useContext(AppContext);
 
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -27,18 +27,23 @@ export default function Login() {
                 })
             })
             if(result.ok){
+                console.log("Succesffully signed in")
                 const data = await result.json();
-                console.log(data);
+                setAccount(data);
+                navigate("/app")
             }
         }catch (e) {
             console.log(e);
         }
     }
 
-    if(account) navigate("/app");
+    useEffect(() => {
+        if(account) navigate("/app")
+    }, []);
 
 
-    if(!account) return (
+
+    return (
         <AuthLayout>
             <form onSubmit={(event) => handleLogin(event)} className="mt-8 space-y-6" action="#" method="POST">
                 <input type="hidden" name="remember" value="true" />

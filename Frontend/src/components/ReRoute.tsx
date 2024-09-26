@@ -1,12 +1,18 @@
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
+import {AppContext} from "../context/AppContext.ts";
 
 export function ReRoute() {
     const navigate = useNavigate()
+    const {account} = useContext(AppContext);
 
     useEffect(() => {
-        navigate("/app")
-    }, []);
+        if(!account) navigate("/")
+        if(account) navigate("/app")
+    }, [account]);
 
-    return <></>
+
+
+
+    return <h1>Home page</h1>
 }

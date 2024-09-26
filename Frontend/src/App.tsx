@@ -1,6 +1,6 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import CompanyManager from "./app/CompanyManager.tsx";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {SelectWorkspace} from "./components/SelectWorkspace.tsx";
 import {ReRoute} from "./components/ReRoute.tsx";
 import {Company} from "./components/Company.tsx";
@@ -15,8 +15,7 @@ import {AppContext} from "./context/AppContext.ts";
 
 export default function App() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-
-    const [account, setAccount] = useState<object>({})
+    const [account, setAccount] = useState<object | undefined>(undefined);
 
     async function fetchAccount() {
         try {
@@ -43,27 +42,26 @@ export default function App() {
 
     if (!isLoading) return (
 
-        <AppContext.Provider value={{account: account}}>
+        <AppContext.Provider value={{account: account, setAccount: setAccount}}>
             <BrowserRouter>
                 <Routes>
                     <Route path={""} Component={ReRoute}/>
                     <Route path={"/auth/login"} Component={Login}/>
                     <Route path={"/auth/register"} Component={Register}/>
-                    <Route path={"/app"} Component={SelectWorkspace}/>
-                    <Route path={"/app/workspace/:workspaceId"} Component={Dashboard}/>
-                    <Route path={"/app/workspace/:workspaceId/company"} Component={CompanyManager}/>
-                    <Route path={"/app/workspace/:workspaceId/company/:companyId"} Component={Company}/>
-                    <Route path={"/app/workspace/:workspaceId/leads"} Component={Leads}/>
-                    <Route path={"/app/workspace/:workspaceId/aileadassist"} Component={AILeadAssist}/>
+                    <Route path={"/app/*"} element={account ? <AppRoutes/> : <Navigate to={"/auth/login"}/> }/>
                 </Routes>
             </BrowserRouter>
         </AppContext.Provider>
     );
 }
 
-
-export function Home() {
-
-    return <h1>Home</h1>
+function AppRoutes(){
+    return<Routes>
+        <Route path={"/"} Component={SelectWorkspace}/>
+        <Route path={"/workspace/:workspaceId"} Component={Dashboard}/>
+        <Route path={"/workspace/:workspaceId/company"} Component={CompanyManager}/>
+        <Route path={"/workspace/:workspaceId/company/:companyId"} Component={Company}/>
+        <Route path={"/workspace/:workspaceId/leads"} Component={Leads}/>
+        <Route path={"/workspace/:workspaceId/aileadassist"} Component={AILeadAssist}/>
+    </Routes>
 }
-
