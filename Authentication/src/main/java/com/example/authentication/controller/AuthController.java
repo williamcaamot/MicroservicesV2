@@ -1,6 +1,8 @@
 package com.example.authentication.controller;
 
+import com.example.authentication.dto.AccountDTO;
 import com.example.authentication.entity.Account;
+import com.example.authentication.mapper.AccountMapper;
 import com.example.authentication.repository.AccountRepository;
 import com.example.authentication.utility.JwtUtil;
 import jakarta.servlet.http.Cookie;
@@ -61,7 +63,7 @@ public class AuthController {
     }
 
     @GetMapping("/account")
-    public ResponseEntity<Account> getAccount() {
+    public ResponseEntity<AccountDTO> getAccount() {
         System.out.println("getting account");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -77,10 +79,10 @@ public class AuthController {
         Optional<Account> account = accountRepository.findByUsername(username);
 
         if (account.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(account.get());
+            AccountDTO accountDTO = AccountMapper.mapToAccountDTO(account.get(), new AccountDTO());
+            return ResponseEntity.status(HttpStatus.OK).body(accountDTO);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
 }
