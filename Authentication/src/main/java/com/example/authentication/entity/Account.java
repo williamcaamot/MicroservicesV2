@@ -1,6 +1,5 @@
 package com.example.authentication.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +7,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Account {
+public class Account extends BaseEnetity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
