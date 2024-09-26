@@ -1,8 +1,8 @@
 import {BrowserRouter, Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import CompanyManager from "./app/CompanyManager.tsx";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {SelectWorkspace} from "./components/SelectWorkspace.tsx";
-import {ReRoute} from "./components/ReRoute.tsx";
+import {Home} from "./components/Home.tsx";
 import {Company} from "./components/Company.tsx";
 import {LoadingScreen} from "./app/LoadingScreen.tsx";
 import Login from "./app/auth/Login.tsx";
@@ -41,11 +41,10 @@ export default function App() {
     )
 
     if (!isLoading) return (
-
         <AppContext.Provider value={{account: account, setAccount: setAccount}}>
             <BrowserRouter>
                 <Routes>
-                    <Route path={""} Component={ReRoute}/>
+                    <Route path={""} Component={Home}/>
                     <Route path={"/auth/login"} Component={Login}/>
                     <Route path={"/auth/register"} Component={Register}/>
                     <Route path={"/app/*"} element={account ? <AppRoutes/> : <Navigate to={"/auth/login"}/> }/>

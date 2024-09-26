@@ -1,11 +1,14 @@
 import AuthLayout from "../../components/common/AuthLayout.tsx";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import LoadingSpinner from "../../components/common/LoadingSpinner.tsx";
 import {useNavigate} from "react-router-dom";
+import {AppContext} from "../../context/AppContext.ts";
 
 export default function Register() {
 
     const navigate = useNavigate();
+
+    const {setAccount} = useContext(AppContext)
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | undefined>(undefined);
@@ -37,8 +40,8 @@ export default function Register() {
                 return
             }
             const data = await result.json();
-            console.log(data);
-
+            setAccount(data)
+            navigate("/app")
         } catch (e) {
             setError("Something went wrong when registering")
             console.log(e)

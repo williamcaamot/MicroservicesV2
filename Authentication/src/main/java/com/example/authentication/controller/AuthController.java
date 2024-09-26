@@ -34,14 +34,25 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody Account account) {
+    public ResponseEntity<?> registerUser(@RequestBody Account account, HttpServletResponse response) {
         if (accountRepository.findByUsername(account.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("Username is already taken!");
         }
 
         account.setPassword(passwordEncoder.encode(account.getPassword()));
-        accountRepository.save(account);
-        return ResponseEntity.ok("User registered successfully!");
+        Account savedAccount = accountRepository.save(account);
+
+        String token = jwtUtil.generateToken(account.getUsername());
+
+        // Set the JWT as a cookie
+        Cookie cookie = new Cookie("jwt", token);
+        cookie.setHttpOnly(true); // Make it HTTP-only
+        cookie.setPath("/"); // Cookie is available across the entire site
+        cookie.setMaxAge(60 * 60 * 10); // Cookie expires in 10 hours
+        response.addCookie(cookie); // Add cookie to response
+
+        AccountDTO savedAccountDTO = AccountMapper.mapToAccountDTO(savedAccount, new AccountDTO());
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedAccountDTO);
     }
 
     @PostMapping("/login")
@@ -70,7 +81,7 @@ public class AuthController {
         Cookie cookie = new Cookie("jwt", null);
         cookie.setHttpOnly(true); // Make it HTTP-only
         cookie.setPath("/"); // Cookie is available across the entire site
-        cookie.setMaxAge(60 * 60 * 10); // Cookie expires in 10 hours
+        cookie.setMaxAge(60); // Cookie expires in 10 hours
         response.addCookie(cookie); // Add cookie to response
 
         return ResponseEntity.status(HttpStatus.OK).body(null);

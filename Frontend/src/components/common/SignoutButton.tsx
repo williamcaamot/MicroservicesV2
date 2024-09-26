@@ -1,9 +1,12 @@
 import {useNavigate} from "react-router-dom";
+import {useContext} from "react";
+import {AppContext} from "../../context/AppContext.ts";
 
 
 export default function SignoutButton(){
 
     const navigate = useNavigate();
+    const {setAccount} = useContext(AppContext);
 
     async function handleSignout(){
         try{
@@ -15,6 +18,7 @@ export default function SignoutButton(){
             })
             if (result.ok){
                 console.log("Signed out")
+                setAccount(undefined);
                 navigate("/")
             }
         }catch (e) {
