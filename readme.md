@@ -33,3 +33,12 @@ There are a few services necessary for developmnet. Run the following command to
 - [ ] Products selling, used for prompts to generate pitches
 - [ ] Global exception handling using the same DTO in ALL microservices
 
+
+# Exam grades
+## E Requirements:
+- [ ] Synchronous communication
+- [ ] Asynchronous communication
+
+## A Requirements:
+- [ ] Docker containerization and scaling (not auto scaling, but being able to select how many instances)
+

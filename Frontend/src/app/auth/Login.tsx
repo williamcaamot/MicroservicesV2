@@ -1,6 +1,10 @@
 import AuthLayout from "../../components/common/AuthLayout.tsx";
+import {useNavigate} from "react-router-dom";
 
 export default function Login() {
+    const navigate = useNavigate();
+
+
     return (
         <AuthLayout>
             <form className="mt-8 space-y-6" action="#" method="POST">
@@ -45,6 +49,8 @@ export default function Login() {
                     </button>
                 </div>
             </form>
+            <span className={""}>New here? <button className={"underline"}
+                                                                  onClick={() => navigate("/auth/register")}>Sign up</button></span>
         </AuthLayout>
     );
 }

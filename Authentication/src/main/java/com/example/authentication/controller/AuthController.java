@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-@CrossOrigin(origins = "*") // Enable CORS for this controller from any origin
 public class AuthController {
 
     private AccountRepository accountRepository;
@@ -28,7 +27,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody Account account) {
-        System.out.println("Trying to register");
         if (accountRepository.findByUsername(account.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("Username is already taken!");
         }
@@ -47,5 +45,4 @@ public class AuthController {
         }
         return ResponseEntity.badRequest().body("Invalid username or password");
     }
-
 }

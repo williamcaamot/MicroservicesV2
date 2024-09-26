@@ -38,7 +38,7 @@ export default function App() {
     async function fetchDetails(){
         setTimeout(() => {
             setIsLoading(false)
-        },500)
+        },250)
     }
 
     useEffect(() => {

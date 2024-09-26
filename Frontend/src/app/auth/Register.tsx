@@ -1,8 +1,13 @@
 import AuthLayout from "../../components/common/AuthLayout.tsx";
 import {useState} from "react";
 import {b} from "vite/dist/node/types.d-aGj9QkWt";
+import {LoadingScreen} from "../LoadingScreen.tsx";
+import LoadingSpinner from "../../components/common/LoadingSpinner.tsx";
+import {useNavigate} from "react-router-dom";
 
 export default function Register() {
+
+    const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | undefined>(undefined);
@@ -12,9 +17,11 @@ export default function Register() {
     const [password, setPassword] = useState<string>("");
 
 
-    async function postRegister() {
+    async function postRegister(event) {
+        event.preventDefault();
+        setIsLoading(true)
         try {
-            const result = await fetch("http://localhost:63534/api/v1/auth/register", {
+            const result = await fetch("/api/v1/auth/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "Application/JSON"
@@ -28,20 +35,25 @@ export default function Register() {
             if (!result.ok) {
                 console.log("Something went wrong, status: " + result.status)
                 setError("Something went wrong");
+                setIsLoading(false)
                 return
             }
             const data = await result.json();
             console.log(data);
+
         } catch (e) {
             setError("Something went wrong when registering")
             console.log(e)
         }
+        setIsLoading(false);
     }
 
 
     return (
         <AuthLayout>
-            <form className="mt-8 space-y-6" onSubmit={() => {postRegister()}}>
+            <form className="mt-8 space-y-6" onSubmit={(event) => {
+                postRegister(event)
+            }}>
                 <input type="hidden" name="remember" value="true"/>
                 <div className="rounded-md shadow-sm -space-y-px">
                     <div>
@@ -49,6 +61,7 @@ export default function Register() {
                             Username
                         </label>
                         <input
+                            autoFocus={true}
                             id="Username"
                             name="Username"
                             type="text"
@@ -57,7 +70,9 @@ export default function Register() {
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             placeholder="Username"
                             value={username}
-                            onChange={(event) => {setUsername(event.target.value)}}
+                            onChange={(event) => {
+                                setUsername(event.target.value)
+                            }}
                         />
                     </div>
                     <div>
@@ -73,7 +88,9 @@ export default function Register() {
                             className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                             placeholder="Email address"
                             value={email}
-                            onChange={(event) => {setEmail(event.target.value)}}
+                            onChange={(event) => {
+                                setEmail(event.target.value)
+                            }}
                         />
                     </div>
                     <div>
@@ -99,18 +116,12 @@ export default function Register() {
                         type="submit"
                         className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Register
+                        {isLoading ? <LoadingSpinner/> : "Register"}
                     </button>
                 </div>
             </form>
-
-            <button
-                onClick={() => postRegister()}
-                type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-                Register V2
-            </button>
+            <span className={""}>Already have an account? <button className={"underline"}
+                                                                  onClick={() => navigate("/auth/login")}>Sign in</button></span>
         </AuthLayout>
     );
 }
