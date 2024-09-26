@@ -1,18 +1,17 @@
 import {Link, useNavigate, useParams} from "react-router-dom";
-import IconLayoutDashboard from "./components/icons/IconLayoutDashboard.tsx";
-import IconBxsDashboard from "./components/icons/IconBxsDashboard.tsx";
-import IconListCircleOutline from "./components/icons/IconListCircleOutline.tsx";
-import IconListCircle from "./components/icons/IconListCircle.tsx";
-import IconUser from "./components/icons/IconUser.tsx";
-import IconUserOutline from "./components/icons/IconUserOutline.tsx";
-import IconNotificationsOutline from "./components/icons/IconNotificationsOutline.tsx";
-import IconNotifications from "./components/icons/IconNotifications.tsx";
-import IconSecurePaymentLine from "./components/icons/IconSecurePaymentLine.tsx";
-import IconSecurePaymentFill from "./components/icons/IconSecurePaymentFill.tsx";
-import IconBusiness from "./components/icons/IconBusiness.tsx";
-import IconAccountPlus from "./components/icons/IconAccountPlus.tsx";
-import IconNotification from "./components/icons/IconNotification.tsx";
-import IconAddressCard from "./components/icons/IconAddressCard.tsx";
+import IconLayoutDashboard from "./icons/IconLayoutDashboard.tsx";
+import IconBxsDashboard from "./icons/IconBxsDashboard.tsx";
+import IconListCircleOutline from "./icons/IconListCircleOutline.tsx";
+import IconListCircle from "./icons/IconListCircle.tsx";
+import IconUser from "./icons/IconUser.tsx";
+import IconUserOutline from "./icons/IconUserOutline.tsx";
+import IconNotificationsOutline from "./icons/IconNotificationsOutline.tsx";
+import IconNotifications from "./icons/IconNotifications.tsx";
+import IconSecurePaymentLine from "./icons/IconSecurePaymentLine.tsx";
+import IconSecurePaymentFill from "./icons/IconSecurePaymentFill.tsx";
+import IconAccountPlus from "./icons/IconAccountPlus.tsx";
+import IconNotification from "./icons/IconNotification.tsx";
+import IconAddressCard from "./icons/IconAddressCard.tsx";
 
 const tabs = [
     {

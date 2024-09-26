@@ -1,9 +1,8 @@
-import CompanySearchV2 from "../CompanySearchV2.tsx";
+import CompanySearchV2 from "../components/CompanySearchV2.tsx";
 import {useEffect, useState} from "react";
 import CompanyList from "../components/common/Company.tsx";
 import {useParams} from "react-router-dom";
-import Layout from "../Layout.tsx";
-import {c} from "vite/dist/node/types.d-aGj9QkWt";
+import Layout from "../components/Layout.tsx";
 
 
 export interface Company {

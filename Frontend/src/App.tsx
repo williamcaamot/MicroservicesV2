@@ -1,39 +1,19 @@
-import Layout from "./Layout.tsx";
-import {BrowserRouter, Route, Routes, useParams} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import CompanyManager from "./app/CompanyManager.tsx";
 import {useEffect, useState} from "react";
 import {SelectWorkspace} from "./components/SelectWorkspace.tsx";
-import {ReRoute} from "./ReRoute.tsx";
-import {Company} from "./Company.tsx";
+import {ReRoute} from "./components/ReRoute.tsx";
+import {Company} from "./components/Company.tsx";
 import {LoadingScreen} from "./app/LoadingScreen.tsx";
 import Login from "./app/auth/Login.tsx";
 import Register from "./app/auth/Register.tsx";
+import {Leads} from "./app/Leads.tsx";
+import {AILeadAssist} from "./app/AILeadAssist.tsx";
+import {Dashboard} from "./app/Dashboard.tsx";
 
-function Dashboard() {
-    let {workspaceId} = useParams();
-    console.log(workspaceId)
-    return <Layout>
-        <>Dash</>
-    </Layout>
-}
-
-function Leads() {
-    return<Layout>
-        <h1>Leads</h1>
-    </Layout>
-}
-
-function AILeadAssist() {
-    return<Layout>
-        <h1>AI Lead Assistant</h1>
-    </Layout>
-}
 
 export default function App() {
-
-    const [workspace, setWorkspace] = useState<Workspace | undefined>(undefined);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-
 
     async function fetchAccount(){
         try{
@@ -43,11 +23,9 @@ export default function App() {
                 console.log(data);
             }
         }catch (e) {
-
+            console.log(e)
         }
-        setTimeout(() => {
-            setIsLoading(false)
-        },250)
+        setIsLoading(false);
     }
 
     useEffect(() => {
