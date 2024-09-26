@@ -6,6 +6,8 @@ import {SelectWorkspace} from "./components/SelectWorkspace.tsx";
 import {ReRoute} from "./ReRoute.tsx";
 import {Company} from "./Company.tsx";
 import {LoadingScreen} from "./app/LoadingScreen.tsx";
+import Login from "./app/auth/Login.tsx";
+import Register from "./app/auth/Register.tsx";
 
 function Dashboard() {
     let {workspaceId} = useParams();
@@ -53,6 +55,8 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route path={""} Component={ReRoute}/>
+                <Route path={"/auth/login"} Component={Login}/>
+                <Route path={"/auth/register"} Component={Register}/>
                 <Route path={"/app"} Component={SelectWorkspace}/>
                 <Route path={"/app/workspace/:workspaceId"} Component={Dashboard}/>
                 <Route path={"/app/workspace/:workspaceId/company"} Component={CompanyManager}/>
