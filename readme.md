@@ -1,7 +1,10 @@
 # PG3402
 
 # Running the application
-Docker compose will run all the services.
+- Docker compose will run all the services.
+- Docker port mapping problem: Cannot use port to be 0 (random available port) because all ports are available. It should be 
+- Or can it be random because it shouldn't be accessible by the computer, only through the gateway
+
 > docker compose up -d
 
 # Running dev
@@ -29,20 +32,33 @@ There are a few services necessary for developmnet. Run the following command to
  - Unique ID service account: 108969935334828963980
  - Google custom search API key:  AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow 
 
-# User stories and features
-- [ ] Authentication, Email and password for this simple project in the course.
+## User stories and features
+- [ ] Authentication, username and password for this simple project in the course.
 - [ ] Products selling, used for prompts to generate pitches
 - [ ] Global exception handling using the same DTO in ALL microservices
 
-## Gateway requirements
-- [ ] Circuit breaker - A dependency that should be added.
-- [ ] Load balancing
+## Exam grades
+### E Requirements:
+- [ ] Multiple services that fulfull different functionality and communicate with each other
 
-# Exam grades
-## E Requirements:
-- [ ] Synchronous communication
-- [ ] Asynchronous communication
+### D Requirements:
+- [ ] At least two of the services communicate using synchronous communication (REST between two services)
+- [ ] At least two of the services communicate asynchronously
 
-## A Requirements:
+### C Requirements:
+- [X] The project uses a Gateway
+- [ ] The projects also does load balancing
+        - This is probably done but should be checked
+
+### B Requirements:
+- [X] The project has a means of centrally controlling the health of running services health check
+- [ ] The project has a means of centrally controlling the configuration for the services, for example using consul
+
+### A Requirements:
 - [ ] Docker containerization and scaling (not auto scaling, but being able to select how many instances)
 
+
+### Extras
+- [ ] Gateway Circuit breaker - A dependency that should be added.
+- [X] DTO For authentication service to not expose hashed password to client
+- [ ] BaseEntities for services

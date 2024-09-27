@@ -18,6 +18,10 @@ public class GatewayConfig {
                 .route("CompanyManager", r -> r.path("/api/v1/workspace/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://CompanyManager"))
+                .route("Authentication", r -> r.path("/api/v1/auth/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://Authentication")
+                )
                 .build();
     }
 

@@ -13,15 +13,15 @@ spring:
         instance-id: ${spring.application.name}-${server.port}
         service-name: Gateway
     gateway:
-      routes:
-        - id: Authentication
-          uri: lb://Authentication
-          predicates:
-            - Path=/api/v1/auth/**
-        - id: CompanyManager
-          uri: lb://CompanyManager
-          predicates:
-            - Path=/api/v1/workspace/**
+#      routes:
+#        - id: Authentication
+#          uri: lb://Authentication
+#          predicates:
+#            - Path=/api/v1/auth/**
+#        - id: CompanyManager
+#          uri: lb://CompanyManager
+#          predicates:
+#            - Path=/api/v1/workspace/**
       globalcors:
         cors-configurations:
           '[/**]':
