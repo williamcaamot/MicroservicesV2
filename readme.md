@@ -11,6 +11,7 @@ There are a few services necessary for developmnet. Run the following command to
 # Useful URLs
 > - Consul: http://localhost:8500/ui/dc1/services
 > - RabbitMQ: http://localhost:15672
+> - Authentication inspiration: https://medium.com/@rajithgama/spring-cloud-gateway-security-with-jwt-23045ba59b8a
 
 # Services
 
