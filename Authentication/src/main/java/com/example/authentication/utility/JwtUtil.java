@@ -14,9 +14,9 @@ public class JwtUtil {
     private final SecretKey SECRET_KEY = Keys.hmacShaKeyFor("1mRPuAinUyeBUIsv2UmFHZynJhUiTMb4D5CJwD7FlrJ0tAoUCnqe7zmY7tmzcJLUFH5sxjbfvrse5LuBzgqWOI3j1MxjycYS5qs".getBytes());
 
     // Generate JWT token
-    public String generateToken(String username) {
+    public String generateToken(Long accountId) {
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(String.valueOf(accountId))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
                 .signWith(SECRET_KEY, SignatureAlgorithm.HS512)  // Use the SecretKey with HS512
@@ -24,7 +24,7 @@ public class JwtUtil {
     }
 
     // Extract username from the token
-    public String extractUsername(String token) {
+    public String extractAccountId(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(SECRET_KEY)
                 .build()

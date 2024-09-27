@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -43,11 +42,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         // Validate the JWT and set authentication in the security context
         if (jwt != null && jwtUtil.isTokenValid(jwt)) {
-            String username = jwtUtil.extractUsername(jwt);
+            Long accountId = Long.valueOf(jwtUtil.extractAccountId(jwt));
 
             // Set the authentication in the security context
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                    username, null, new ArrayList<>()
+                    accountId, null, new ArrayList<>()
             );
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }

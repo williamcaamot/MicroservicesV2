@@ -23,8 +23,8 @@ public class JwtUtil {
                 .compact();
     }
 
-    // Extract username from the token
-    public String extractUsername(String token) {
+    // Extract account id from the token
+    public String extractAccountId(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(SECRET_KEY)
                 .build()

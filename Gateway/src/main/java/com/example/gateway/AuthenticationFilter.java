@@ -1,6 +1,5 @@
 package com.example.gateway;
 
-import org.apache.http.cookie.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -66,9 +65,9 @@ public class AuthenticationFilter implements GatewayFilter {
     }
 
     private void updateRequest(ServerWebExchange exchange, String token) {
-        String username = jwtUtil.extractUsername(token);
+        Long accountId = Long.valueOf(jwtUtil.extractAccountId(token));
         exchange.getRequest().mutate()
-                .header("username", String.valueOf(username))
+                .header("accountid", String.valueOf(accountId))
                 .build();
     }
 }

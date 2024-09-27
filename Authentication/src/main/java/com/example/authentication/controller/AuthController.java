@@ -42,7 +42,8 @@ public class AuthController {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         Account savedAccount = accountRepository.save(account);
 
-        String token = jwtUtil.generateToken(account.getUsername());
+        String token = jwtUtil.generateToken(savedAccount.getAccountId());
+
 
         // Set the JWT as a cookie
         Cookie cookie = new Cookie("jwt", token);
@@ -59,7 +60,8 @@ public class AuthController {
     public ResponseEntity<?> loginUser(@RequestBody Account account, HttpServletResponse response) {
         Optional<Account> dbAccount = accountRepository.findByUsername(account.getUsername());
         if (dbAccount.isPresent() && passwordEncoder.matches(account.getPassword(), dbAccount.get().getPassword())) {
-            String token = jwtUtil.generateToken(account.getUsername());
+            Account dbAccountFound = dbAccount.get();
+            String token = jwtUtil.generateToken(dbAccountFound.getAccountId());
 
             // Set the JWT as a cookie
             Cookie cookie = new Cookie("jwt", token);
@@ -68,7 +70,7 @@ public class AuthController {
             cookie.setMaxAge(60 * 60 * 10); // Cookie expires in 10 hours
             response.addCookie(cookie); // Add cookie to response
 
-            AccountDTO accountDTO = AccountMapper.mapToAccountDTO(dbAccount.get(), new AccountDTO());
+            AccountDTO accountDTO = AccountMapper.mapToAccountDTO(dbAccountFound, new AccountDTO());
 
             return ResponseEntity.status(HttpStatus.OK).body(accountDTO);
         }
@@ -97,11 +99,10 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        String username = authentication.getName(); // Get username from the authentication token
-        System.out.println(username);
+        Long accountId = Long.valueOf(authentication.getName()); // The account ID is stored and
 
-        // Fetch the account from the database using the username
-        Optional<Account> account = accountRepository.findByUsername(username);
+        // Fetch the account from the database using the account id
+        Optional<Account> account = accountRepository.findById(accountId);
 
         if (account.isPresent()) {
             AccountDTO accountDTO = AccountMapper.mapToAccountDTO(account.get(), new AccountDTO());
@@ -110,6 +111,4 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
-
 }

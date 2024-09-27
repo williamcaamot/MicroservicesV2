@@ -62,3 +62,8 @@ There are a few services necessary for developmnet. Run the following command to
 - [ ] Gateway Circuit breaker - A dependency that should be added.
 - [X] DTO For authentication service to not expose hashed password to client
 - [ ] BaseEntities for services
+- [ ] Testing
+- [ ] Option to hide downstream services, or only let them be accessed directly from the gateway
+
+### Todo
+- [ ] Remove any duplicate code possible to remove from auth/gateway
