@@ -23,19 +23,19 @@ public class WorkspaceController {
     }
 
     @PostMapping(path = "")
-    public ResponseEntity<Workspace> saveWorkspace(@RequestBody Workspace workspace) {
+    public ResponseEntity<Workspace> saveWorkspace(
+            @RequestHeader("accountid") Long accountId,
+            @RequestBody Workspace workspace) {
+        System.out.println(accountId);
         return ResponseEntity.status(HttpStatus.CREATED).body(workspaceService.saveWorkspace(workspace));
-
     }
+
 
     @GetMapping(path = "")
-    public ResponseEntity<List<Workspace>> getWorkspaces() {
-        System.out.println("Hitting get /api/v1/workspace");
+    public ResponseEntity<List<Workspace>> getWorkspaces(
+            @RequestHeader("accountid") Long accountId
+    ) {
         return ResponseEntity.status(HttpStatus.OK).body(workspaceService.getWorkspaces());
     }
-
-
-
-
 
 }
