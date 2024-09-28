@@ -26,7 +26,9 @@ public class WorkspaceController {
     public ResponseEntity<Workspace> saveWorkspace(
             @RequestHeader("accountid") Long accountId,
             @RequestBody Workspace workspace) {
-        System.out.println(accountId);
+
+        workspace.setOwningAccountId(accountId);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(workspaceService.saveWorkspace(workspace));
     }
 
@@ -35,7 +37,7 @@ public class WorkspaceController {
     public ResponseEntity<List<Workspace>> getWorkspaces(
             @RequestHeader("accountid") Long accountId
     ) {
-        return ResponseEntity.status(HttpStatus.OK).body(workspaceService.getWorkspaces());
+        return ResponseEntity.status(HttpStatus.OK).body(workspaceService.getWorkspaceByOwnerId(accountId));
     }
 
 }

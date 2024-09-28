@@ -24,6 +24,9 @@ public class WorkspaceService {
         return workspaceRepository.findAll();
     }
 
+    public List<Workspace> getWorkspaceByOwnerId(Long ownerAccountId){
+        return workspaceRepository.getWorkspaceByOwningAccountId(ownerAccountId);
+    }
 
     public Workspace saveWorkspace(Workspace workspace){
         return workspaceRepository.save(workspace);

@@ -8,19 +8,15 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Workspace {
+public class Workspace extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "workspace_id")
     private Long workspaceId;
 
+    private Long owningAccountId;
+
     private String name;
-
-
-    //TODO This should be the color of the workspace, the user can self select the main workspace colors. Have to choose where this will be used.
-    // Use the same cards to selectin workspace as UploadTHing uses
-    private String color;
-
 
 }
