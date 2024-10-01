@@ -1,0 +1,23 @@
+server:
+  port: 0  # This tells Spring Boot to use a random available port
+
+spring:
+  application:
+    name: "WebscraperService"
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        instance-id: ${spring.application.name}:${random.value}  # Unique instance ID
+        service-name: WebscraperService
+        prefer-ip-address: true
+        health-check-path: /actuator/health
+        health-check-interval: 15s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info

@@ -21,11 +21,22 @@ export function Company() {
 
         }
     }
-
     useEffect(() => {
         fetchCompany()
     }, []);
 
+
+    async function fetchCompanyWebsite(){
+        try{
+            const result = await fetch(`/api/v1/webscraper/companywebsite?companyName=${company.navn}`);
+            if(result.ok){
+                const data = await result.json();
+                console.log(data);
+            }
+        }catch (e) {
+            console.log(e)
+        }
+    }
 
 
 
@@ -64,7 +75,9 @@ export function Company() {
                 <p>Created: {company.createdAt || 'Not specified'}</p>
                 <p>Last Updated: {company.updatedAt || 'Not specified'}</p>
             </div>
+
         </div>
+            <button onClick={() => fetchCompanyWebsite()} className={"p-4 bg-purple-200 rounded border"}>Find website for this company</button>
         </Layout>
     );
 }

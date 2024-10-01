@@ -20,8 +20,10 @@ public class GatewayConfig {
                         .uri("lb://CompanyManager"))
                 .route("Authentication", r -> r.path("/api/v1/auth/**")
                         .filters(f -> f.filter(filter))
-                        .uri("lb://Authentication")
-                )
+                        .uri("lb://Authentication"))
+                .route("WebscraperService", r -> r.path("/api/v1/webscraper/companywebsite")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://WebscraperService"))
                 .build();
     }
 
