@@ -40,19 +40,22 @@ public class WorkspaceController {
         return ResponseEntity.status(HttpStatus.OK).body(workspaceService.getWorkspaceByOwnerId(accountId));
     }
 
+    @GetMapping(path = "/:workspaceId")
+    public ResponseEntity<Workspace> getWorkspaceById(@PathVariable Long workspaceId) {
+        return ResponseEntity.status(HttpStatus.OK).body(workspaceService.getWorkspaceById(workspaceId));
+    }
+
 
     @PutMapping("")
     public ResponseEntity<Workspace> updateWorkspace(
             @RequestHeader("accountid") Long accountId,
             @RequestBody Workspace workspace
-    ){
-
-
-
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(new Workspace());
+    ) throws Exception {
+        if (workspace.getOwningAccountId() == null) {
+            throw new Exception("The account if of the owner of the workspace must be set!");
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(workspaceService.updateWorkspace(workspace));
     }
-
 
 
 }

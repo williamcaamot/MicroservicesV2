@@ -19,4 +19,6 @@ public class Workspace extends BaseEntity{
 
     private String name;
 
+    private String productDescription;
+
 }
