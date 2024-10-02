@@ -40,4 +40,19 @@ public class WorkspaceController {
         return ResponseEntity.status(HttpStatus.OK).body(workspaceService.getWorkspaceByOwnerId(accountId));
     }
 
+
+    @PutMapping("")
+    public ResponseEntity<Workspace> updateWorkspace(
+            @RequestHeader("accountid") Long accountId,
+            @RequestBody Workspace workspace
+    ){
+
+
+
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(new Workspace());
+    }
+
+
+
 }

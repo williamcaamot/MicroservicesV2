@@ -16,7 +16,7 @@ export default function InformationPopup({children}) {
                 <IconInfo height={"14px"} width={"14px"}/>
             </div>
         </div>
-        {isOpen && <div className={"fixed w-56 h-auto flex bg-gray-50 border shadow p-2 text-zinc-800 text-sm"}>
+        {isOpen && <div className={"fixed w-56 h-auto flex bg-gray-50 border shadow p-2 text-zinc-800 text-sm z-30"}>
             {children}
         </div>
         }

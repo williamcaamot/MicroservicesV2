@@ -12,12 +12,19 @@ import IconSecurePaymentFill from "./icons/IconSecurePaymentFill.tsx";
 import IconAccountPlus from "./icons/IconAccountPlus.tsx";
 import IconNotification from "./icons/IconNotification.tsx";
 import IconAddressCard from "./icons/IconAddressCard.tsx";
+import IconSettingsOutline from "./icons/IconSettingsOutline.tsx";
 
 const tabs = [
     {
         title: "Dashboard",
         url: "/app",
         icon:  <IconLayoutDashboard width={"1.4em"} height={"1.4em"}/>,
+        iconActive: <IconBxsDashboard width={"1.4em"} height={"1.4em"}/>
+    },
+    {
+        title: "Workspace Settings",
+        url: "/app/workspaceSetting",
+        icon:  <IconSettingsOutline width={"1.4em"} height={"1.4em"}/>,
         iconActive: <IconBxsDashboard width={"1.4em"} height={"1.4em"}/>
     },
     {
@@ -63,6 +70,7 @@ export default function Layout({children}) {
                     </div>
                     <ul className="space-y-2 p-4">
                         <li onClick={() => {navigate(`/app/workspace/${workspaceId}`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconLayoutDashboard width={"1.4em"} height={"1.4em"}/></span> Dashboard</a></li>
+                        <li onClick={() => {navigate(`/app/workspace/${workspaceId}/settings`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconSettingsOutline width={"1.4em"} height={"1.4em"}/></span>Workspace Settings</a></li>
                         <li onClick={() => {navigate(`/app/workspace/${workspaceId}/company`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconListCircleOutline width={"1.4em"} height={"1.4em"}/></span>Selskaper</a></li>
                         <li onClick={() => {navigate(`/app/workspace/${workspaceId}/leads`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconAccountPlus width={"1.4em"} height={"1.4em"}/></span>Leads</a></li>
                         <li onClick={() => {navigate(`/app/workspace/${workspaceId}/aileadassist`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconNotification width={"1.4em"} height={"1.4em"}/></span>AI Lead assist</a></li>

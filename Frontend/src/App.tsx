@@ -11,6 +11,7 @@ import {Leads} from "./app/Leads.tsx";
 import {AILeadAssist} from "./app/AILeadAssist.tsx";
 import {Dashboard} from "./app/Dashboard.tsx";
 import {AppContext} from "./context/AppContext.ts";
+import WorkspaceSettings from "./app/WorkspaceSettings.tsx";
 
 
 export default function App() {
@@ -58,6 +59,7 @@ function AppRoutes(){
     return<Routes>
         <Route path={"/"} Component={SelectWorkspace}/>
         <Route path={"/workspace/:workspaceId"} Component={Dashboard}/>
+        <Route path={"/workspace/:workspaceId/settings"} Component={WorkspaceSettings}/>
         <Route path={"/workspace/:workspaceId/company"} Component={CompanyManager}/>
         <Route path={"/workspace/:workspaceId/company/:companyId"} Component={Company}/>
         <Route path={"/workspace/:workspaceId/leads"} Component={Leads}/>
