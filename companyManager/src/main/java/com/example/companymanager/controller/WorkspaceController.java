@@ -40,7 +40,7 @@ public class WorkspaceController {
         return ResponseEntity.status(HttpStatus.OK).body(workspaceService.getWorkspaceByOwnerId(accountId));
     }
 
-    @GetMapping(path = "/:workspaceId")
+    @GetMapping(path = "/{workspaceId}")
     public ResponseEntity<Workspace> getWorkspaceById(@PathVariable Long workspaceId) {
         return ResponseEntity.status(HttpStatus.OK).body(workspaceService.getWorkspaceById(workspaceId));
     }

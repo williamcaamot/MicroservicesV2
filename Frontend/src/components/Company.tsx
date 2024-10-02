@@ -1,6 +1,7 @@
 import {useParams} from "react-router-dom";
 import Layout from "./Layout.tsx";
 import {useEffect, useState} from "react";
+import Button from "./Button.tsx";
 
 export function Company() {
 
@@ -78,7 +79,9 @@ export function Company() {
 
         </div>
             <button onClick={() => fetchCompanyWebsite()} className={"p-4 bg-purple-200 rounded border"}>Find website for this company</button>
+            <Button>Generate sales pitch</Button>
         </Layout>
+
     );
 }
 
