@@ -1,0 +1,4 @@
+# Path should be /config/Authentication/data
+# Inside data write the following config (do not end it with .yaml)
+server:
+  port: 9001

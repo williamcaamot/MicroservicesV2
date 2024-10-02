@@ -15,6 +15,16 @@ spring:
   h2:
     console:
       enabled: false
+  #-----------------------------------------------#
+  # RABBIT MQ CONFIGURATION                       #
+  #-----------------------------------------------#
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+
+
   cloud:
     consul:
       host: localhost
