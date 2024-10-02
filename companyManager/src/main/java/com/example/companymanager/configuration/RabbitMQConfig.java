@@ -1,8 +1,7 @@
 package com.example.companymanager.configuration;
 
 
-import org.springframework.amqp.core.Exchange;
-import org.springframework.amqp.core.ExchangeBuilder;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,5 +20,20 @@ public class RabbitMQConfig {
     public Exchange dealflowExchange(){
         return ExchangeBuilder.directExchange(EXCHANGE_NAME).durable(true).build();
     }
+
+    @Bean
+    public Queue myQueue(){
+        return QueueBuilder.durable(QUEUE_NAME).build();
+    }
+
+    @Bean
+    public Binding binding(){
+        return BindingBuilder
+                .bind(myQueue())
+                .to(dealflowExchange())
+                .with(ROUTING_KEY)
+                .noargs();
+    }
+
 
 }
