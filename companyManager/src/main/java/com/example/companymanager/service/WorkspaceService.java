@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class WorkspaceService {
 
-    private WorkspaceRepository workspaceRepository;
+    private final WorkspaceRepository workspaceRepository;
 
 
     @Autowired
