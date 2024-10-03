@@ -6,28 +6,26 @@
 #
 ######################################################################
 
-version: '3.8'
 services:
 
   ##############################################
   # CONSUL IMPORTER & CONSUL                   #
   ##############################################
   consul-importer:
+    container_name: mc_consul_importer
     build:
       context: "./docker/consul"
       dockerfile: Dockerfile
-    image: consul-importer:latest
-    container_name: ms_consul_importer
     depends_on:
-      - consul-dev
+      - consul
     networks:
       - ms_network
-  consul-dev:
+  consul:
     image: hashicorp/consul
     container_name: ms_consul
     ports:
       - '8500:8500'
-    command: 'agent -dev -node=learnmicro -client=0.0.0.0 -log-level=INFO'
+    command: 'agent -dev -node=wca_microservices -client=0.0.0.0 -log-level=INFO'
     networks:
       - ms_network
 
@@ -46,6 +44,7 @@ services:
     networks:
       - ms_network
 
+
   ##############################################
   # ACTUAL MICROSERVICES                       #
   ##############################################
@@ -59,7 +58,10 @@ services:
       - "8081:8081"  # Exposing the service on port 8081 externally
     networks:
       - ms_network
-    depends_on: [microservicePostgres]
+    depends_on:
+      - microservicePostgres
+      - consul
+      - consul-importer
 
 
 networks:
