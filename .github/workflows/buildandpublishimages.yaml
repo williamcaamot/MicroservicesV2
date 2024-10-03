@@ -1,11 +1,11 @@
-name: Build Docker Image
+name: Build Docker Images
 on:
   push:
     branches:
       - main
 jobs:
   build:
-    name: push docker image to docker hub
+    name: push docker images to docker hub
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
