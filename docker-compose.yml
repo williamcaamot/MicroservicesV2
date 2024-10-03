@@ -1,20 +1,42 @@
-version: '3.8'
+######################################################################
+#  DOCKER-COMPOSEE
+#
+#  Purpose:
+#    For building images locally and running all containers.
+#
+######################################################################
 
+version: '3.8'
 services:
-  property-manager:
+
+  ##############################################
+  # CONSUL IMPORTER & CONSUL                   #
+  ##############################################
+  consul-importer:
     build:
-      context: ./companyManager
+      context: "./docker/consul"
       dockerfile: Dockerfile
-    image: galovex/company-manager:latest
-    container_name: microservicesCompanyManager
-    ports:
-      - "8081:8081"  # Exposing the service on port 8081 externally
+    image: consul-importer:latest
+    container_name: ms_consul_importer
+    depends_on:
+      - consul-dev
     networks:
-      - microservices-network
-    depends_on: [microservicePostgres]
+      - ms_network
+  consul-dev:
+    image: hashicorp/consul
+    container_name: ms_consul
+    ports:
+      - '8500:8500'
+    command: 'agent -dev -node=learnmicro -client=0.0.0.0 -log-level=INFO'
+    networks:
+      - ms_network
+
+  ##############################################
+  # OTHER FACILITATING SERVICES                #
+  ##############################################
   microservicePostgres:
     image: postgres:15-alpine
-    container_name: microservicePostgres
+    container_name: ms_postgres
     environment:
       POSTGRES_DB: proptools
       POSTGRES_USER: postgres
@@ -22,8 +44,24 @@ services:
     ports:
       - "5433:5432"
     networks:
-      - microservices-network
+      - ms_network
+
+  ##############################################
+  # ACTUAL MICROSERVICES                       #
+  ##############################################
+  property-manager:
+    build:
+      context: ./companyManager
+      dockerfile: Dockerfile
+    image: galovex/company-manager:latest
+    container_name: ms_companymanager
+    ports:
+      - "8081:8081"  # Exposing the service on port 8081 externally
+    networks:
+      - ms_network
+    depends_on: [microservicePostgres]
+
 
 networks:
-  microservices-network:
+  ms_network:
     driver: bridge

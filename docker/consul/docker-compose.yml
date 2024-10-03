@@ -1,0 +1,30 @@
+# This file is intended for testing the files in this folder for running the consul importer
+# Trying to:
+# 1 - Run consul container
+# 2 - Import configuration
+# 3 - Run other containers
+version: "3"
+
+services:
+  consul-importer:
+    build:
+      context: "./"
+      dockerfile: Dockerfile
+    image: consul-importer:latest
+    container_name: ms_consul_importer
+    depends_on:
+      - consul-dev
+    networks:
+      - microservices
+  consul-dev:
+    image: hashicorp/consul
+    container_name: ms_consul
+    ports:
+      - '8900:8500'
+    command: 'agent -dev -node=learnmicro -client=0.0.0.0 -log-level=INFO'
+    networks:
+      - microservices
+
+networks:
+  microservices:
+    driver: bridge
