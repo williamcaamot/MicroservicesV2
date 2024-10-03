@@ -15,7 +15,6 @@ public class RabbitMQConfig {
 
     public static final String ROUTING_KEY = "my_routing_key";
 
-
     @Bean //1 Declare exchange
     public Exchange dealflowExchange(){
         return ExchangeBuilder.directExchange(EXCHANGE_NAME).durable(true).build();
