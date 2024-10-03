@@ -23,4 +23,4 @@ jobs:
           docker build . -f companyManager/Dockerfile -t williamcaamot/ms_companymanager:latest
       - name: push the docker image
         id: push-docker-image
-        run: docker push ${{secrets.DOCKERHUBUSERNAME}}/demo-image-test:latest
+        run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_companymanager:latest
