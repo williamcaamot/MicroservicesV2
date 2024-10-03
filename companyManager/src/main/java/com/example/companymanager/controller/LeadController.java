@@ -25,7 +25,6 @@ public class LeadController {
     @PostMapping
     public ResponseEntity<Null> generateLead(){
 
-
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
