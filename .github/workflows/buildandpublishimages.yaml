@@ -20,7 +20,7 @@ jobs:
         id: build-docker-image
         run: |
           ls -la 
-          docker build companyManager/ -f Dockerfile -t williamcaamot/ms_companymanager:latest
+          docker build companyManager/ -f companyManager/Dockerfile -t williamcaamot/ms_companymanager:latest
       - name: push the docker image
         id: push-docker-image
         run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_companymanager:latest
