@@ -1,0 +1,65 @@
+server:
+  port: 0  # This tells Spring Boot to use a random available port
+
+
+spring:
+  config:
+    import: "optional:consul:"  # This tells Spring Boot to fetch configuration from Consul
+  application:
+    name: AIService  # This should match the Consul path
+  profiles:
+    active: development  # Ensures profile-specific configurations are loaded
+
+  #-----------------------------------------------#
+  # POSTGRES DATABASE CONFIGURATION               #
+  #-----------------------------------------------#
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ms_aiservice
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: false
+
+  #-----------------------------------------------#
+  # RABBIT MQ CONFIGURATION                       #
+  #-----------------------------------------------#
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+
+
+
+  #-----------------------------------------------#
+  # CONSUL CONFIGURATION                          #
+  #-----------------------------------------------#
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        format: yaml
+        #prefixes: config # Default value
+        #data-key: data # Default value
+        #default-context: application # default value
+        enabled: true
+      discovery:
+        enabled: true
+        instance-id: ${spring.application.name}:${random.value}  # Unique instance ID
+        service-name: AIService
+        prefer-ip-address: true
+        health-check-path: /actuator/health
+        health-check-interval: 15s
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info

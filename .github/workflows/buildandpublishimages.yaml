@@ -12,15 +12,15 @@ jobs:
       - name: login to docker hub
         id: docker-hub
         env:
-          username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_PASSWORD}}
+          username: ${{secrets.DOCKERHUBUSERNAME}}
+          password: ${{secrets.DOCKERHUBPASSWORD}}
         run: |
           docker login -u $username -p $password
       - name: build the docker image
         id: build-docker-image
         run: |
           ls -la 
-          docker build . -f Dockerfile -t dhruvin30/demo-image-test:latest
+          docker build . -f companyManager/Dockerfile -t williamcaamot/ms_companymanager:latest
       - name: push the docker image
         id: push-docker-image
-        run: docker push ${{secrets.DOCKERHUB_USERNAME}}/demo-image-test:latest
+        run: docker push ${{secrets.DOCKERHUBUSERNAME}}/demo-image-test:latest
