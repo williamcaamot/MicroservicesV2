@@ -13,8 +13,6 @@ import java.util.List;
 public class WorkspaceService {
 
     private final WorkspaceRepository workspaceRepository;
-
-
     @Autowired
     public WorkspaceService(WorkspaceRepository workspaceRepository){
         this.workspaceRepository = workspaceRepository;
