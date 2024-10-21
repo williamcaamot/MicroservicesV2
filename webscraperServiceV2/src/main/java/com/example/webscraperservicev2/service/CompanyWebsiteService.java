@@ -4,7 +4,9 @@ package com.example.webscraperservicev2.service;
 import com.example.webscraperservicev2.dto.SaveCompanyWebsiteDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.net.URI;
 import java.net.URLEncoder;
@@ -20,8 +22,15 @@ import java.util.Map;
 @Service
 public class CompanyWebsiteService {
 
-    private static final String API_KEY = "AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow";  // Replace with your API key
-    private static final String CX = "178c48d27a6b145d9";  // Replace with your Custom Search Engine ID
+    //TODO Should probably manage these secrets better...
+    private static final String API_KEY = "AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow";
+    private static final String CX = "178c48d27a6b145d9";
+
+
+    @Autowired
+    private WebClient.Builder webClientBuilder;
+
+
 
     public List<String> getWebsite(String companyName) {
         try {
@@ -76,6 +85,24 @@ public class CompanyWebsiteService {
 
 
     public String saveWebsite(SaveCompanyWebsiteDTO websiteDTO, Long accountId){
+        Map<String, String> request = new HashMap<>();
+        request.put("workspace", String.valueOf(websiteDTO.getWorkspaceId()));
+        request.put("websiteUrl", websiteDTO.getCompanyWebsite());
+        request.put("accountId", String.valueOf(accountId));
+
+
+        String companyManagerUrl = "lb://CompanyManager/api/v1/website";
+
+        String response = webClientBuilder.build()
+                .post()
+                .uri(companyManagerUrl)
+                .bodyValue(request)
+                .retrieve()
+                .bodyToMono(String.class)
+                .block(); // Blocking call for simplicity; use non-blocking in real cases
+
+
+        // Should now call the companymanager website
         System.out.println("Workspace " + websiteDTO.getWorkspaceId());
         System.out.println("Website URL " + websiteDTO.getCompanyWebsite());
         System.out.println("Account ID " + accountId);
