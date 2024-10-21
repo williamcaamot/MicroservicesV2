@@ -84,29 +84,26 @@ public class CompanyWebsiteService {
     }
 
 
-    public String saveWebsite(SaveCompanyWebsiteDTO websiteDTO, Long accountId){
-        Map<String, String> request = new HashMap<>();
-        request.put("workspace", String.valueOf(websiteDTO.getWorkspaceId()));
-        request.put("websiteUrl", websiteDTO.getCompanyWebsite());
-        request.put("accountId", String.valueOf(accountId));
+    public String saveWebsite(SaveCompanyWebsiteDTO websiteDTO, Long accountId) {
+        // Construct the request payload
+        Map<String, Object> request = new HashMap<>();
+        request.put("workspaceId", websiteDTO.getWorkspaceId());
+        request.put("companyWebsite", websiteDTO.getCompanyWebsite());
+        request.put("accountId", accountId);
 
+        // Using load-balanced URL with lb://
+        String companyManagerUrl = "http://CompanyManager/api/v1/company/website";
 
-        String companyManagerUrl = "lb://CompanyManager/api/v1/website";
-
+        // Make a POST request to the companyManager service using WebClient
         String response = webClientBuilder.build()
                 .post()
                 .uri(companyManagerUrl)
                 .bodyValue(request)
                 .retrieve()
                 .bodyToMono(String.class)
-                .block(); // Blocking call for simplicity; use non-blocking in real cases
+                .block(); // Blocking call for simplicity
 
-
-        // Should now call the companymanager website
-        System.out.println("Workspace " + websiteDTO.getWorkspaceId());
-        System.out.println("Website URL " + websiteDTO.getCompanyWebsite());
-        System.out.println("Account ID " + accountId);
-        return websiteDTO.getCompanyWebsite();
+        return response;
     }
 
 }
