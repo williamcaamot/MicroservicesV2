@@ -72,6 +72,6 @@ There are a few services necessary for developmnet. Run the following command to
 
 ### Todo
 - [ ] Remove any duplicate code possible to remove from auth/gateway
-- [ ] Error handling when service cannot be reached along with better retry logic? Maybe an interval between retries?
+- [ ] Error handling when service cannot be reached along with better retry logic? Maybe an interval between retries? - Should be better error handling...
 - [ ] Website getter enginge/service - If adding a company WITHOUT a website, the company service should add into queue to be getting recommended possible websites and the UI should also infrom about this
 - [ ] AI Enginge for pitches also based on products

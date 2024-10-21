@@ -29,13 +29,11 @@ public class CompanyWebsiteController {
     }
 
     @PostMapping
-    public ResponseEntity<HashMap<String, String>> saveCompanyWebsite(
+    public ResponseEntity<String> saveCompanyWebsite(
             @RequestBody SaveCompanyWebsiteDTO websiteDTO,
             @RequestHeader("accountid") Long accountId
     ) {
-        HashMap<String, String> result = new HashMap<>();
-        result.put("Website", companyWebsiteService.saveWebsite(websiteDTO, accountId));
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+        return ResponseEntity.status(HttpStatus.OK).body(companyWebsiteService.saveWebsite(websiteDTO, accountId));
     }
 
 

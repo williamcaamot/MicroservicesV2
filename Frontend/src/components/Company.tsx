@@ -39,28 +39,30 @@ export function Company() {
                 const data = await result.json();
                 setWebsiteSuggestions(data);
                 setIsModalOpen(true);
+
             }
         } catch (e) {
             console.log(e)
         }
     }
 
-    async function saveCompanyWebsite(website: string){
+    async function saveCompanyWebsite(website: string) {
         try {
-            const result = await fetch(`/api/v1/webscraper/companywebsite`,{
+            const result = await fetch(`/api/v1/webscraper/companywebsite`, {
                     method: "POST",
                     headers: {
-                        "content-type":"Application/JSON"
+                        "content-type": "Application/JSON"
                     },
                     body: JSON.stringify({
                         companyWebsite: website,
                         workspaceId: workspaceId
                     })
                 }
-                );
+            );
             if (result.ok) {
+                setCompany(prevCompany => ({...prevCompany, hjemmeside: website}))
                 const data = await result.json();
-                console.log(data)
+                setIsModalOpen(false);
             }
         } catch (e) {
             console.log(e)
@@ -89,7 +91,7 @@ export function Company() {
                                             </button>
                                         </a>
                                         <button onClick={() => saveCompanyWebsite(website)}
-                                            className="px-3 py-1 bg-teal-600 text-white rounded hover:bg-teal-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50">
+                                                className="px-3 py-1 bg-teal-600 text-white rounded hover:bg-teal-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50">
                                             Velg
                                         </button>
                                     </div>
