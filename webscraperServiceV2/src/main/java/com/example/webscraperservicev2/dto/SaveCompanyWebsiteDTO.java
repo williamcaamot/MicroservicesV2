@@ -10,5 +10,6 @@ import lombok.*;
 public class SaveCompanyWebsiteDTO {
 
     private String companyWebsite;
+    private int workspaceId;
 
 }

@@ -1,6 +1,7 @@
 package com.example.webscraperservicev2.service;
 
 
+import com.example.webscraperservicev2.dto.SaveCompanyWebsiteDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
@@ -74,9 +75,11 @@ public class CompanyWebsiteService {
     }
 
 
-    public String saveWebsite(String url){
-        System.out.println(url);
-        return url;
+    public String saveWebsite(SaveCompanyWebsiteDTO websiteDTO, Long accountId){
+        System.out.println("Workspace " + websiteDTO.getWorkspaceId());
+        System.out.println("Website URL " + websiteDTO.getCompanyWebsite());
+        System.out.println("Account ID " + accountId);
+        return websiteDTO.getCompanyWebsite();
     }
 
 }

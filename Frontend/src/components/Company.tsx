@@ -54,6 +54,7 @@ export function Company() {
                     },
                     body: JSON.stringify({
                         companyWebsite: website,
+                        workspaceId: workspaceId
                     })
                 }
                 );

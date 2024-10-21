@@ -3,7 +3,6 @@ package com.example.webscraperservicev2.controller;
 
 import com.example.webscraperservicev2.dto.SaveCompanyWebsiteDTO;
 import com.example.webscraperservicev2.service.CompanyWebsiteService;
-import org.htmlunit.csp.value.Hash;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +29,12 @@ public class CompanyWebsiteController {
     }
 
     @PostMapping
-    public ResponseEntity<HashMap<String, String>> saveCompanyWebsite(@RequestBody SaveCompanyWebsiteDTO websiteDTO) {
+    public ResponseEntity<HashMap<String, String>> saveCompanyWebsite(
+            @RequestBody SaveCompanyWebsiteDTO websiteDTO,
+            @RequestHeader("accountid") Long accountId
+    ) {
         HashMap<String, String> result = new HashMap<>();
-        result.put("Website", companyWebsiteService.saveWebsite(websiteDTO.getCompanyWebsite()));
+        result.put("Website", companyWebsiteService.saveWebsite(websiteDTO, accountId));
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
