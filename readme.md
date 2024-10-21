@@ -23,9 +23,11 @@ There are a few services necessary for developmnet. Run the following command to
 - [ ] Consul for Load Balancing, Service Discovery and configuration
 - [ ] API Gateway
 
-- [ ] companyManager
 - [ ] AI sales communication recommender
-- [ ] Sending emails service
+- [ ] Webscraper Service
+- [ ] companyManager
+- [ ] Authentication
+- [ ] TODO: Sending emails service
 
 # Google search 
  - Email service accont:  pg3402@microservices-436410.iam.gserviceaccount.com 
@@ -33,9 +35,12 @@ There are a few services necessary for developmnet. Run the following command to
  - Google custom search API key:  AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow 
 
 ## User stories and features
+- [ ] As a user I want to be able to find relevant websites for a company with Google Search (Webscraper Service)
+- [ ] As a user I want to be able to find relevant emails from a company website (Webscraper Service)
 - [ ] Authentication, username and password for this simple project in the course.
 - [ ] Products selling, used for prompts to generate pitches
 - [ ] Global exception handling using the same DTO in ALL microservices
+- [ ] Fix Authentication so that a user can only access their own information
 
 ## Exam grades
 ### E Requirements:

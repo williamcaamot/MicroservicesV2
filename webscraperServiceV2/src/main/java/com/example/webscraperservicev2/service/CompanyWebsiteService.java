@@ -72,4 +72,11 @@ public class CompanyWebsiteService {
         }
         return new ArrayList<>();
     }
+
+
+    public String saveWebsite(String url){
+        System.out.println(url);
+        return url;
+    }
+
 }

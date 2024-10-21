@@ -1,20 +1,19 @@
 package com.example.webscraperservicev2.controller;
 
 
+import com.example.webscraperservicev2.dto.SaveCompanyWebsiteDTO;
 import com.example.webscraperservicev2.service.CompanyWebsiteService;
+import org.htmlunit.csp.value.Hash;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping(path = "/api/v1/webscraper/companywebsite")
 public class CompanyWebsiteController {
-
 
     private CompanyWebsiteService companyWebsiteService;
 
@@ -28,6 +27,14 @@ public class CompanyWebsiteController {
         ArrayList<String> result = (ArrayList<String>) companyWebsiteService.getWebsite(companyName);
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
-
     }
+
+    @PostMapping
+    public ResponseEntity<HashMap<String, String>> saveCompanyWebsite(@RequestBody SaveCompanyWebsiteDTO websiteDTO) {
+        HashMap<String, String> result = new HashMap<>();
+        result.put("Website", companyWebsiteService.saveWebsite(websiteDTO.getCompanyWebsite()));
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+
 }
