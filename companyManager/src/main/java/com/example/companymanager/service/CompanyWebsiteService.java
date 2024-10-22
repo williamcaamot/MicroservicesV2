@@ -17,7 +17,6 @@ public class CompanyWebsiteService {
         this.companyRepository = companyRepository;
     }
 
-
     public void SaveCompanyWebsite(CompanyWebsiteDTO websiteDTO){
         Company company = companyRepository.getById(websiteDTO.getCompanyId());
         company.setHjemmeside(websiteDTO.getCompanyWebsite());

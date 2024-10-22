@@ -3,6 +3,7 @@ import Layout from "./Layout.tsx";
 import {useEffect, useState} from "react";
 import Button from "./Button.tsx";
 import Modal from "./common/Modal.tsx";
+import button from "./Button.tsx";
 
 export function Company() {
 
@@ -10,7 +11,7 @@ export function Company() {
     const [company, setCompany] = useState();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [websiteSuggestions, setWebsiteSuggestions] = useState<string[] | undefined>(undefined);
-
+    const [isFetchingWebsitesLoading, setIsFetchingWebsitesLoading] = useState<boolean>(false);
 
     async function fetchCompany() {
         try {
@@ -27,12 +28,8 @@ export function Company() {
         }
     }
 
-    useEffect(() => {
-        fetchCompany()
-    }, []);
-
-
     async function fetchCompanyWebsites() {
+        setIsFetchingWebsitesLoading(true);
         try {
             const result = await fetch(`/api/v1/webscraper/companywebsite?companyName=${company.navn}`);
             if (result.ok) {
@@ -44,6 +41,7 @@ export function Company() {
         } catch (e) {
             console.log(e)
         }
+        setIsFetchingWebsitesLoading(false);
     }
 
     async function saveCompanyWebsite(website: string) {
@@ -70,9 +68,13 @@ export function Company() {
         }
     }
 
+    useEffect(() => {
+        fetchCompany()
+    }, []);
 
     if (company) return (
         <Layout>
+
             <Modal isOpen={isModalOpen} title="Velg en nettside" onClose={() => setIsModalOpen(false)}>
                 {websiteSuggestions && (
                     <div className="space-y-4">
@@ -86,12 +88,12 @@ export function Company() {
                                     <div className="flex space-x-2">
                                         <a href={website} target={"_blank"}>
                                             <button className="px-3 py-1 bg-sky-500 text-white rounded hover:bg-sky-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50">
-                                                Åpne
+                                                Open
                                             </button>
                                         </a>
                                         <button onClick={() => saveCompanyWebsite(website)}
                                                 className="px-3 py-1 bg-teal-600 text-white rounded hover:bg-teal-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50">
-                                            Velg
+                                            Select
                                         </button>
                                     </div>
                                 </li>
@@ -104,7 +106,10 @@ export function Company() {
                 <div className="flex items-center justify-between mb-8">
                     <h1 className="text-3xl font-bold text-gray-800">{company.navn}</h1>
                 </div>
-
+                <div className={"flex space-x-2"}>
+                <Button variant={"outlined"} onClick={() => fetchCompanyWebsites()} loading={isFetchingWebsitesLoading}>Find websites for this company</Button>
+                <Button variant={"outlined"} >Generate sales pitch</Button>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-4">
                         <InfoItem label="Organization Number" value={company.organisasjonsnummer}/>
@@ -135,10 +140,7 @@ export function Company() {
                 </div>
 
             </div>
-            <button onClick={() => fetchCompanyWebsites()} className={"p-4 bg-purple-200 rounded border"}>Find website
-                for this company
-            </button>
-            <Button>Generate sales pitch</Button>
+
         </Layout>
 
     );
