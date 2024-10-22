@@ -1,7 +1,7 @@
 package com.example.webscraperservicev2.service;
 
 
-import com.example.webscraperservicev2.dto.SaveCompanyWebsiteDTO;
+import com.example.webscraperservicev2.dto.CompanyWebsiteDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +84,7 @@ public class CompanyWebsiteService {
     }
 
 
-    public String saveWebsite(SaveCompanyWebsiteDTO websiteDTO, Long accountId) {
+    public String saveWebsite(CompanyWebsiteDTO websiteDTO, Long accountId) {
         // Construct the request payload
         Map<String, Object> request = new HashMap<>();
         request.put("workspaceId", websiteDTO.getWorkspaceId());

@@ -80,13 +80,11 @@ export function Company() {
                         </p>
                         <ul className="space-y-3">
                             {websiteSuggestions.map((website, index) => (
-                                <li key={index}
-                                    className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                <li key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                                     <span className="text-gray-800 font-medium truncate flex-grow mr-4">{website}</span>
                                     <div className="flex space-x-2">
                                         <a href={website} target={"_blank"}>
-                                            <button
-                                                className="px-3 py-1 bg-sky-500 text-white rounded hover:bg-sky-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50">
+                                            <button className="px-3 py-1 bg-sky-500 text-white rounded hover:bg-sky-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50">
                                                 Åpne
                                             </button>
                                         </a>

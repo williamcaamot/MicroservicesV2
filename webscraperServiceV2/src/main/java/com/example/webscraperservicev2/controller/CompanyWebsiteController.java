@@ -1,14 +1,13 @@
 package com.example.webscraperservicev2.controller;
 
 
-import com.example.webscraperservicev2.dto.SaveCompanyWebsiteDTO;
+import com.example.webscraperservicev2.dto.CompanyWebsiteDTO;
 import com.example.webscraperservicev2.service.CompanyWebsiteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 @RestController
 @RequestMapping(path = "/api/v1/webscraper/companywebsite")
@@ -30,7 +29,7 @@ public class CompanyWebsiteController {
 
     @PostMapping
     public ResponseEntity<String> saveCompanyWebsite(
-            @RequestBody SaveCompanyWebsiteDTO websiteDTO,
+            @RequestBody CompanyWebsiteDTO websiteDTO,
             @RequestHeader("accountid") Long accountId
     ) {
         return ResponseEntity.status(HttpStatus.OK).body(companyWebsiteService.saveWebsite(websiteDTO, accountId));

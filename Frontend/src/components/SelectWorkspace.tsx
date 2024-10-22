@@ -62,7 +62,7 @@ export function SelectWorkspace() {
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-            <div className="flex items-center justify-between mb-8 flex">
+            <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl font-bold text-gray-800">Select Workspace </h2><InformationPopup>Create a workspace to use the application. All information is stored in association to a workspace.</InformationPopup>
                 <img src="/logo.png" alt="Logo" className="h-10 w-auto" />
             </div>

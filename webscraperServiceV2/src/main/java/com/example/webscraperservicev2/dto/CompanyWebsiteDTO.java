@@ -7,9 +7,11 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SaveCompanyWebsiteDTO {
+public class CompanyWebsiteDTO {
+
 
     private String companyWebsite;
-    private int workspaceId;
+    private Long workspaceId;
+    private Long companyId;
 
 }

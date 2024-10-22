@@ -10,7 +10,8 @@ import lombok.*;
 @Data
 public class CompanyWebsiteDTO {
     private String companyWebsite;
-    private int workspaceId;
+    private Long workspaceId;
     private Long accountId;
+    private Long companyId;
 
 }
