@@ -85,16 +85,14 @@ public class CompanyWebsiteService {
 
 
     public String saveWebsite(CompanyWebsiteDTO websiteDTO, Long accountId) {
-        // Construct the request payload
         Map<String, Object> request = new HashMap<>();
         request.put("workspaceId", websiteDTO.getWorkspaceId());
         request.put("companyWebsite", websiteDTO.getCompanyWebsite());
         request.put("accountId", accountId);
+        request.put("companyId", websiteDTO.getCompanyId());
 
-        // Using load-balanced URL with lb://
         String companyManagerUrl = "http://CompanyManager/api/v1/company/website";
 
-        // Make a POST request to the companyManager service using WebClient
         String response = webClientBuilder.build()
                 .post()
                 .uri(companyManagerUrl)

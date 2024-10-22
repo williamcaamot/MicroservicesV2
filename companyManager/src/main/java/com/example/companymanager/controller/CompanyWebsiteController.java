@@ -2,6 +2,8 @@ package com.example.companymanager.controller;
 
 
 import com.example.companymanager.dto.CompanyWebsiteDTO;
+import com.example.companymanager.service.CompanyWebsiteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +17,13 @@ import java.util.HashMap;
 @RestController
 public class CompanyWebsiteController {
 
+    private CompanyWebsiteService companyWebsiteService;
+
+    @Autowired
+    public CompanyWebsiteController(CompanyWebsiteService companyWebsiteService){
+        this.companyWebsiteService = companyWebsiteService;
+    }
+
 
 
     @PostMapping
@@ -25,6 +34,8 @@ public class CompanyWebsiteController {
             System.out.println(websiteDTO.getWorkspaceId());
             System.out.println(websiteDTO.getAccountId());
 
+            companyWebsiteService.SaveCompanyWebsite(websiteDTO);
+
             result.put("success", "Successfully set the website");
             return ResponseEntity.status(HttpStatus.OK).body(result);
         }catch (Exception e){
@@ -32,12 +43,5 @@ public class CompanyWebsiteController {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
         }
-
-
-
-        //TODO Should call service from this controller- That does not happen now!
-        //After the request comes here we assume it is OK.
     }
-
-
 }
