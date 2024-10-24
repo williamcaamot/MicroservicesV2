@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  build:
+  buildCompanyManager:
     name: push docker images to docker hub
     runs-on: ubuntu-latest
     steps:
@@ -24,3 +24,23 @@ jobs:
       - name: push the docker image
         id: push-docker-image
         run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_companymanager:latest
+  buildAuthentication:
+    name: push docker images to docker hub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: login to docker hub
+        id: docker-hub
+        env:
+          username: ${{secrets.DOCKERHUBUSERNAME}}
+          password: ${{secrets.DOCKERHUBPASSWORD}}
+        run: |
+          docker login -u $username -p $password
+      - name: build the docker image
+        id: build-docker-image
+        run: |
+          ls -la 
+          docker build Authentication/ -f Authentication/Dockerfile -t williamcaamot/ms_authentication:latest
+      - name: push the docker image
+        id: push-docker-image
+        run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_authentication:latest
