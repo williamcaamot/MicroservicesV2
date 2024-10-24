@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   buildCompanyManager:
-    name: push docker images to docker hub
+    name: Companymanager build and publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +25,7 @@ jobs:
         id: push-docker-image
         run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_companymanager:latest
   buildAuthentication:
-    name: push docker images to docker hub
+    name: Authentication build and publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
