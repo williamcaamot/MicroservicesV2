@@ -2,6 +2,7 @@ package com.example.companymanager.controller;
 
 
 import com.example.companymanager.dto.CompanyEmailDTO;
+import com.example.companymanager.entity.Company;
 import com.example.companymanager.service.CompanyEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,9 +32,9 @@ public class CompanyEmailController {
             @RequestBody CompanyEmailDTO companyEmailDTO
             ){
         HashMap<String, ArrayList<String>> result = new HashMap<>();
-        System.out.println(companyEmailDTO.getCompanyId());
-        System.out.println(companyEmailDTO.getEmails());
-        System.out.println(companyEmailDTO.getAccountId());
+
+        Company updatedCompany = companyEmailService.saveCompanyEmail(companyEmailDTO);
+
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }

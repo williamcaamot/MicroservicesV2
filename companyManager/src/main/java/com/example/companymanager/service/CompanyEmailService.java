@@ -1,35 +1,50 @@
 package com.example.companymanager.service;
 
 
+import com.example.companymanager.Exception.NoPermissionException;
 import com.example.companymanager.dto.CompanyEmailDTO;
 import com.example.companymanager.entity.Company;
+import com.example.companymanager.entity.Email;
+import com.example.companymanager.entity.Workspace;
 import com.example.companymanager.repository.CompanyRepository;
+import com.example.companymanager.repository.EmailRepository;
+import com.example.companymanager.repository.WorkspaceRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Objects;
 
 @Service
 public class CompanyEmailService {
 
 
     private CompanyRepository companyRepository;
+    private EmailRepository emailRepository;
+    private WorkspaceRepository workspaceRepository;
 
     @Autowired
-    public CompanyEmailService(CompanyRepository companyRepository){
+    public CompanyEmailService(
+            CompanyRepository companyRepository,
+            EmailRepository emailRepository,
+            WorkspaceRepository workspaceRepository
+    ) {
         this.companyRepository = companyRepository;
+        this.emailRepository = emailRepository;
+        this.workspaceRepository = workspaceRepository;
     }
 
-    public Company saveCompanyEmail(CompanyEmailDTO companyEmailDTO){
+    public Company saveCompanyEmail(CompanyEmailDTO companyEmailDTO) {
+        Workspace workspace = workspaceRepository.findById(companyEmailDTO.getWorkspaceId()).orElseThrow(() -> new EntityNotFoundException("Could not find Workspace with ID: " + companyEmailDTO.getWorkspaceId()));
+        if (!Objects.equals(workspace.getOwningAccountId(), companyEmailDTO.getAccountId())) {
+            throw new NoPermissionException();
+        }
+        Company company = companyRepository.findById(companyEmailDTO.getCompanyId()).orElseThrow(() -> new EntityNotFoundException("Could not find company with id: " + companyEmailDTO.getCompanyId()));
+        if(!Objects.equals(company.getWorkspaceId(), workspace.getWorkspaceId())){
+            throw new NoPermissionException();
+        }
+        company.setEmailAddresses(companyEmailDTO.getEmails());
 
-
-
-        return new Company();
+        return companyRepository.save(company);
     }
-
-
 }
