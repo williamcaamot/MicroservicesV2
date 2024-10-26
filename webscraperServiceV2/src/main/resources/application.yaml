@@ -15,6 +15,7 @@ spring:
         prefer-ip-address: true
         health-check-path: /actuator/health
         health-check-interval: 15s
+        health-check-critical-timeout: 20s
 
 management:
   endpoints:

@@ -48,7 +48,7 @@ export function Company() {
     async function fetchCompanyEmail() {
         setIsFetchingCompanyEmailsLoading(true);
         try {
-            const result = await fetch(`/api/v1/webscraper/companyemail?companyName=${company.navn}`);
+            const result = await fetch(`/api/v1/webscraper/companyemail`);
             if (result.ok) {
                 const data = await result.json();
                 console.log(data);
