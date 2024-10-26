@@ -1,7 +1,6 @@
 package com.example.webscraperservicev2.service;
 
 
-import com.example.webscraperservicev2.dto.GetAndSaveEmailsDTO;
 import com.example.webscraperservicev2.dto.GetAndSavePhonenumberDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

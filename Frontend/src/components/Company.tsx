@@ -13,6 +13,7 @@ export function Company() {
     const [websiteSuggestions, setWebsiteSuggestions] = useState<string[] | undefined>(undefined);
     const [isFetchingWebsitesLoading, setIsFetchingWebsitesLoading] = useState<boolean>(false);
     const [isFetchingCompanyEmailsLoading, setIsFetchingCompanyEmailsLoading] = useState<boolean>(false);
+    const [isFetchingPhonenumbersLoading, setIsFetchingPhonenumbersLoading] = useState<boolean>(false)
 
     async function fetchCompany() {
         try {
@@ -76,6 +77,39 @@ export function Company() {
             console.log(e)
         }
         setIsFetchingCompanyEmailsLoading(false);
+    }
+
+    async function fetchCompanyPhonenumbers() {
+        if(!company.hjemmeside){
+            alert("You have not chosen a website for this company! Cannot find phone numbers without a website!")
+            return
+        }
+        setIsFetchingPhonenumbersLoading(true);
+        try {
+            const result = await fetch(`/api/v1/webscraper/companyphonenumber`, {
+                method: "POST",
+                headers: {
+                    "content-type": "Application/JSON"
+                },
+                body: JSON.stringify({
+                    workspaceId: workspaceId,
+                    website: company.hjemmeside,
+                    companyId: companyId,
+                })
+            });
+            if (result.ok) {
+                const data = await result.json();
+                console.log(data);
+                if (data.length === 0){
+                    alert("Could not find any email addresses!")
+                }else if(data.length>0) {
+                    setCompany(prevCompany => ({...prevCompany, phonenumbers: data}))
+                }
+            }
+        } catch (e) {
+            console.log(e)
+        }
+        setIsFetchingPhonenumbersLoading(false);
     }
 
     async function saveCompanyWebsite(website: string) {
@@ -143,6 +177,7 @@ export function Company() {
                 <div className={"flex space-x-2"}>
                 <Button variant={"outlined"} onClick={() => fetchCompanyWebsites()} loading={isFetchingWebsitesLoading}>Find websites for this company</Button>
                     <Button variant={"outlined"} onClick={() => fetchCompanyEmail()} loading={isFetchingCompanyEmailsLoading}>Find email addresses for this company</Button>
+                    <Button variant={"outlined"} onClick={() => fetchCompanyPhonenumbers()} loading={isFetchingPhonenumbersLoading}>Find phone numbers for this company</Button>
                 <Button variant={"outlined"} >Generate sales pitch</Button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
@@ -151,9 +186,17 @@ export function Company() {
                         <InfoItem label="Workspace ID" value={company.workspaceId}/>
                         <InfoItem label="Website" value={company.hjemmeside || 'Not specified'}/>
                         <div>
-                            <h2 className="text-xl font-semibold text-gray-700 mb-2">Epost adresser</h2>
+                            <h2 className="text-xl font-semibold text-gray-700 mb-2">Email addresses</h2>
                             <ul className="list-disc list-inside text-gray-600">
                                 {company.emailAddresses && company.emailAddresses.map((item, index) => (
+                                    <li key={index} className="mb-1">{item}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div>
+                            <h2 className="text-xl font-semibold text-gray-700 mb-2">Phone numbers</h2>
+                            <ul className="list-disc list-inside text-gray-600">
+                                {company.phonenumbers && company.phonenumbers.map((item, index) => (
                                     <li key={index} className="mb-1">{item}</li>
                                 ))}
                             </ul>

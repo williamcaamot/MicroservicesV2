@@ -26,7 +26,7 @@ public class CompanyPhonenumberController {
 
 
     @PostMapping
-    public ResponseEntity<ArrayList<String>> getAndSaveEmails(
+    public ResponseEntity<ArrayList<String>> getAndSavePhonenumbers(
             @RequestBody GetAndSavePhonenumberDTO getAndSavePhonenumberDTO,
             @RequestHeader("accountid") Long accountId
     ) {
