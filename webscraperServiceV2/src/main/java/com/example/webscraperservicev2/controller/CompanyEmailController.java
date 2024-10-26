@@ -27,8 +27,9 @@ public class CompanyEmailController {
 
 
     @GetMapping()
-    public ResponseEntity<ArrayList<String>> getEmail() {
-        return ResponseEntity.status(HttpStatus.OK).body(new ArrayList<>(Arrays.asList("Test", "test")));
+    public ResponseEntity<ArrayList<String>> getEmail(@RequestParam String companyWebsite) {
+        ArrayList<String> result = companyEmailService.getEmails(companyWebsite);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
 }

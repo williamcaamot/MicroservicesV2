@@ -6,32 +6,28 @@ import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlBody;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CompanyEmailService {
 
-    // 1. Get DOM and try find an element with email format, maybe use regex?
+
+    private EmailScraperService emailScraperService;
 
 
-    public void testMethod(){
-        try(final WebClient webClient = new WebClient()){
-
-            final HtmlPage page1 = webClient.getPage("https://www.a-ll.no/");
-            final List divs = page1.getByXPath("");
-            for(int i = 0; i < divs.size(); i ++){
-                System.out.println(divs.get(i).toString());
-            }
-
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    @Autowired
+    public CompanyEmailService(EmailScraperService emailScraperService){
+        this.emailScraperService = emailScraperService;
     }
 
 
+    public ArrayList<String> getEmails(String website){
+        // TODO Communication with company manager service
+        return emailScraperService.getEmails(website);
+    }
 
 }
