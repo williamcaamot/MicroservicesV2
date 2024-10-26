@@ -34,6 +34,7 @@ public class CompanyEmailController {
         HashMap<String, ArrayList<String>> result = new HashMap<>();
 
         Company updatedCompany = companyEmailService.saveCompanyEmail(companyEmailDTO);
+        result.put("Emails", (ArrayList<String>) updatedCompany.getEmailAddresses());
 
 
         return ResponseEntity.status(HttpStatus.OK).body(result);

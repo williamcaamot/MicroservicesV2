@@ -39,4 +39,7 @@ public class Company extends BaseEntity {
     @Column
     List<String> emailAddresses = new ArrayList<>();
 
+    @Column
+    List<String> phonenumbers = new ArrayList<>();
+
 }
