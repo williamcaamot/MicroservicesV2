@@ -36,5 +36,4 @@ public class Company extends BaseEntity {
     @Column
     String hjemmeside;
 
-
 }
