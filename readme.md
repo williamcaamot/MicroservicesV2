@@ -38,6 +38,7 @@ There are a few services necessary for developmnet. Run the following command to
 - [X] As a user I want to be able to find relevant websites for a company with Google Search (Webscraper Service)
 - [ ] Security and validation on the feature above - It works, but is it secure and resilient?
 - [X] As a user I want to be able to find relevant emails from a company website (Webscraper Service)
+- [X] As a user I want to be able to find relevant phone numbers from a company website (Webscraper Service)
 - [X] Authentication, username and password for this simple project in the course.
 - [X] Product description for selling, used for prompts to generate pitches
 - [ ] Global exception handling using the same DTO in ALL microservices
