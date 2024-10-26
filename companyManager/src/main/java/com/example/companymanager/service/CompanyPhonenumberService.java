@@ -37,8 +37,7 @@ public class CompanyPhonenumberService {
         if(!Objects.equals(company.getWorkspaceId(), workspace.getWorkspaceId())){
             throw new NoPermissionException();
         }
-        company.setPhonenumbers(companyPhonenumberDTO.getPhoneNumbers());
-
+        company.setPhonenumbers(companyPhonenumberDTO.getPhonenumbers());
         return companyRepository.save(company);
     }
 
