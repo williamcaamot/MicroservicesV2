@@ -32,7 +32,11 @@ public class CompanyEmailController {
 
 
     @PostMapping
-    public ResponseEntity<ArrayList<String>> getAndSaveEmails(@RequestBody GetAndSaveEmailsDTO getAndSaveEmailsDTO) {
+    public ResponseEntity<ArrayList<String>> getAndSaveEmails(
+            @RequestBody GetAndSaveEmailsDTO getAndSaveEmailsDTO,
+            @RequestHeader("accountid") Long accountId
+    ) {
+        getAndSaveEmailsDTO.setAccountId(accountId);
         ArrayList<String> result = companyEmailService.getAndSaveEmails(getAndSaveEmailsDTO);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }

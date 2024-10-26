@@ -31,10 +31,10 @@ public class CompanyEmailController {
             @RequestBody CompanyEmailDTO companyEmailDTO
             ){
         HashMap<String, ArrayList<String>> result = new HashMap<>();
-
+        System.out.println(companyEmailDTO.getCompanyId());
+        System.out.println(companyEmailDTO.getEmails());
+        System.out.println(companyEmailDTO.getAccountId());
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
-
-
 }

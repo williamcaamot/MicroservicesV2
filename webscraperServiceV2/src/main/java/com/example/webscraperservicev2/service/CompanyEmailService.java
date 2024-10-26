@@ -31,6 +31,7 @@ public class CompanyEmailService {
     }
 
     public ArrayList<String> getAndSaveEmails(GetAndSaveEmailsDTO getAndSaveEmailsDTO){
+        System.out.println("Getting and saving emails in scraper service");
         ArrayList<String> result = emailScraperService.getEmails(getAndSaveEmailsDTO.getWebsite());
 
         Map<String, Object> request = new HashMap<>();

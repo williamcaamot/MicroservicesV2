@@ -48,7 +48,17 @@ export function Company() {
     async function fetchCompanyEmail() {
         setIsFetchingCompanyEmailsLoading(true);
         try {
-            const result = await fetch(`/api/v1/webscraper/companyemail?companyWebsite=${company.hjemmeside}`);
+            const result = await fetch(`/api/v1/webscraper/companyemail?companyWebsite=${company.hjemmeside}`, {
+                method: "POST",
+                headers: {
+                    "content-type": "Application/JSON"
+                },
+                body: JSON.stringify({
+                    workspaceId: workspaceId,
+                    website: company.hjemmeside,
+                    companyId: companyId,
+                })
+            });
             if (result.ok) {
                 const data = await result.json();
                 console.log(data);
