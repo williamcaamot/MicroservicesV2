@@ -12,6 +12,7 @@ export function Company() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [websiteSuggestions, setWebsiteSuggestions] = useState<string[] | undefined>(undefined);
     const [isFetchingWebsitesLoading, setIsFetchingWebsitesLoading] = useState<boolean>(false);
+    const [isFetchingCompanyEmailsLoading, setIsFetchingCompanyEmailsLoading] = useState<boolean>(false);
 
     async function fetchCompany() {
         try {
@@ -42,6 +43,21 @@ export function Company() {
             console.log(e)
         }
         setIsFetchingWebsitesLoading(false);
+    }
+
+    async function fetchCompanyEmail() {
+        setIsFetchingCompanyEmailsLoading(true);
+        try {
+            const result = await fetch(`/api/v1/webscraper/companyemail?companyName=${company.navn}`);
+            if (result.ok) {
+                const data = await result.json();
+                console.log(data);
+
+            }
+        } catch (e) {
+            console.log(e)
+        }
+        setIsFetchingCompanyEmailsLoading(false);
     }
 
     async function saveCompanyWebsite(website: string) {
@@ -108,6 +124,7 @@ export function Company() {
                 </div>
                 <div className={"flex space-x-2"}>
                 <Button variant={"outlined"} onClick={() => fetchCompanyWebsites()} loading={isFetchingWebsitesLoading}>Find websites for this company</Button>
+                    <Button variant={"outlined"} onClick={() => fetchCompanyEmail()} loading={isFetchingWebsitesLoading}>Find email addresses for this company</Button>
                 <Button variant={"outlined"} >Generate sales pitch</Button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
