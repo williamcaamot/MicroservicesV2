@@ -34,22 +34,18 @@ public class CompanyWebsiteService {
 
     public List<String> getWebsite(String companyName) {
         try {
-            // Formulate the search query
             String encodedCompanyName = URLEncoder.encode(companyName, StandardCharsets.UTF_8);
             String apiUrl = "https://www.googleapis.com/customsearch/v1?q=" + encodedCompanyName + "&key=" + API_KEY + "&cx=" + CX + "&num=10";
 
-            // Create an HTTP client and request
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(apiUrl))
                     .build();
 
-            // Send the request and get the response
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             //System.out.println(response.body());
 
-            // Parse the response and extract the first website URL
             return extractWebsiteUrl(response.body());
 
         } catch (Exception e) {
@@ -71,7 +67,6 @@ public class CompanyWebsiteService {
 
 
                 for (JsonNode item : items) {
-                    // Get the first result's link
                     String link = item.get("link").asText();
                     result.add(link);
                 }

@@ -13,24 +13,18 @@ import java.util.regex.Pattern;
 public class EmailScraperService {
 
     public ArrayList<String> getEmails(String url) {
-        System.out.println("Fetching emails from URL: " + url);
-
         ArrayList<String> result = new ArrayList<>();
 
-        // Regular expression to match email addresses
         String emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}";
         Pattern emailPattern = Pattern.compile(emailRegex);
 
-        // Set up the HTMLUnit WebClient
         try (WebClient webClient = new WebClient()) {
             webClient.getOptions().setJavaScriptEnabled(false);
             webClient.getOptions().setCssEnabled(false);
 
-            // Load the page and get raw HTML content
             HtmlPage page = webClient.getPage(url);
-            String pageHtml = page.asXml(); // Get the raw HTML as a string
+            String pageHtml = page.asXml();
 
-            // Find and add emails to the result list
             Matcher matcher = emailPattern.matcher(pageHtml);
             while (matcher.find()) {
                 result.add(matcher.group());
@@ -40,8 +34,6 @@ public class EmailScraperService {
             System.err.println("Error fetching emails: " + e.getMessage());
             e.printStackTrace();
         }
-
-        System.out.println("Found emails: " + result);
         return result;
     }
 }
