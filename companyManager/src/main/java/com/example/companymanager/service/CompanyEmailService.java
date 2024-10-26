@@ -4,10 +4,8 @@ package com.example.companymanager.service;
 import com.example.companymanager.Exception.NoPermissionException;
 import com.example.companymanager.dto.CompanyEmailDTO;
 import com.example.companymanager.entity.Company;
-import com.example.companymanager.entity.Email;
 import com.example.companymanager.entity.Workspace;
 import com.example.companymanager.repository.CompanyRepository;
-import com.example.companymanager.repository.EmailRepository;
 import com.example.companymanager.repository.WorkspaceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +18,14 @@ public class CompanyEmailService {
 
 
     private CompanyRepository companyRepository;
-    private EmailRepository emailRepository;
     private WorkspaceRepository workspaceRepository;
 
     @Autowired
     public CompanyEmailService(
             CompanyRepository companyRepository,
-            EmailRepository emailRepository,
             WorkspaceRepository workspaceRepository
     ) {
         this.companyRepository = companyRepository;
-        this.emailRepository = emailRepository;
         this.workspaceRepository = workspaceRepository;
     }
 
