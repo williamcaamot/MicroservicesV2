@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Email extends BaseEntity{
     @Id
-    private Long id;
+    private Long emailId;
 
     @Column
     private Long companyId;
