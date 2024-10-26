@@ -46,6 +46,10 @@ export function Company() {
     }
 
     async function fetchCompanyEmail() {
+        if(!company.hjemmeside){
+            alert("You have not chosen a website for this company! Cannot find emails without a website!")
+            return
+        }
         setIsFetchingCompanyEmailsLoading(true);
         try {
             const result = await fetch(`/api/v1/webscraper/companyemail?companyWebsite=${company.hjemmeside}`, {
@@ -62,7 +66,11 @@ export function Company() {
             if (result.ok) {
                 const data = await result.json();
                 console.log(data);
-
+                if (data.length === 0){
+                    alert("Could not find any email addresses!")
+                }else if(data.length>0) {
+                    setCompany(prevCompany => ({...prevCompany, emailAddresses: data}))
+                }
             }
         } catch (e) {
             console.log(e)
@@ -134,22 +142,30 @@ export function Company() {
                 </div>
                 <div className={"flex space-x-2"}>
                 <Button variant={"outlined"} onClick={() => fetchCompanyWebsites()} loading={isFetchingWebsitesLoading}>Find websites for this company</Button>
-                    <Button variant={"outlined"} onClick={() => fetchCompanyEmail()} loading={isFetchingWebsitesLoading}>Find email addresses for this company</Button>
+                    <Button variant={"outlined"} onClick={() => fetchCompanyEmail()} loading={isFetchingCompanyEmailsLoading}>Find email addresses for this company</Button>
                 <Button variant={"outlined"} >Generate sales pitch</Button>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                    <div className="space-y-4 border rounded p-2">
                         <InfoItem label="Organization Number" value={company.organisasjonsnummer}/>
                         <InfoItem label="Workspace ID" value={company.workspaceId}/>
                         <InfoItem label="Website" value={company.hjemmeside || 'Not specified'}/>
+                        <div>
+                            <h2 className="text-xl font-semibold text-gray-700 mb-2">Epost adresser</h2>
+                            <ul className="list-disc list-inside text-gray-600">
+                                {company.emailAddresses && company.emailAddresses.map((item, index) => (
+                                    <li key={index} className="mb-1">{item}</li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-4 border rounded p-2">
                         <div>
                             <h2 className="text-xl font-semibold text-gray-700 mb-2">Activity</h2>
                             <ul className="list-disc list-inside text-gray-600">
                                 {company.aktivitet.map((item, index) => (
-                                    <li key={index} className="mb-1">{item}</li>
+                                    <span key={index} className="mb-1">{item}</span>
                                 ))}
                             </ul>
                         </div>
@@ -158,6 +174,7 @@ export function Company() {
                             label="Statutory Purpose"
                             value={company.vedtektsfestetFormaal || 'Not specified'}
                         />
+
                     </div>
                 </div>
 
