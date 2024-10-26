@@ -16,7 +16,7 @@ import java.util.Arrays;
 public class CompanyEmailController {
 
 
-    private CompanyEmailService companyEmailService;
+    private final CompanyEmailService companyEmailService;
 
     @Autowired
     public CompanyEmailController(CompanyEmailService companyEmailService) {

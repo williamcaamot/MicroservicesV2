@@ -27,9 +27,12 @@ public class CompanyWebsiteService {
     private static final String CX = "178c48d27a6b145d9";
 
 
-    @Autowired
-    private WebClient.Builder webClientBuilder;
+    private final WebClient.Builder webClientBuilder;
 
+    @Autowired
+    public CompanyWebsiteService(WebClient.Builder webClientBuilder){
+        this.webClientBuilder = webClientBuilder;
+    }
 
 
     public List<String> getWebsite(String companyName) {
