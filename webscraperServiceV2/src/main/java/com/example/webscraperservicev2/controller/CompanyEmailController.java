@@ -24,13 +24,6 @@ public class CompanyEmailController {
     }
 
 
-    @GetMapping()
-    public ResponseEntity<ArrayList<String>> getEmail(@RequestParam String companyWebsite) {
-        ArrayList<String> result = companyEmailService.getEmails(companyWebsite);
-        return ResponseEntity.status(HttpStatus.OK).body(result);
-    }
-
-
     @PostMapping
     public ResponseEntity<ArrayList<String>> getAndSaveEmails(
             @RequestBody GetAndSaveEmailsDTO getAndSaveEmailsDTO,

@@ -20,12 +20,6 @@ public class CompanyEmailService {
         this.webClientBuilder = webClientBuilder;
     }
 
-
-    public ArrayList<String> getEmails(String website){
-        ArrayList<String> result = emailScraperService.getEmails(website);
-        return result;
-    }
-
     public ArrayList<String> getAndSaveEmails(GetAndSaveEmailsDTO getAndSaveEmailsDTO){
         ArrayList<String> result = emailScraperService.getEmails(getAndSaveEmailsDTO.getWebsite());
 
