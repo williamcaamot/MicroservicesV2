@@ -33,9 +33,6 @@ public class CompanyEmailService {
     public ArrayList<String> getAndSaveEmails(GetAndSaveEmailsDTO getAndSaveEmailsDTO){
         ArrayList<String> result = emailScraperService.getEmails(getAndSaveEmailsDTO.getWebsite());
 
-
-
-
         Map<String, Object> request = new HashMap<>();
         request.put("accountId", getAndSaveEmailsDTO.getAccountId());
         request.put("workspaceId", getAndSaveEmailsDTO.getWorkspaceId());
