@@ -2,10 +2,6 @@ package com.example.webscraperservicev2.service;
 
 
 import com.example.webscraperservicev2.dto.GetAndSaveEmailsDTO;
-import org.htmlunit.ScriptResult;
-import org.htmlunit.html.HtmlBody;
-import org.htmlunit.html.HtmlElement;
-import org.htmlunit.html.HtmlPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,11 +11,11 @@ import java.util.*;
 @Service
 public class CompanyEmailService {
 
-    private EmailScraperService emailScraperService;
+    private ScraperService emailScraperService;
     private WebClient.Builder webClientBuilder;
 
     @Autowired
-    public CompanyEmailService(EmailScraperService emailScraperService, WebClient.Builder webClientBuilder){
+    public CompanyEmailService(ScraperService emailScraperService, WebClient.Builder webClientBuilder){
         this.emailScraperService = emailScraperService;
         this.webClientBuilder = webClientBuilder;
     }
