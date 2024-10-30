@@ -27,6 +27,6 @@ public class CompanyControllerUnitTest {
                 .get("/api/v1/workspace/1/company")
                 .then()
                 .statusCode(404)
-                .body("key", equalTo("value"));
+                .body("key", equalTo(null)); //TODO With global exception handling in the controller, can test here that I actually receive the correct error object
     }
 }
