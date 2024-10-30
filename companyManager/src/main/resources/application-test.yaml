@@ -1,3 +1,6 @@
+server:
+  port: 0  # This tells Spring Boot to use a random available port
+
 spring:
   datasource:
     url: jdbc:h2:mem:testdb  # In-memory H2 database

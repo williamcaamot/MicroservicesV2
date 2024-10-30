@@ -10,25 +10,23 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 @ActiveProfiles("test")
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CompanyControllerUnitTest {
 
-    //@LocalServerPort(2000L);
 
-    @Test
-    public void basicSaveCompanyTest(){
-
-    }
+    @LocalServerPort
+    private int port;
 
     @Test
     public void testApiResponse() {
-        given().
-                baseUri("localhost").
-                when().
-                get("/endpoint").
-                then().
-                statusCode(200).
-                body("key", equalTo("value"));
-    }
 
+        given()
+                .baseUri("http://localhost")
+                .port(port) // Dynamically set the port to the injected value
+                .when()
+                .get("/api/v1/workspace/1/company")
+                .then()
+                .statusCode(404)
+                .body("key", equalTo("value"));
+    }
 }
