@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb  # In-memory H2 database
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update  # Automatically create tables based on entities
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect  # Specifies the H2 dialect for Hibernate
+
+  cloud:
+    consul:
+      enabled: false
+      discovery:
+        enabled: false  # Disable discovery
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: test
+    password: test
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
