@@ -32,7 +32,10 @@ There are a few services necessary for developmnet. Run the following command to
 # Google search 
  - Email service accont:  pg3402@microservices-436410.iam.gserviceaccount.com 
  - Unique ID service account: 108969935334828963980
- - Google custom search API key:  AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow 
+ - Google custom search API key:  AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow
+
+- [ ] Want environment variables to be injected - send bogdan the .env in the exam delivery and explain how to run the project
+- [ ] Want a UI to test the load balancing, should have centrlized logging, this should be controlled as a feature flag, set in the env file. Explain this also in the readme file
 
 ## User stories and features
 - [X] As a user I want to be able to find relevant websites for a company with Google Search (Webscraper Service)
