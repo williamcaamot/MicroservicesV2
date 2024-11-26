@@ -5,8 +5,6 @@ import {useParams} from "react-router-dom";
 import Layout from "../components/Layout.tsx";
 import Button from "../components/Button.tsx";
 import RightDrawer from "../components/common/RigthDrawer.tsx";
-import CompanySearch from "../components/CompanySearch.tsx";
-
 
 export interface Company {
     id: number,
@@ -77,10 +75,8 @@ export default function CompanyManager() {
 
 
     if (companies) return <Layout>
-        <h1 className={"pb-4"}>Selskaper</h1>
-
         <div className={"w-full flex"}>
-            <h2 className="text-2xl font-semibold mb-6 pt-2">Selskapsoversikt</h2>
+            <h2 className="text-2xl font-semibold mb-6 pt-2">Companies</h2>
             <div className={"px-2"}>
                 <Button fullWidth={false} text={"Nytt selskap"} onClick={() => setIsRightDrawerOpen(true)}>New company</Button>
             </div>
@@ -102,7 +98,6 @@ export default function CompanyManager() {
             </div>
 
         </RightDrawer>
-
         <div>
             <CompanyList
                 companies={companies}
@@ -111,10 +106,6 @@ export default function CompanyManager() {
                 onDelete={handleDeleteCompany}
             />
         </div>
-
-
-
-
     </Layout>
 
 

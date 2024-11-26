@@ -2,6 +2,7 @@ package com.example.companymanager.service;
 
 
 import com.example.companymanager.CompanyManagerApplication;
+import com.example.companymanager.dto.CompanySalesPitchGenerateDTO;
 import com.example.companymanager.entity.Company;
 import com.example.companymanager.repository.CompanyRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -28,8 +29,6 @@ public class CompanyService {
     }
 
     public Company getCompanyById(Long id){
-        rabbitMQService
-                .sendMessage("Heeeeeey!");
 
         return companyRepository
                 .findById(id)
@@ -48,6 +47,12 @@ public class CompanyService {
     public void deleteCompany(Long id){
         companyRepository.deleteById(id);
         return;
+    }
+
+
+    public void putSalesPitchGenerationInMQ(CompanySalesPitchGenerateDTO generateDTO){
+        rabbitMQService
+                .sendMessage("Heeeeeey!");
     }
 
 

@@ -136,6 +136,11 @@ export function Company() {
         }
     }
 
+    async function generateSalesPitch(){
+        //TODO Create this
+    }
+
+
     useEffect(() => {
         fetchCompany()
     }, []);
