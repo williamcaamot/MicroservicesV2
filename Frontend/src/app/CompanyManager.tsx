@@ -3,6 +3,9 @@ import {useEffect, useState} from "react";
 import CompanyList from "../components/common/Company.tsx";
 import {useParams} from "react-router-dom";
 import Layout from "../components/Layout.tsx";
+import Button from "../components/Button.tsx";
+import RightDrawer from "../components/common/RigthDrawer.tsx";
+import CompanySearch from "../components/CompanySearch.tsx";
 
 
 export interface Company {
@@ -13,9 +16,10 @@ export interface Company {
 
 
 export default function CompanyManager() {
-
     const [searchTerm, setSearchTerm] = useState("")
     const [companies, setCompanies] = useState<Company[]>([])
+
+    const [isRightDrawerOpen, setIsRightDrawerOpen] = useState<boolean>(false)
 
     const {workspaceId} = useParams();
 
@@ -74,11 +78,31 @@ export default function CompanyManager() {
 
     if (companies) return <Layout>
         <h1 className={"pb-4"}>Selskaper</h1>
-        <CompanySearchV2
-            handleSelectCompany={handleSelectCompany}
-            setSearchTerm={setSearchTerm}
-            searchTerm={searchTerm}
-        />
+
+        <div className={"w-full flex"}>
+            <h2 className="text-2xl font-semibold mb-6 pt-2">Selskapsoversikt</h2>
+            <div className={"px-2"}>
+                <Button fullWidth={false} text={"Nytt selskap"} onClick={() => setIsRightDrawerOpen(true)}>New company</Button>
+            </div>
+        </div>
+        <RightDrawer isOpen={isRightDrawerOpen} setIsOpen={setIsRightDrawerOpen} title={"Add new company"}>
+
+            <div className={"w-full flex mb-2"}>
+                <form className={"flex w-full flex-wrap"} autoComplete={'false'} onSubmit={(e) => {
+                    e.preventDefault()
+                }}>
+                    <div className={"pr-3 flex-1 min-w-44"}>
+                        <CompanySearchV2
+                            handleSelectCompany={handleSelectCompany}
+                            setSearchTerm={setSearchTerm}
+                            searchTerm={searchTerm}
+                        />
+                    </div>
+                </form>
+            </div>
+
+        </RightDrawer>
+
         <div>
             <CompanyList
                 companies={companies}
@@ -87,6 +111,9 @@ export default function CompanyManager() {
                 onDelete={handleDeleteCompany}
             />
         </div>
+
+
+
 
     </Layout>
 
