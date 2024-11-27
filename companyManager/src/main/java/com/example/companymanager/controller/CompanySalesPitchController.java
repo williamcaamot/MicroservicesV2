@@ -3,6 +3,7 @@ package com.example.companymanager.controller;
 
 import com.example.companymanager.dto.CompanySalesPitchGenerateDTO;
 import com.example.companymanager.service.CompanyService;
+import com.example.companymanager.service.RabbitMQService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,9 @@ public class CompanySalesPitchController {
     CompanyService companyService;
 
     @Autowired
-    public CompanySalesPitchController(CompanyService companyService){
+    public CompanySalesPitchController(
+            CompanyService companyService
+    ){
         this.companyService = companyService;
     }
 
@@ -36,6 +39,7 @@ public class CompanySalesPitchController {
         companySalesPitchGenerateDTO.setAccountId(accountId);
 
         companyService.putSalesPitchGenerationInMQ(companySalesPitchGenerateDTO);
+
 
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
