@@ -14,6 +14,7 @@ export function Company() {
     const [isFetchingWebsitesLoading, setIsFetchingWebsitesLoading] = useState<boolean>(false);
     const [isFetchingCompanyEmailsLoading, setIsFetchingCompanyEmailsLoading] = useState<boolean>(false);
     const [isFetchingPhonenumbersLoading, setIsFetchingPhonenumbersLoading] = useState<boolean>(false)
+    const [isGeneratingSalesPitchLoading, setIsGeneratingSalesPitchLoading] = useState<boolean>(false);
 
     async function fetchCompany() {
         try {
@@ -47,7 +48,7 @@ export function Company() {
     }
 
     async function fetchCompanyEmail() {
-        if(!company.hjemmeside){
+        if (!company.hjemmeside) {
             alert("You have not chosen a website for this company! Cannot find emails without a website!")
             return
         }
@@ -67,9 +68,9 @@ export function Company() {
             if (result.ok) {
                 const data = await result.json();
                 console.log(data);
-                if (data.length === 0){
+                if (data.length === 0) {
                     alert("Could not find any email addresses!")
-                }else if(data.length>0) {
+                } else if (data.length > 0) {
                     setCompany(prevCompany => ({...prevCompany, emailAddresses: data}))
                 }
             }
@@ -80,7 +81,7 @@ export function Company() {
     }
 
     async function fetchCompanyPhonenumbers() {
-        if(!company.hjemmeside){
+        if (!company.hjemmeside) {
             alert("You have not chosen a website for this company! Cannot find phone numbers without a website!")
             return
         }
@@ -100,9 +101,9 @@ export function Company() {
             if (result.ok) {
                 const data = await result.json();
                 console.log(data);
-                if (data.length === 0){
+                if (data.length === 0) {
                     alert("Could not find any email addresses!")
-                }else if(data.length>0) {
+                } else if (data.length > 0) {
                     setCompany(prevCompany => ({...prevCompany, phonenumbers: data}))
                 }
             }
@@ -136,8 +137,25 @@ export function Company() {
         }
     }
 
-    async function generateSalesPitch(){
-        //TODO Create this
+    async function generateSalesPitch() {
+        setIsGeneratingSalesPitchLoading(true);
+        try {
+            const res = await fetch(`/api/v1/workspace/${workspaceId}/company/salespitch`, {
+                method: "POST",
+                headers: {
+                    "content-type": "Application/JSON"
+                },
+                body: JSON.stringify({
+                    companyId: companyId
+                })
+            });
+            const data = await res.json();
+            console.log(data);
+        } catch (e) {
+            console.log(e)
+        }
+
+        setIsGeneratingSalesPitchLoading(false);
     }
 
 
@@ -156,11 +174,13 @@ export function Company() {
                         </p>
                         <ul className="space-y-3">
                             {websiteSuggestions.map((website, index) => (
-                                <li key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                                <li key={index}
+                                    className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
                                     <span className="text-gray-800 font-medium truncate flex-grow mr-4">{website}</span>
                                     <div className="flex space-x-2">
                                         <a href={website} target={"_blank"}>
-                                            <button className="px-3 py-1 bg-sky-500 text-white rounded hover:bg-sky-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50">
+                                            <button
+                                                className="px-3 py-1 bg-sky-500 text-white rounded hover:bg-sky-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50">
                                                 Open
                                             </button>
                                         </a>
@@ -180,10 +200,14 @@ export function Company() {
                     <h1 className="text-3xl font-bold text-gray-800">{company.navn}</h1>
                 </div>
                 <div className={"flex space-x-2"}>
-                <Button variant={"outlined"} onClick={() => fetchCompanyWebsites()} loading={isFetchingWebsitesLoading}>Find websites for this company</Button>
-                    <Button variant={"outlined"} onClick={() => fetchCompanyEmail()} loading={isFetchingCompanyEmailsLoading}>Find email addresses for this company</Button>
-                    <Button variant={"outlined"} onClick={() => fetchCompanyPhonenumbers()} loading={isFetchingPhonenumbersLoading}>Find phone numbers for this company</Button>
-                <Button variant={"outlined"} >Generate sales pitch</Button>
+                    <Button variant={"outlined"} onClick={() => fetchCompanyWebsites()}
+                            loading={isFetchingWebsitesLoading}>Find websites for this company</Button>
+                    <Button variant={"outlined"} onClick={() => fetchCompanyEmail()}
+                            loading={isFetchingCompanyEmailsLoading}>Find email addresses for this company</Button>
+                    <Button variant={"outlined"} onClick={() => fetchCompanyPhonenumbers()}
+                            loading={isFetchingPhonenumbersLoading}>Find phone numbers for this company</Button>
+                    <Button variant={"outlined"} onClick={() => generateSalesPitch()}
+                            loading={isGeneratingSalesPitchLoading}>Generate sales pitch</Button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                     <div className="space-y-4 border rounded p-2">

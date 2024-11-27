@@ -22,8 +22,8 @@ public class RabbitMQService {
     }
 
 
-    public void sendMessage(String message){
-        Message message1 = new Message(message.getBytes(), new MessageProperties());
-        rabbitTemplate.send(exchangeName, routingKey, message1);
+    public void sendMessage(Message message){
+
+        rabbitTemplate.send(exchangeName, routingKey, message);
     }
 }

@@ -1,15 +1,16 @@
 package com.example.companymanager.service;
 
 
-import com.example.companymanager.CompanyManagerApplication;
 import com.example.companymanager.dto.CompanySalesPitchGenerateDTO;
 import com.example.companymanager.dto.PutSalesPitchDTO;
 import com.example.companymanager.entity.Company;
 import com.example.companymanager.entity.Workspace;
 import com.example.companymanager.repository.CompanyRepository;
 import com.example.companymanager.repository.WorkspaceRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.jdbc.Work;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,9 +76,17 @@ public class CompanyService {
         putSalesPitchDTO.setAktivitet(new ArrayList<>(company.getAktivitet()));
         putSalesPitchDTO.setVedtektsfestetFormaal(new ArrayList<>(company.getVedtektsfestetFormaal()));
 
+        try{
 
-        rabbitMQService
-                .sendMessage("Heeeeeey!");
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(putSalesPitchDTO);
+
+            Message message = new Message(json.getBytes(), new MessageProperties());
+            rabbitMQService.sendMessage(message);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
