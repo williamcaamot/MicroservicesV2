@@ -1,4 +1,5 @@
-package com.example.companymanager.entity;
+package com.example.aiservice.entity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.*;
@@ -15,6 +16,7 @@ public class BaseEntity {
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
+
     @Column(updatable = false)
     private String createdBy;
 

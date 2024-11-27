@@ -1,6 +1,8 @@
 package com.example.aiservice.service;
 
 import com.example.aiservice.dto.PutSalesPitchDTO;
+import com.example.aiservice.entity.SalesPitch;
+import com.example.aiservice.repository.SalesPitchRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -17,13 +19,17 @@ public class RabbitMQService {
     private final RabbitTemplate rabbitTemplate;
     private final OpenAIChatGPTService openAIChatGPTService;
 
+    private final SalesPitchRepo salesPitchRepo;
+
     @Autowired
     public RabbitMQService(
             RabbitTemplate rabbitTemplate,
-            OpenAIChatGPTService openAIChatGPTService
+            OpenAIChatGPTService openAIChatGPTService,
+            SalesPitchRepo salesPitchRepo
     ){
         this.rabbitTemplate = rabbitTemplate;
         this.openAIChatGPTService = openAIChatGPTService;
+        this.salesPitchRepo = salesPitchRepo;
     }
 
 
@@ -48,11 +54,23 @@ public class RabbitMQService {
                     ".";
 
 
+            // Create and save initial salespitch
+            SalesPitch salesPitch = new SalesPitch();
+            salesPitch.setPrompt(prompt);
+            salesPitch.setComplete(false);
+            salesPitch.setWorkspaceId(dto.getWorkspaceId());
+            salesPitch.setCompanyId(dto.getCompanyId());
+
+            salesPitchRepo.save(salesPitch);
+
+
+            // Fetch the response
             String response = openAIChatGPTService.getChatResponse(prompt);
 
-
-            System.out.println(response);
-
+            // Set the response and save it
+            salesPitch.setSalesPitch(response);
+            salesPitch.setComplete(true);
+            salesPitchRepo.save(salesPitch);
 
 
         } catch (Exception e) {

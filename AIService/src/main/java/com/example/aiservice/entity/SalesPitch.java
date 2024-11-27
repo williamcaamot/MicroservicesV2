@@ -1,7 +1,6 @@
 package com.example.aiservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,16 +11,24 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SalesPitch {
+public class SalesPitch extends BaseEntity{
 
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "salespitch_id")
+    private Long salesPitchId;
+
 
     private Long companyId;
 
+
     private Long workspaceId;
 
+    @Column(length = 20480)
     private String salesPitch;
+
+    @Column(length = 20480)
+    private String prompt;
 
     private boolean isComplete;
 
