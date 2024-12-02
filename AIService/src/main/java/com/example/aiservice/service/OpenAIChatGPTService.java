@@ -2,6 +2,7 @@ package com.example.aiservice.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -15,12 +16,21 @@ public class OpenAIChatGPTService {
     private static final String OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
     private static final String API_KEY = "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";
 
+    private final WebClient webClient;
+
+    @Autowired
+    public OpenAIChatGPTService(WebClient.Builder webClientBuilder) {
+        this.webClient = webClientBuilder
+                .baseUrl(OPENAI_API_URL)
+                .defaultHeader("Authorization", "Bearer " + API_KEY)
+                .build();
+    }
+
+
     public String getChatResponse(String prompt) {
         try {
-            WebClient webClient = WebClient.builder()
-                    .baseUrl(OPENAI_API_URL)
-                    .defaultHeader("Authorization", "Bearer " + API_KEY)
-                    .build();
+
+
 
             System.out.println("Sending request to openai");
             String response = webClient.post()
