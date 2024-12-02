@@ -1,11 +1,16 @@
+##############################################
+# THIS IS THE CONFIG USED FOR DEPLOY         #
+##############################################
+
 server:
-  port: 0  # This tells Spring Boot to use a random available port
+  port: 8090  # This tells Spring Boot to use a random available port
+  address: 0.0.0.0
 
 spring:
   application:
     name: "CompanyManager"
   datasource:
-    url: jdbc:postgresql://localhost:5432/proptools
+    url: jdbc:postgresql://postgres:5432/companymanager
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
@@ -19,7 +24,7 @@ spring:
   # RABBIT MQ CONFIGURATION                       #
   #-----------------------------------------------#
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: user
     password: password
@@ -27,7 +32,7 @@ spring:
 
   cloud:
     consul:
-      host: localhost
+      host: consul
       port: 8500
       discovery:
         enabled: true
@@ -35,13 +40,17 @@ spring:
         service-name: CompanyManager
         prefer-ip-address: true
         health-check-path: /actuator/health
-        health-check-interval: 15s
+        health-check-interval: 2s
+
 
 management:
   endpoints:
     web:
       exposure:
         include: health, info
+  #endpoint:
+    #health:
+      #show-details: always
 
 # Production profile:
 ---

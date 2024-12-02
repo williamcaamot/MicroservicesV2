@@ -48,7 +48,7 @@ services:
   ##############################################
   # ACTUAL MICROSERVICES                       #
   ##############################################
-  property-manager:
+  company-manager:
     build:
       context: ./companyManager
       dockerfile: Dockerfile
@@ -60,7 +60,6 @@ services:
       - ms_network
     depends_on:
       - microservicePostgres
-      - consul
       - consul-importer
 
 

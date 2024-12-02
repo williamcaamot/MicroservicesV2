@@ -1,24 +1,28 @@
 server:
-  port: 0  # This tells Spring Boot to use a random available port
+  port: 8012
+  address: 0.0.0.0  # Bind to all interfaces so it's accessible from the Docker container
 
 spring:
   application:
-    name: "WebscraperService"
+    name: WebscraperService
+
   cloud:
     consul:
       host: localhost
       port: 8500
       discovery:
         enabled: true
-        instance-id: ${spring.application.name}:${random.value}  # Unique instance ID
+        instance-id: WebscraperService-${random.value}  # Unique but consistent instance ID per deployment
         service-name: WebscraperService
-        prefer-ip-address: true
+        prefer-ip-address: true  # Ensure IP is used for service registration
         health-check-path: /actuator/health
         health-check-interval: 15s
-        health-check-critical-timeout: 20s
+        health-check-critical-timeout: 30s  # Allows for some health check failures before removing the service
+        register: true  # Register this service with Consul
+        register-health-check: true  # Automatically add the health check
 
 management:
   endpoints:
     web:
       exposure:
-        include: health, info
+        include: health, info  # Expose health and info endpoints

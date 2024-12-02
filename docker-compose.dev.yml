@@ -1,22 +1,32 @@
 services:
+
   postgres:
     image: postgres:15-alpine
     container_name: ms_dev_postgres
     environment:
-      POSTGRES_DB: proptools
+      POSTGRES_DB: companymanager
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5433:5432"
+      - "5432:5432"
     networks:
       - microservices-network
+
+
   consul:
     image: hashicorp/consul
     container_name: ms_dev_consul
     ports:
-      - "8500:8500"
+      - '8500:8500' # Consul UI and agent port
+      - '8600:8600/udp'
     networks:
       - microservices-network
+    command: 'agent -dev -node=pdc_microservices -client=0.0.0.0 -log-level=DEBUG'
+    environment:
+      - HOST_IP=host.docker.internal
+
+
+
   frontend:
     image: node:20.1.0-alpine  # Node.js version suitable for your frontend
     container_name: ms_dev_frontend
@@ -30,15 +40,38 @@ services:
       - NODE_ENV=development
     networks:
       - microservices-network
-  rabbitMq:
+
+
+
+  rabbitmq:
     image: rabbitmq:3-management
     container_name: ms_dev_rabbitmq
+    networks:
+      - microservices-network
     ports:
       - "5672:5672"  # RabbitMQ main port
       - "15672:15672"  # RabbitMQ management UI port
     environment:
         RABBITMQ_DEFAULT_USER: user
         RABBITMQ_DEFAULT_PASS: password
+
+
+  company-manager:
+    build:
+      context: ./companyManager
+      dockerfile: Dockerfile
+    image: williamcaamot/ms_companymanager:latest
+    #container_name: ms_companymanager
+    ports:
+      - "0:8090"
+    networks:
+      - microservices-network
+    depends_on:
+      - postgres
+      - rabbitmq
+    deploy:
+      replicas: 2
+
 networks:
   microservices-network:
     driver: bridge

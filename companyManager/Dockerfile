@@ -20,7 +20,7 @@ WORKDIR /app
 COPY --from=builder /app/target/companyManager-0.0.1-SNAPSHOT.jar /app/
 
 # Expose the application port
-EXPOSE 8080
+EXPOSE 8081
 
 # Run the application # "--spring.profiles.active=production"
 ENTRYPOINT ["java", "-jar", "companyManager-0.0.1-SNAPSHOT.jar"]
