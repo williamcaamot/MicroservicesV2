@@ -1,7 +1,7 @@
-import AuthLayout from "../../components/common/AuthLayout.tsx";
+import AuthLayout from "../../components/common/AuthLayout";
 import {useNavigate} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
-import {AppContext} from "../../context/AppContext.ts";
+import {AppContext} from "../../context/AppContext";
 
 export default function Login() {
     const navigate = useNavigate();

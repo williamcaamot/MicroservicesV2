@@ -1,10 +1,10 @@
-import CompanySearchV2 from "../components/CompanySearchV2.tsx";
+import CompanySearchV2 from "../components/CompanySearchV2";
 import {useEffect, useState} from "react";
-import CompanyList from "../components/common/Company.tsx";
+import CompanyList from "../components/common/Company";
 import {useParams} from "react-router-dom";
-import Layout from "../components/Layout.tsx";
-import Button from "../components/Button.tsx";
-import RightDrawer from "../components/common/RigthDrawer.tsx";
+import Layout from "../components/Layout";
+import Button from "../components/Button";
+import RightDrawer from "../components/common/RigthDrawer";
 
 export interface Company {
     id: number,

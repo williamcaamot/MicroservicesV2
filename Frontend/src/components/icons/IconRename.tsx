@@ -1,6 +1,6 @@
 // icon:rename | CSS Icons https://css.gg/ | Astrit
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 function IconRename({color = "currentColor", height = "1em", width = "1em"}: iconProps) {
     return (

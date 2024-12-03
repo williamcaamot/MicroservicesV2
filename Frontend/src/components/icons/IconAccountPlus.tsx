@@ -1,6 +1,6 @@
 // icon:account-plus | Material Design Icons https://materialdesignicons.com/ | Austin Andrews
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 function IconAccountPlus({color = "currentColor", height="1em", width="1em"}:iconProps) {
     return (

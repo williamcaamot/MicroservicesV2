@@ -1,6 +1,6 @@
 // icon:delete | Ant Design Icons https://ant.design/components/icon/ | Ant Design
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconChecked";
+import {iconProps} from "./IconAddressCard";
 
 
 function IconDelete({color = "currentColor", height="1em", width="1em"}:iconProps) {

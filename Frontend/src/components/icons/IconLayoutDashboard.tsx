@@ -1,6 +1,6 @@
 // icon:layout-dashboard | Lucide https://lucide.dev/ | Lucide
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 function IconLayoutDashboard({color = "currentColor", height = "1em", width = "1em"}: iconProps) {
     return (

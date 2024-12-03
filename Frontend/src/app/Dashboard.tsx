@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import Layout from "../components/Layout.tsx";
+import Layout from "../components/Layout";
 
 export function Dashboard() {
     let {workspaceId} = useParams();

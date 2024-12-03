@@ -1,6 +1,6 @@
 // icon:notification | Tabler Icons https://tablericons.com/ | Csaba Kissi
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 function IconNotification({color = "currentColor", height="1em", width="1em"}:iconProps) {
     return (

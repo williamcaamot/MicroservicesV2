@@ -1,6 +1,6 @@
 // icon:user | Fontawesome https://fontawesome.com/ | Fontawesome
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 function IconUser({color = "currentColor", height = "1em", width = "1em"}: iconProps) {
     return (

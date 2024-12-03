@@ -1,6 +1,12 @@
 import {createContext} from "react";
 
-export const AppContext = createContext({
+interface appContextType{
+    account: Account | undefined,
+    setAccount: (account: Account | undefined) => void;
+}
+
+
+export const AppContext = createContext<appContextType>({
     account: undefined,
-    setAccount: (account: Account | undefined) => {},
+    setAccount: () => {},
 });

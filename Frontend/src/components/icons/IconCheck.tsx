@@ -1,4 +1,4 @@
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 
 export default function IconCheck({color = "currentColor", height="1em", width="1em"}:iconProps) {

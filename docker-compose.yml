@@ -122,16 +122,14 @@ services:
 
   # TODO This has to use a dockerfile and build files and then make an image
   frontend:
-    image: node:20.1.0-alpine  # Node.js version suitable for your frontend
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_PROXY_TARGET: http://gateway:8000
     container_name: ms_dev_frontend
-    working_dir: /app/frontend
-    volumes:
-      - ./frontend:/app/frontend  # Mount your frontend directory
-    command: sh -c "npm install && npm run dev -- --host"  # Expose Vite server
     ports:
-      - "5173:5173"  # Expose Vite port on host machine
-    environment:
-      - NODE_ENV=development
+      - "80:80"  # Expose Vite port on host machine
     networks:
       - microservices-network
 

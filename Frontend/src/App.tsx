@@ -1,22 +1,22 @@
-import {BrowserRouter, Navigate, Route, Routes, useNavigate} from "react-router-dom";
-import CompanyManager from "./app/CompanyManager.tsx";
+import {BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import CompanyManager from "./app/CompanyManager";
 import {useEffect, useState} from "react";
-import {SelectWorkspace} from "./components/SelectWorkspace.tsx";
-import {Home} from "./components/Home.tsx";
-import {Company} from "./components/Company.tsx";
-import {LoadingScreen} from "./app/LoadingScreen.tsx";
-import Login from "./app/auth/Login.tsx";
-import Register from "./app/auth/Register.tsx";
-import {Leads} from "./app/Leads.tsx";
-import {AILeadAssist} from "./app/AILeadAssist.tsx";
-import {Dashboard} from "./app/Dashboard.tsx";
-import {AppContext} from "./context/AppContext.ts";
-import WorkspaceSettings from "./app/WorkspaceSettings.tsx";
+import {SelectWorkspace} from "./components/SelectWorkspace";
+import {Home} from "./components/Home";
+import {Company} from "./components/Company";
+import {LoadingScreen} from "./app/LoadingScreen";
+import Login from "./app/auth/Login";
+import Register from "./app/auth/Register";
+import {Leads} from "./app/Leads";
+import {AILeadAssist} from "./app/AILeadAssist";
+import {Dashboard} from "./app/Dashboard";
+import {AppContext} from "./context/AppContext";
+import WorkspaceSettings from "./app/WorkspaceSettings";
 
 
 export default function App() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [account, setAccount] = useState<object | undefined>(undefined);
+    const [account, setAccount] = useState<Account | undefined>(undefined);
 
     async function fetchAccount() {
         try {

@@ -1,6 +1,6 @@
 // icon:eye | Ant Design Icons https://ant.design/components/icon/ | Ant Design
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 function IconEye({color = "currentColor", height="1em", width="1em"}:iconProps) {
     return (

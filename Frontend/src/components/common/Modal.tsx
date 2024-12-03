@@ -1,4 +1,4 @@
-import IconX from "../icons/IconX.tsx";
+import IconX from "../icons/IconX";
 
 export default function Modal({ isOpen, onClose, title, children }){
 

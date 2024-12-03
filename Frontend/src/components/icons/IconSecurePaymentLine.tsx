@@ -1,6 +1,6 @@
 // icon:secure-payment-line | Remix Icon https://remixicon.com/ | Remix Design
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 function IconSecurePaymentLine({color = "currentColor", height = "1em", width = "1em"}: iconProps) {
     return (

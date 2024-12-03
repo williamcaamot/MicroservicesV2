@@ -1,6 +1,6 @@
 // icon:law-16 | Octicons https://primer.style/octicons/ | Github Primer
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 function IconLaw16({color = "currentColor", height="1em", width="1em"}:iconProps) {
     return (

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, KeyboardEvent } from "react";
-import Input from "./Input.tsx";
+import Input from "./Input";
 
 export interface CompanySearchResult {
     navn: string;

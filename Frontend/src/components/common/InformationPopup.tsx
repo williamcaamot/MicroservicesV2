@@ -1,4 +1,4 @@
-import IconInfo from "../icons/IconInfo.tsx";
+import IconInfo from "../icons/IconInfo";
 import {useState} from "react";
 
 

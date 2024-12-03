@@ -1,4 +1,4 @@
-import {iconProps} from "./IconChecked.tsx";
+import {iconProps} from "./IconChecked";
 
 export default function IconInfo({color = "currentColor", height="1em", width="1em"}:iconProps) {
 

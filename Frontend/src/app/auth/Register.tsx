@@ -1,8 +1,8 @@
-import AuthLayout from "../../components/common/AuthLayout.tsx";
+import AuthLayout from "../../components/common/AuthLayout";
 import {useContext, useState} from "react";
-import LoadingSpinner from "../../components/common/LoadingSpinner.tsx";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import {useNavigate} from "react-router-dom";
-import {AppContext} from "../../context/AppContext.ts";
+import {AppContext} from "../../context/AppContext";
 
 export default function Register() {
 

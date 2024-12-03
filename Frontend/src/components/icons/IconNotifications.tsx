@@ -1,6 +1,6 @@
 // icon:notifications | Ionicons https://ionicons.com/ | Ionic Framework
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 function IconNotifications({color = "currentColor", height="1em", width="1em"}:iconProps) {
     return (

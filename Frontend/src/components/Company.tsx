@@ -1,9 +1,9 @@
 import {useParams} from "react-router-dom";
-import Layout from "./Layout.tsx";
+import Layout from "./Layout";
 import {useEffect, useState} from "react";
-import Button from "./Button.tsx";
-import Modal from "./common/Modal.tsx";
-import button from "./Button.tsx";
+import Button from "./Button";
+import Modal from "./common/Modal";
+import button from "./Button";
 
 export function Company() {
 

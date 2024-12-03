@@ -11,13 +11,13 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src')
+          '@': path.resolve(__dirname, './src')
       }
     },
       server: {
           proxy: {
               '/api': {
-                  target: 'http://host.docker.internal:8000',  // Point to your host machine
+                  target: env.VITE_API_PROXY_TARGET || 'http://localhost:8000',
                   changeOrigin: true,
                   // No need for rewrite if you want to keep the path
               }

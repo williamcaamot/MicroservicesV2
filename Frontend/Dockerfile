@@ -1,26 +1,17 @@
-# Stage 1: Build the application
-FROM maven:3.9.4-eclipse-temurin-21-alpine as builder
-
+# Stage 1: Build the Vite application
+FROM node:16-alpine as build
 WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+# Set environment variable for proxy target during build
+ARG VITE_API_PROXY_TARGET
+ENV VITE_API_PROXY_TARGET=$VITE_API_PROXY_TARGET
+RUN npm run build
 
-# Copy the pom.xml and download dependencies
-COPY pom.xml /app/
-RUN mvn dependency:go-offline -B
-
-# Copy the source code and build the jar file
-COPY src /app/src
-RUN mvn clean package -DskipTests
-
-# Stage 2: Create the final image with the JAR
-FROM openjdk:21-jdk-slim
-
-WORKDIR /app
-
-# Copy the jar file from the builder stage
-COPY --from=builder /app/target/companyManager-0.0.1-SNAPSHOT.jar /app/
-
-# Expose the application port
-EXPOSE 8080
-
-# Run the application
-ENTRYPOINT ["java", "-jar", "companyManager-0.0.1-SNAPSHOT.jar", "--spring.profiles.active=production"]
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

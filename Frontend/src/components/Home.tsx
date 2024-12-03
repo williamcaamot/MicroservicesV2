@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {createContext, useContext, useEffect} from "react";
-import {AppContext} from "../context/AppContext.ts";
+import {AppContext} from "../context/AppContext";
 
 export function Home() {
     const navigate = useNavigate()

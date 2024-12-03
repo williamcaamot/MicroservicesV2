@@ -1,4 +1,4 @@
-import {Company} from "../../app/CompanyManager.tsx";
+import {Company} from "../../app/CompanyManager";
 import {useNavigate, useParams} from "react-router-dom";
 
 type CompanyListProps = {

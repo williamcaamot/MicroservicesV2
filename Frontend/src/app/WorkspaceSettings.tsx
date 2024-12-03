@@ -1,10 +1,16 @@
-import Layout from "../components/Layout.tsx";
-import Input from "../components/Input.tsx";
-import InformationPopup from "../components/common/InformationPopup.tsx";
+import Layout from "../components/Layout";
+import Input from "../components/Input";
+import InformationPopup from "../components/common/InformationPopup";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {useFetchGET} from "../hooks/useFetch.ts";
-import Button from "../components/Button.tsx";
+import {useFetchGET} from "../hooks/useFetch";
+import Button from "../components/Button";
+
+interface workspace{
+    owningAccountId: string,
+    productDescription: string,
+    name: string
+}
 
 
 export default function WorkspaceSettings() {
@@ -16,13 +22,24 @@ export default function WorkspaceSettings() {
 
     const {data, error, isLoading} = useFetchGET(`/api/v1/workspace/${workspaceId}`)
 
-    useEffect(() => {
-        if (data) {
-            setWorkspaceOwner(data.owningAccountId);
-            setWorkspaceProduct(data.productDescription);
-            setWorkspaceName(data.name);
+    async function fetchWorkspace(){
+        try{
+            const res = await fetch(`/api/v1/workspace/${workspaceId}`);
+            const data = await res.json() as workspace;
+            if(data){
+                setWorkspaceOwner(data.owningAccountId);
+                setWorkspaceProduct(data.productDescription);
+                setWorkspaceName(data.name);
+            }
+        }catch (e) {
+            console.log(e)
         }
+    }
+
+    useEffect(() => {
+        fetchWorkspace()
     }, [data]);
+
 
     const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false)
 

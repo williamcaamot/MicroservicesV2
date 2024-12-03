@@ -1,6 +1,6 @@
 // icon:265-notification | Icomoon https://icomoon.io/ | Keyamoon
 import * as React from "react";
-import {iconProps} from "@/components/common/icons/IconAddressCard";
+import {iconProps} from "./IconAddressCard";
 
 function Icon265Notification({color = "currentColor", height="1em", width="1em"}:iconProps) {
     return (

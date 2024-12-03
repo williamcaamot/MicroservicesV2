@@ -1,8 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import InformationPopup from "./common/InformationPopup.tsx";
-import SignoutButton from "./common/SignoutButton.tsx";
-import {AppContext} from "../context/AppContext.ts";
+import InformationPopup from "./common/InformationPopup";
+import SignoutButton from "./common/SignoutButton";
 
 export function SelectWorkspace() {
     const [workspaces, setWorkspaces] = useState<Workspace[] | undefined>(undefined)
