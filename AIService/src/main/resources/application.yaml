@@ -7,8 +7,6 @@ spring:
     import: "optional:consul:"  # This tells Spring Boot to fetch configuration from Consul
   application:
     name: AIService  # This should match the Consul path
-  profiles:
-    active: development  # Ensures profile-specific configurations are loaded
 
   #-----------------------------------------------#
   # POSTGRES DATABASE CONFIGURATION               #
