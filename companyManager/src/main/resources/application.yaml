@@ -3,14 +3,14 @@
 ##############################################
 
 server:
-  port: 8090  # This tells Spring Boot to use a random available port
+  port: 8080  # This tells Spring Boot to use a random available port
   address: 0.0.0.0
 
 spring:
   application:
     name: "CompanyManager"
   datasource:
-    url: jdbc:postgresql://postgres:5432/companymanager
+    url: jdbc:postgresql://postgres:5432/ms_companymanager
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
