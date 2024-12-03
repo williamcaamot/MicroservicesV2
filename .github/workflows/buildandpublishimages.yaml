@@ -64,3 +64,23 @@ jobs:
       - name: push the docker image
         id: push-docker-image
         run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_authentication:latest
+  buildWebscraperService:
+    name: WebscraperService build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: login to docker hub
+        id: docker-hub
+        env:
+          username: ${{secrets.DOCKERHUBUSERNAME}}
+          password: ${{secrets.DOCKERHUBPASSWORD}}
+        run: |
+          docker login -u $username -p $password
+      - name: build the docker image
+        id: build-docker-image
+        run: |
+          ls -la 
+          docker build Authentication/ -f webscraperServiceV2/Dockerfile -t williamcaamot/ms_webscraperservice:latest
+      - name: push the docker image
+        id: push-docker-image
+        run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_webscraperservice:latest

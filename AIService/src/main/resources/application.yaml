@@ -41,19 +41,14 @@ spring:
     consul:
       host: localhost
       port: 8500
-      config:
-        format: yaml
-        #prefixes: config # Default value
-        #data-key: data # Default value
-        #default-context: application # default value
-        enabled: true
       discovery:
         enabled: true
         instance-id: ${spring.application.name}:${random.value}  # Unique instance ID
         service-name: AIService
         prefer-ip-address: true
         health-check-path: /actuator/health
-        health-check-interval: 15s
+        health-check-interval: 2s
+
 
 
 management:
