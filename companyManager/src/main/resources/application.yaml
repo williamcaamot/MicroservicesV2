@@ -48,19 +48,3 @@ management:
     web:
       exposure:
         include: health, info
-
-
-
-# Production profile:
----
-spring:
-  config:
-    activate:
-      on-profile: production
-  datasource:
-    url: jdbc:postgresql://microservicePostgres:5432/proptools
-    username: postgres
-    password: postgres
-  jpa:
-    hibernate:
-      ddl-auto: update
