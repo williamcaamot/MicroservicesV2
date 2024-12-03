@@ -45,7 +45,7 @@ jobs:
         id: push-docker-image
         run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_authentication:latest
   buildGateway:
-    name: Authentication build and publish
+    name: Gateway build and publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -60,10 +60,10 @@ jobs:
         id: build-docker-image
         run: |
           ls -la 
-          docker build Authentication/ -f Authentication/Dockerfile -t williamcaamot/ms_authentication:latest
+          docker build Authentication/ -f Gateway/Dockerfile -t williamcaamot/ms_gateway:latest
       - name: push the docker image
         id: push-docker-image
-        run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_authentication:latest
+        run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_gateway:latest
   buildWebscraperService:
     name: WebscraperService build and publish
     runs-on: ubuntu-latest
