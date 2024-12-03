@@ -48,9 +48,8 @@ management:
     web:
       exposure:
         include: health, info
-  #endpoint:
-    #health:
-      #show-details: always
+
+
 
 # Production profile:
 ---
@@ -65,5 +64,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-server:
-  port: 0  # Use random port in production as well

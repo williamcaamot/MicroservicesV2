@@ -1,5 +1,6 @@
 server:
   port: 0  # This tells Spring Boot to use a random available port
+  address: 0.0.0.0
 
 
 spring:
@@ -54,6 +55,3 @@ management:
     web:
       exposure:
         include: health, info
-  health:
-    defaults:
-      enabled: true

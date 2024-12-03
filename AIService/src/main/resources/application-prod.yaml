@@ -1,16 +1,14 @@
-server:
-  port: 0  # This tells Spring Boot to use a random available port
+##############################################
+# CONFIG FOR DEPLOY   AI SERVICE             #
+##############################################
 
+server:
+  port: 8080  # This tells Spring Boot to use a random available port
+  address: 0.0.0.0
 
 spring:
-  config:
-    import: "optional:consul:"  # This tells Spring Boot to fetch configuration from Consul
   application:
     name: AIService  # This should match the Consul path
-
-  #-----------------------------------------------#
-  # POSTGRES DATABASE CONFIGURATION               #
-  #-----------------------------------------------#
   datasource:
     url: jdbc:postgresql://postgres:5432/ms_aiservice
     username: postgres
@@ -46,7 +44,8 @@ spring:
         prefer-ip-address: true
         health-check-path: /actuator/health
         health-check-interval: 2s
-
+  config:
+    import: "optional:consul:"
 
 
 management:
@@ -54,6 +53,10 @@ management:
     web:
       exposure:
         include: health, info
-  health:
-    defaults:
-      enabled: true
+
+# Production profile:
+---
+spring:
+  config:
+    activate:
+      on-profile: production
