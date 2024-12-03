@@ -1,15 +1,16 @@
+##############################################
+# THIS IS THE CONFIG USED FOR DEPLOY         #
+##############################################
+
 server:
-  port: 0  # This tells Spring Boot to use a random available port
+  port: 8080  # This tells Spring Boot to use a random available port
+  address: 0.0.0.0
 
 spring:
   application:
-    name: Authentication  # This should match the Consul path
-
-  #-----------------------------------------------#
-  # POSTGRES DATABASE CONFIGURATION               #
-  #-----------------------------------------------#
+    name: 'CompanyManager'
   datasource:
-    url: jdbc:postgresql://localhost:5432/ms_authentication
+    url: jdbc:postgresql://postgres:5432/ms_companymanager
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
@@ -19,38 +20,31 @@ spring:
   h2:
     console:
       enabled: false
-
   #-----------------------------------------------#
   # RABBIT MQ CONFIGURATION                       #
   #-----------------------------------------------#
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: user
     password: password
-
-
 
   #-----------------------------------------------#
   # CONSUL CONFIGURATION                          #
   #-----------------------------------------------#
   cloud:
     consul:
-      host: localhost
+      host: consul
       port: 8500
-      config:
-        format: yaml
-        #prefixes: config # Default value
-        #data-key: data # Default value
-        #default-context: application # default value
-        enabled: true
       discovery:
         enabled: true
         instance-id: ${spring.application.name}:${random.value}  # Unique instance ID
-        service-name: Authentication
+        service-name: CompanyManager
         prefer-ip-address: true
         health-check-path: /actuator/health
-        health-check-interval: 15s
+        health-check-interval: 2s
+  config:
+    import: "optional:consul:"
 
 
 management:
@@ -58,3 +52,13 @@ management:
     web:
       exposure:
         include: health, info
+      #endpoint:
+      #health:
+      #show-details: always
+
+# Production profile:
+---
+spring:
+  config:
+    activate:
+      on-profile: production

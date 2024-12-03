@@ -73,11 +73,14 @@ services:
     #container_name: ms_companymanager # Breaks if used along with deploy & replicas
     ports:
       - "0:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
     networks:
       - microservices-network
     depends_on:
       - postgres
       - rabbitmq
+      - consul
     deploy:
       replicas: 2
   ms-authentication:
@@ -85,20 +88,39 @@ services:
       context: ./Authentication
       dockerfile: Dockerfile
     image: williamcaamot/ms_authentication:latest
-    #container_name: ms_companymanager # Breaks if used along with deploy & replicas
     ports:
       - "0:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+    networks:
+      - microservices-network
+    depends_on:
+      - postgres
+      - rabbitmq
+      - consul
+    deploy:
+      replicas: 2
+  ms-gateway:
+    build:
+      context: ./Gateway
+      dockerfile: Dockerfile
+    image: williamcaamot/ms_gateway:latest
+    #container_name: ms_companymanager # Breaks if used along with deploy & replicas
+    ports:
+      - "0:8000"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
     networks:
       - microservices-network
     depends_on:
       - postgres
       - rabbitmq
     deploy:
-      replicas: 2
+      replicas: 1
 
 
 
-# TODO This has to use a dockerfile and build files and then make an image
+  # TODO This has to use a dockerfile and build files and then make an image
   frontend:
     image: node:20.1.0-alpine  # Node.js version suitable for your frontend
     container_name: ms_dev_frontend

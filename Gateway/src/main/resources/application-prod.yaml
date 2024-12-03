@@ -1,0 +1,50 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: "Gateway"
+  cloud:
+    consul:
+      host: consul
+      port: 8500
+      discovery:
+        enabled: true
+        instance-id: ${spring.application.name}-${server.port}
+        service-name: Gateway
+    gateway:
+      #      routes:
+      #        - id: Authentication
+      #          uri: lb://Authentication
+      #          predicates:
+      #            - Path=/api/v1/auth/**
+      #        - id: CompanyManager
+      #          uri: lb://CompanyManager
+      #          predicates:
+      #            - Path=/api/v1/workspace/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origins:
+              - "http://localhost:5173"
+            allowed-headers:
+              - "*"
+            allowed-methods:
+              - "GET"
+              - "POST"
+              - "OPTIONS"
+      default-filters:
+        - name: Retry
+          args:
+            retries: 3
+            methods: GET, POST
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    com.ecwid.consul: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, service
