@@ -1,10 +1,20 @@
+##############################################
+# CONFIG FOR LOCAL                           #
+##############################################
+
 server:
-  port: 8012
+  port: 0
   address: 0.0.0.0  # Bind to all interfaces so it's accessible from the Docker container
 
 spring:
   application:
     name: WebscraperService
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
 
   cloud:
     consul:

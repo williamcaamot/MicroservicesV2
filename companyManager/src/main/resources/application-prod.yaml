@@ -1,9 +1,9 @@
 ##############################################
-# THIS IS THE CONFIG USED FOR DEPLOY         #
+# CONFIG FOR DEPLOY                          #
 ##############################################
 
 server:
-  port: 8080  # This tells Spring Boot to use a random available port
+  port: 8080
   address: 0.0.0.0
 
 spring:

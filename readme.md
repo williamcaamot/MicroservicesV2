@@ -1,20 +1,21 @@
 # PG3402
 
 # Running the application
-- Docker compose will run all the services.
-- Docker port mapping problem: Cannot use port to be 0 (random available port) because all ports are available. It should be 
-- Or can it be random because it shouldn't be accessible by the computer, only through the gateway
+## 1. Use Docker compose with images from dockerhub
+> docker compose -f docker-compose.dockerhub.yml up -d
 
+## 2. Use Docker compose to build images locally
 > docker compose up -d
 
-# Running dev
-There are a few services necessary for developmnet. Run the following command to run RabbitMQ, Consul and Postgres;
+## 3. Use Docker compose to only run RabbitMQ, Consul and DB, then start each service with maven
+
 > docker compose -f docker-compose.dev.yml up -d
+
 
 # Useful URLs
 > - Consul: http://localhost:8500/ui/dc1/services
 > - RabbitMQ: http://localhost:15672
-> - Authentication inspiration: https://medium.com/@rajithgama/spring-cloud-gateway-security-with-jwt-23045ba59b8a
+
 
 # Services
 
@@ -68,7 +69,6 @@ There are a few services necessary for developmnet. Run the following command to
 ### A Requirements:
 - [ ] Docker containerization and scaling (not auto scaling, but being able to select how many instances)
 
-
 ### Extras
 - [ ] Gateway Circuit breaker - A dependency that should be added.
 - [X] DTO For authentication service to not expose hashed password to client
@@ -81,3 +81,6 @@ There are a few services necessary for developmnet. Run the following command to
 - [ ] Error handling when service cannot be reached along with better retry logic? Maybe an interval between retries? - Should be better error handling...
 - [ ] Website getter enginge/service - If adding a company WITHOUT a website, the company service should add into queue to be getting recommended possible websites and the UI should also infrom about this
 - [ ] AI Enginge for pitches also based on products
+
+## References
+- For Authentication: https://medium.com/@rajithgama/spring-cloud-gateway-security-with-jwt-23045ba59b8a
