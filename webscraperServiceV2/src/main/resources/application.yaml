@@ -20,10 +20,16 @@ spring:
     consul:
       host: localhost
       port: 8500
+      config:
+        format: yaml
+        prefixes: config
+        data-key: configuration_file
+        default-context: ${spring.application.name}
+        enabled: false
       discovery:
         enabled: true
-        instance-id: WebscraperService-${random.value}  # Unique but consistent instance ID per deployment
-        service-name: WebscraperService
+        instance-id: ${spring.application.name}-${random.value}  # Unique but consistent instance ID per deployment
+        service-name: ${spring.application.name}
         prefer-ip-address: true  # Ensure IP is used for service registration
         health-check-path: /actuator/health
         health-check-interval: 15s

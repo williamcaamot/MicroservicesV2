@@ -35,6 +35,8 @@ spring:
           args:
             retries: 3
             methods: GET, POST
+  config:
+    import: "optional:consul:"
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG

@@ -14,9 +14,6 @@ import java.util.Map;
 @Service
 public class OpenAIChatGPTService {
 
-    @Value("${openai.chatgpt.key}")
-    private String openAIKey;
-
     private static final String OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
     private static final String API_KEY = "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";
 
