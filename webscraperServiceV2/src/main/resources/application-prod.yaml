@@ -2,6 +2,10 @@
 # CONFIG FOR DEPLOY                          #
 ##############################################
 
+google:
+  cx: 178c48d27a6b145d9
+  api_key: AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow
+
 server:
   port: 8080
   address: 0.0.0.0

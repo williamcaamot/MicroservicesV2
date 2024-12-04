@@ -5,6 +5,8 @@ import com.example.webscraperservicev2.dto.CompanyWebsiteDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -20,11 +22,15 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RefreshScope
 public class CompanyWebsiteService {
 
-    //TODO Should probably manage these secrets better...
-    private static final String API_KEY = "AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow";
-    private static final String CX = "178c48d27a6b145d9";
+
+    @Value("${google.api_key:}") // Default to an empty string if not set
+    private String API_KEY;
+
+    @Value("${google.cx:}") // Default to an empty string if not set
+    private String CX;
 
 
     private final WebClient.Builder webClientBuilder;
