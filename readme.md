@@ -5,12 +5,15 @@ In all of these cases, there needs to be supplied API keys for Google and OpenAI
 ## 1. Use Docker compose to build images locally
 This is the way I recommend.
 > docker compose up --build -d
+
 Visit localhost:8500, to KV storage, and provide the API keys as described in the word document. The service will need a few seconds to reload the keys from Consul.
+
 
 ## 2. Use Docker compose with images from dockerhub
 > docker compose -f docker-compose.dockerhub.yml up -d
 
 ## 3. Use Docker compose to only run RabbitMQ, Consul and DB, then start each service with maven
+For this version of running the services, Consul Config is not enabled, and health checks will not work (consul is containerized and cannot access services running locally on the machine, that are not containerized)
 
 > docker compose -f docker-compose.dev.yml up -d
 
