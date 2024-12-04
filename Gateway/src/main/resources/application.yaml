@@ -24,6 +24,9 @@ spring:
           '[/**]':
             allowed-origins:
               - "http://localhost:5173"
+              - "http://localhost:80"
+              - "http://ms-frontend:80"
+              - "http://ms-frontend:5173"
             allowed-headers:
               - "*"
             allowed-methods:

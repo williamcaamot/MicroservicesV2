@@ -153,13 +153,14 @@ services:
     deploy:
       replicas: 1
 
+  # TODO This has to use a dockerfile and build files and then make an image
   ms-frontend:
     build:
       context: ./Frontend
       dockerfile: Dockerfile
     image: williamcaamot/ms_frontend:latest
     ports:
-      - "80:5173"  # Expose Vite port on host machine
+      - "5173:5173"  # Expose Vite port on host machine
     #environment:
     #  - NODE_ENV=production
     networks:
