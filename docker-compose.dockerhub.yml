@@ -133,21 +133,14 @@ services:
       - consul
     deploy:
       replicas: 1
-
-  # TODO This has to use a dockerfile and build files and then make an image
-  frontend:
-    image: node:20.1.0-alpine  # Node.js version suitable for your frontend
-    container_name: ms_dev_frontend
-    working_dir: /app/frontend
-    volumes:
-      - ./Frontend:/app/frontend  # Mount your frontend directory
-    command: sh -c "npm install && npm run dev -- --host --mode production"  # Expose Vite server
+  ms-frontend:
+    image: williamcaamot/ms_frontend:latest
     ports:
-      - "80:3000"  # Expose Vite port on host machine
-    #environment:
-    #  - NODE_ENV=production
+      - "80:3000"
     networks:
       - microservices-network
+    deploy:
+      replicas: 1
 
 networks:
   microservices-network:

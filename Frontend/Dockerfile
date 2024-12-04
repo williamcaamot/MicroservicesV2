@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:20.1.0-alpine
 WORKDIR /app
 
 # Copy files
@@ -6,7 +6,8 @@ COPY . .
 
 # Install dependencies
 RUN npm install
-RUN npm run buildNoTsc
+
+EXPOSE 5173
 
 # Run the server
-CMD ["node", "express-server.js"]
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--mode", "production"]
