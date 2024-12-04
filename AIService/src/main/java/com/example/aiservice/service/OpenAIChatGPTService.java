@@ -31,8 +31,6 @@ public class OpenAIChatGPTService {
     public String getChatResponse(String prompt) {
         try {
 
-            System.out.println("This is the openai key from docker-compose: " + openAIKey);
-
             System.out.println("Sending request to openai");
             String response = webClient.post()
                     .bodyValue(buildRequest(prompt)) // Build the request JSON
