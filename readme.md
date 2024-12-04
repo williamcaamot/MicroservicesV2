@@ -57,23 +57,23 @@ For this version of running the services, Consul Config is not enabled, and heal
 
 ## Exam grades
 ### E Requirements:
-- [ ] Multiple services that fulfull different functionality and communicate with each other
+- [X] Multiple services that fulfull different functionality and communicate with each other
 
 ### D Requirements:
-- [ ] At least two of the services communicate using synchronous communication (REST between two services)
-- [ ] At least two of the services communicate asynchronously
+- [X] At least two of the services communicate using synchronous communication (REST between two services)
+- [X] At least two of the services communicate asynchronously
 
 ### C Requirements:
 - [X] The project uses a Gateway
-- [ ] The projects also does load balancing
+- [X] The projects also does load balancing
         - This is probably done but should be checked
 
 ### B Requirements:
 - [X] The project has a means of centrally controlling the health of running services health check
-- [ ] The project has a means of centrally controlling the configuration for the services, for example using consul
+- [X] The project has a means of centrally controlling the configuration for the services, for example using consul
 
 ### A Requirements:
-- [ ] Docker containerization and scaling (not auto scaling, but being able to select how many instances)
+- [X] Docker containerization and scaling (not auto scaling, but being able to select how many instances)
 
 ### Extras
 - [ ] Gateway Circuit breaker - A dependency that should be added.
