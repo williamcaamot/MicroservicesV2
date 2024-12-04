@@ -35,6 +35,12 @@ spring:
     consul:
       host: localhost
       port: 8500
+      config:
+        format: yaml
+        prefixes: config
+        data-key: configuration_file
+        default-context: ${spring.application.name}
+        enabled: false
       discovery:
         enabled: true
         instance-id: ${spring.application.name}:${random.value}  # Unique instance ID

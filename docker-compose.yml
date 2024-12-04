@@ -12,7 +12,7 @@ services:
   # CONSUL IMPORTER & CONSUL                   #
   ##############################################
   consul-importer:
-    container_name: mc_consul_importer
+    container_name: ms_consul_importer
     build:
       context: "./docker/consul" #Find the config file in there and use base64 encoder for the values
       dockerfile: Dockerfile

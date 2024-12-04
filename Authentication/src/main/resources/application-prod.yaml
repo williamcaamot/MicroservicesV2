@@ -37,13 +37,19 @@ spring:
     consul:
       host: consul
       port: 8500
+      config:
+        format: yaml
+        prefixes: config
+        data-key: configuration_file
+        default-context: ${spring.application.name}
+        enabled: true
       discovery:
         enabled: true
         instance-id: ${spring.application.name}:${random.value}  # Unique instance ID
         service-name: Authentication
         prefer-ip-address: true
         health-check-path: /actuator/health
-        health-check-interval: 2s
+        health-check-interval: 15s
   config:
     import: "optional:consul:"
 
@@ -53,6 +59,7 @@ management:
     web:
       exposure:
         include: health, info
+
 ---
 spring:
   config:

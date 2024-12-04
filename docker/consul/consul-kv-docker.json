@@ -5,23 +5,23 @@
     "value": ""
   },
   {
-    "key": "config/defaults,docker/",
+    "key": "config/Authentication/",
     "flags": 0,
     "value": ""
   },
   {
-    "key": "config/Authorization/",
+    "key": "config/Authentication/configuration_file",
+    "flags": 0,
+    "value": "IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwojIFRISVMgSVMgVEhFIENPTkZJRyBVU0VEIEZPUiBERVBMT1kgICAgICAgICAjCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKCnNlcnZlcjoKICBwb3J0OiA4MDgwCiAgYWRkcmVzczogMC4wLjAuMAoKCnNwcmluZzoKICBhcHBsaWNhdGlvbjoKICAgIG5hbWU6ICdBdXRoZW50aWNhdGlvbicgICMgVGhpcyBzaG91bGQgbWF0Y2ggdGhlIENvbnN1bCBwYXRoCiAgZGF0YXNvdXJjZToKICAgIHVybDogamRiYzpwb3N0Z3Jlc3FsOi8vcG9zdGdyZXM6NTQzMi9tc19hdXRoZW50aWNhdGlvbgogICAgdXNlcm5hbWU6IHBvc3RncmVzCiAgICBwYXNzd29yZDogcG9zdGdyZXMKICAgIGRyaXZlckNsYXNzTmFtZTogb3JnLnBvc3RncmVzcWwuRHJpdmVyCiAganBhOgogICAgaGliZXJuYXRlOgogICAgICBkZGwtYXV0bzogdXBkYXRlCiAgaDI6CiAgICBjb25zb2xlOgogICAgICBlbmFibGVkOiBmYWxzZQogICMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSMKICAjIFJBQkJJVCBNUSBDT05GSUdVUkFUSU9OICAgICAgICAgICAgICAgICAgICAgICAjCiAgIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIwogIHJhYmJpdG1xOgogICAgaG9zdDogcmFiYml0bXEKICAgIHBvcnQ6IDU2NzIKICAgIHVzZXJuYW1lOiB1c2VyCiAgICBwYXNzd29yZDogcGFzc3dvcmQ="
+  },
+  {
+    "key": "config/AIService/",
     "flags": 0,
     "value": ""
   },
   {
-    "key": "config/defaults,docker/application.yml",
+    "key": "config/AIService/configuration_file",
     "flags": 0,
-    "value": "c3ByaW5nOgogIHJhYmJpdG1xOgogICAgaG9zdDogcmFiYml0bXEKICBjbG91ZDoKICAgIGNvbnN1bDoKICAgICAgZGlzY292ZXJ5OgogICAgICAgIGluc3RhbmNlLWlkOiAke3NwcmluZy5hcHBsaWNhdGlvbi5uYW1lfS0ke3JhbmRvbS5pbnQoMTAwMCl9"
-  },
-  {
-    "key": "config/Authorization/data",
-    "flags": 0,
-    "value": "c2VydmVyOgogIHBvcnQ6IDY5NjkKc3ByaW5nOgogIHJhYmJpdG1xOgogICAgaG9zdDogcmFiYml0bXEKICBjbG91ZDoKICAgIGNvbnN1bDoKICAgICAgZGlzY292ZXJ5OgogICAgICAgIGluc3RhbmNlLWlkOiAke3NwcmluZy5hcHBsaWNhdGlvbi5uYW1lfS0ke3JhbmRvbS5pbnQoMTAwMCk="
+    "value": "IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwojIENPTkZJRyBGT1IgREVQTE9ZICAgICAgICAgICAgICAgICAgICAgICAgICAjCiMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKCnNlcnZlcjoKICBwb3J0OiA4MDgwCiAgYWRkcmVzczogMC4wLjAuMAoKc3ByaW5nOgogIGFwcGxpY2F0aW9uOgogICAgbmFtZTogJ0FJU2VydmljZScKICBkYXRhc291cmNlOgogICAgdXJsOiBqZGJjOnBvc3RncmVzcWw6Ly9wb3N0Z3Jlczo1NDMyL21zX2Fpc2VydmljZQogICAgdXNlcm5hbWU6IHBvc3RncmVzCiAgICBwYXNzd29yZDogcG9zdGdyZXMKICAgIGRyaXZlckNsYXNzTmFtZTogb3JnLnBvc3RncmVzcWwuRHJpdmVyCiAganBhOgogICAgaGliZXJuYXRlOgogICAgICBkZGwtYXV0bzogdXBkYXRlCiAgaDI6CiAgICBjb25zb2xlOgogICAgICBlbmFibGVkOiBmYWxzZQogICMtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSMKICAjIFJBQkJJVCBNUSBDT05GSUdVUkFUSU9OICAgICAgICAgICAgICAgICAgICAgICAjCiAgIy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIwogIHJhYmJpdG1xOgogICAgaG9zdDogcmFiYml0bXEKICAgIHBvcnQ6IDU2NzIKICAgIHVzZXJuYW1lOiB1c2VyCiAgICBwYXNzd29yZDogcGFzc3dvcmQ="
   }
 ]

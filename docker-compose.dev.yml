@@ -24,7 +24,7 @@ services:
     command: 'agent -dev -node=pdc_microservices -client=0.0.0.0 -log-level=DEBUG'
     environment:
       - HOST_IP=host.docker.internal
-
+      - OPENAI_CHATGPT_KEY=${OPENAI_API_KEY}
 
 
   frontend:

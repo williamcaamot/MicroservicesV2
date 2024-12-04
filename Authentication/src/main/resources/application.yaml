@@ -40,10 +40,10 @@ spring:
       port: 8500
       config:
         format: yaml
-        #prefixes: config # Default value
-        #data-key: data # Default value
-        #default-context: application # default value
-        enabled: true
+        prefixes: config
+        data-key: configuration_file
+        default-context: ${spring.application.name}
+        enabled: false
       discovery:
         enabled: true
         instance-id: ${spring.application.name}:${random.value}  # Unique instance ID
@@ -51,7 +51,8 @@ spring:
         prefer-ip-address: true
         health-check-path: /actuator/health
         health-check-interval: 15s
-
+  config:
+    import: "optional:consul:"
 
 management:
   endpoints:
