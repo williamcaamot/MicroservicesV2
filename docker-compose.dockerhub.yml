@@ -96,7 +96,7 @@ services:
   ms-gateway:
     image: williamcaamot/ms_gateway:latest
     ports:
-      - "0:8000"
+      - "8000:8000"
     environment:
       SPRING_PROFILES_ACTIVE: prod
     networks:
@@ -105,8 +105,6 @@ services:
       - postgres
       - rabbitmq
       - consul
-    deploy:
-      replicas: 1
   ms-webscraperservice:
     image: williamcaamot/ms_webscraperservice:latest
     ports:
@@ -145,7 +143,7 @@ services:
       - ./Frontend:/app/frontend  # Mount your frontend directory
     command: sh -c "npm install && npm run dev -- --host --mode production"  # Expose Vite server
     ports:
-      - "5173:5173"  # Expose Vite port on host machine
+      - "80:3000"  # Expose Vite port on host machine
     #environment:
     #  - NODE_ENV=production
     networks:

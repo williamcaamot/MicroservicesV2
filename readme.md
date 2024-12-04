@@ -6,7 +6,7 @@ In all of these cases, there needs to be supplied API keys for Google and OpenAI
 This is the way I recommend.
 > docker compose up --build -d
 
-Visit localhost:8500, to KV storage, and provide the API keys as described in the word document. The service will need a few seconds to reload the keys from Consul.
+Visit localhost:8500, to KV storage, and provide the API keys as described in the word document. The service will need a few seconds to refresh the keys from Consul (automatically).
 
 
 ## 2. Use Docker compose with images from dockerhub
