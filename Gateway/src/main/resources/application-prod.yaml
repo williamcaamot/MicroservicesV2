@@ -8,6 +8,12 @@ spring:
     consul:
       host: consul
       port: 8500
+      config:
+        format: yaml
+        prefixes: config
+        data-key: configuration_file
+        default-context: ${spring.application.name}
+        enabled: true
       discovery:
         enabled: true
         instance-id: ${spring.application.name}-${server.port}
