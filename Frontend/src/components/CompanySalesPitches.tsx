@@ -1,10 +1,10 @@
-import SalesPitchCard from "./SalesPitchCard.tsx";
+import SalesPitchCard, {SalesPitchType} from "./SalesPitchCard.tsx";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
 const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
     const { companyId, workspaceId } = useParams();
-    const [salesPitches, setSalesPitches] = useState();
+    const [salesPitches, setSalesPitches] = useState<SalesPitchType | undefined>(undefined);
     const [isSalesPitchesLoading, setIsSalesPitchesLoading] = useState(false);
     const [isPolling, setIsPolling] = useState<boolean>(true);
 
@@ -39,7 +39,6 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
                         setIsPolling(false);
                         break;
                     }
-
                     // Wait 1.5 seconds before next poll
                     await new Promise(resolve => setTimeout(resolve, 1500));
                 } else {
@@ -59,6 +58,20 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
     }, []);
 
     useEffect(() => {
+        if (isGeneratingSalesPitchLoading) {
+            const dummyPitch: SalesPitchType = {
+                salesPitchId: Date.now(),
+                companyId: Number(companyId),
+                workspaceId: Number(workspaceId),
+                salesPitch: "",
+                prompt: "",
+                complete: false,
+                createdAt: new Date().toISOString(),
+                createdBy: "System",
+            };
+            setSalesPitches((prev: SalesPitchType) => prev ? [...prev, dummyPitch] : [dummyPitch]);
+        }
+
         setIsPolling(true);
         pollSalesPitches();
     }, [isGeneratingSalesPitchLoading]);
