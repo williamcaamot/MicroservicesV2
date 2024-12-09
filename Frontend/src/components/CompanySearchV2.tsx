@@ -38,7 +38,7 @@ export default function CompanySearchV2({ handleSelectCompany, searchTerm = "", 
         setIsSearching(true);
         //setIsLoading(true)
         try {
-            const result = await fetch(`https://data.brreg.no/enhetsregisteret/api/enheter?navn=${searchTerm}`);
+            const result = await fetch(`/api/v1/company/search?navn=${searchTerm}`);
             if (result.ok) {
                 const data = await result.json();
                 setSearchResults(data._embedded.enheter);

@@ -36,6 +36,11 @@ public class GatewayConfig {
                                 .retry(config -> config.setRetries(3)
                                         .setStatuses(HttpStatus.SERVICE_UNAVAILABLE)))
                         .uri("lb://AIservice"))
+                .route("CompanyManager", r -> r.path("/api/v1/company/**")
+                        .filters(f -> f.filter(filter)
+                                .retry(config -> config.setRetries(3)
+                                        .setStatuses(HttpStatus.SERVICE_UNAVAILABLE)))
+                        .uri("lb://CompanyManager"))
                 .build();
     }
 }
