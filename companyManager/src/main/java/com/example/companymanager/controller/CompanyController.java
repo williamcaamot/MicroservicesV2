@@ -36,16 +36,18 @@ public class CompanyController {
         return ResponseEntity.status(HttpStatus.OK).body(companyService.getAllCompanies(workspaceId));
     }
 
-
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Company> getCompanyById(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(companyService.getCompanyById(id));
-    }
-
-
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
+        System.out.println("Request reaching delete controller endpoint");
         companyService.deleteCompany(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
+
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Company> getCompanyById(@PathVariable Long id) {
+        System.out.println("Reaching the get mapping of company");
+        return ResponseEntity.status(HttpStatus.OK).body(companyService.getCompanyById(id));
+    }
+
 }

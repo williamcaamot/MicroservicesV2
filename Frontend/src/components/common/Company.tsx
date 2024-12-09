@@ -27,7 +27,7 @@ export default function CompanyList({ companies, onViewDetails, onUpdate, onDele
                         <tbody className="divide-y divide-gray-200">
                         {companies && companies.map((company) => (
                             <tr key={company.id} className="hover:bg-gray-50"
-                            onClick={() => {navigate(`/app/workspace/${workspaceId}/company/${company.id}`)}}
+                                onClick={() => {navigate(`/app/workspace/${workspaceId}/company/${company.id}`)}}
                             >
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900">{company.navn}</div>
@@ -35,19 +35,21 @@ export default function CompanyList({ companies, onViewDetails, onUpdate, onDele
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm text-gray-500">{company.organisasjonsnummer}</div>
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+                                    onClick={(e) => e.stopPropagation()}
+                                >
                                     <button
                                         onClick={() => onViewDetails(company.id)}
                                         className="text-blue-600 hover:text-blue-900 mr-3"
                                     >
                                         Details
                                     </button>
-                                    <button
+{/*                                    <button
                                         onClick={() => onUpdate(company.id)}
                                         className="text-green-600 hover:text-green-900 mr-3"
                                     >
                                         Update
-                                    </button>
+                                    </button>*/}
                                     <button
                                         onClick={() => onDelete(company.id)}
                                         className="text-red-600 hover:text-red-900"

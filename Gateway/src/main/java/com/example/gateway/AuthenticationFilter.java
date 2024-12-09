@@ -32,6 +32,7 @@ public class AuthenticationFilter implements GatewayFilter {
         ServerHttpRequest request = exchange.getRequest();
 
         if (routerValidator.isSecured.test(request)) {
+
             if (!request.getCookies().containsKey("jwt")) {
                 return this.onError(exchange, HttpStatus.UNAUTHORIZED);
             }
@@ -41,7 +42,7 @@ public class AuthenticationFilter implements GatewayFilter {
             String jwtToken = cookies.get("jwt").toString().split("=")[1].replace("]", "");
 
             if (!jwtUtil.isTokenValid(jwtToken)) {
-                System.out.println("Token is invalid");
+
                 return this.onError(exchange, HttpStatus.FORBIDDEN);
             }
 
