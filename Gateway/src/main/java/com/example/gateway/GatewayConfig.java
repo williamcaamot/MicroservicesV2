@@ -31,6 +31,11 @@ public class GatewayConfig {
                                 .retry(config -> config.setRetries(3)
                                         .setStatuses(HttpStatus.SERVICE_UNAVAILABLE)))
                         .uri("lb://WebscraperService"))
+                .route("AIService", r -> r.path("/api/v1/salespitch/**")
+                        .filters(f -> f.filter(filter)
+                                .retry(config -> config.setRetries(3)
+                                        .setStatuses(HttpStatus.SERVICE_UNAVAILABLE)))
+                        .uri("lb://AIservice"))
                 .build();
     }
 }
