@@ -1,17 +1,18 @@
 package com.example.aiservice.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 
 import java.time.LocalDateTime;
 
+@MappedSuperclass
 @Getter
 @Setter
-@ToString
-@MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditEntityListener.class)
 public class BaseEntity {
 
     @Column(updatable = false)
@@ -20,9 +21,10 @@ public class BaseEntity {
     @Column(updatable = false)
     private String createdBy;
 
-    @Column(insertable = false)
+    @Column
     private LocalDateTime updatedAt;
 
-    @Column(insertable = false)
+    @Column
     private String updatedBy;
 }
+

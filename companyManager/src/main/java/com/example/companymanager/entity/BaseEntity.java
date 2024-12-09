@@ -1,7 +1,9 @@
 package com.example.companymanager.entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -11,16 +13,17 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditEntityListener.class)
 public class BaseEntity {
-
     @Column(updatable = false)
     private LocalDateTime createdAt;
+
     @Column(updatable = false)
     private String createdBy;
 
-    @Column(insertable = false)
+    @Column
     private LocalDateTime updatedAt;
 
-    @Column(insertable = false)
+    @Column
     private String updatedBy;
 }
