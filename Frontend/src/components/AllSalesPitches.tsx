@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {SalesPitchType} from "./common/SalesPitchCard.tsx";
 import ErrorMessage from "./common/ErrorMessage.tsx";
 import {useParams} from "react-router-dom";
+import SalesPitchCardAllDetails from "./common/SalesPitchCardAllDetails.tsx";
 
 
 export default function AllSalesPitches() {
@@ -18,6 +19,7 @@ export default function AllSalesPitches() {
             if(res.ok){
                 const data = await res.json();
                 setSalesPitches(data);
+
             }else {
                 setError("Something went wrong when fetching sales pitches! Try again!")
             }
@@ -36,15 +38,15 @@ export default function AllSalesPitches() {
         <ErrorMessage message={error} onClose={() => setError(undefined)}/>
     </>
 
-    return <>
+    return <div className={"flex flex-wrap w-full"}>
         {salesPitches && salesPitches?.map((salesPitch: SalesPitchType) => {
-            return <div>
-
+            return <div key={salesPitch.salesPitchId} className={""}>
+                <SalesPitchCardAllDetails salesPitch={salesPitch}/>
             </div>
         })
-        })
+        }
 
-    </>
+    </div>
 
 
 }
