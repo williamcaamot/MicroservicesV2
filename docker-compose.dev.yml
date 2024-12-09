@@ -1,18 +1,25 @@
+######################################################################
+#  DOCKER-COMPOSEE
+#
+#  Purpose:
+#    For building images locally and running all containers.
+#
+######################################################################
+
 services:
 
-  postgres:
-    image: postgres:15-alpine
-    container_name: ms_dev_postgres
-    environment:
-      POSTGRES_DB: companymanager
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
+  ##############################################
+  # CONSUL IMPORTER & CONSUL                   #
+  ##############################################
+  consul-importer:
+    container_name: ms_consul_importer
+    build:
+      context: "./docker/consul" #Find the config file in there and use base64 encoder for the values
+      dockerfile: Dockerfile
+    depends_on:
+      - consul
     networks:
       - microservices-network
-
-
   consul:
     image: hashicorp/consul
     container_name: ms_dev_consul
@@ -24,7 +31,21 @@ services:
     command: 'agent -dev -node=pdc_microservices -client=0.0.0.0 -log-level=DEBUG'
     environment:
       - HOST_IP=host.docker.internal
-      - OPENAI_CHATGPT_KEY=${OPENAI_API_KEY}
+
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: ms_dev_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - microservices-network
+    volumes:
+      #- postgres_data:/var/lib/postgresql/data
+      - ./docker/db/init_databases.sql:/docker-entrypoint-initdb.d/init-databases.sql
 
 
   frontend:
@@ -55,22 +76,6 @@ services:
         RABBITMQ_DEFAULT_USER: user
         RABBITMQ_DEFAULT_PASS: password
 
-
-  company-manager:
-    build:
-      context: ./companyManager
-      dockerfile: Dockerfile
-    image: williamcaamot/ms_companymanager:latest
-    #container_name: ms_companymanager
-    ports:
-      - "0:8090"
-    networks:
-      - microservices-network
-    depends_on:
-      - postgres
-      - rabbitmq
-    deploy:
-      replicas: 2
 
 networks:
   microservices-network:
