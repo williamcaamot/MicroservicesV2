@@ -151,13 +151,15 @@ export function Company() {
                 })
             });
             const data = await res.json();
-            console.log(data);
+            setTimeout(() => {
+                setIsGeneratingSalesPitchLoading(false);
+                alert("The sales pitch is generating, please see below!")
+            }, 2000)
         } catch (e) {
+            setIsGeneratingSalesPitchLoading(false)
             console.log(e)
         }
-        setTimeout(() => {
-            setIsGeneratingSalesPitchLoading(false);
-        }, 2000)
+
     }
 
 

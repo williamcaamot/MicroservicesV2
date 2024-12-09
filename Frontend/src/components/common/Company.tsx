@@ -39,7 +39,7 @@ export default function CompanyList({ companies, onViewDetails, onUpdate, onDele
                                     onClick={(e) => e.stopPropagation()}
                                 >
                                     <button
-                                        onClick={() => onViewDetails(company.id)}
+                                        onClick={() => {navigate(`/app/workspace/${workspaceId}/company/${company.id}`)}}
                                         className="text-blue-600 hover:text-blue-900 mr-3"
                                     >
                                         Details
