@@ -23,6 +23,9 @@ public class SalesPitchService {
         return salesPitchRepo.findSalesPitchByCompanyId(companyId);
     }
 
+    public List<SalesPitch> getSalesPitchesByWorkspaceId(Long companyId){
+        return salesPitchRepo.findSalesPitchByWorkspaceId(companyId);
+    }
 
 
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/salespitch/{workspaceId}/company/{companyId}")
+@RequestMapping("/api/v1/salespitch/{workspaceId}")
 public class SalesPitchController {
 
     private final SalesPitchService salesPitchService;
@@ -23,7 +23,7 @@ public class SalesPitchController {
     }
 
 
-    @GetMapping
+    @GetMapping(path = "/company/{companyId}")
     public ResponseEntity<List<SalesPitch>> getSalesPitches(
             @RequestHeader("accountId") Long accountId,
             @PathVariable Long workspaceId,
@@ -34,4 +34,17 @@ public class SalesPitchController {
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    @GetMapping
+    public ResponseEntity<List<SalesPitch>> getSalesPitches(
+            @RequestHeader("accountId") Long accountId,
+            @PathVariable Long workspaceId
+    ){
+        ArrayList<SalesPitch> result = new ArrayList<>();
+        result = (ArrayList<SalesPitch>) salesPitchService.getSalesPitchesByWorkspaceId(workspaceId);
+
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+
 }

@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface SalesPitchRepo extends JpaRepository<SalesPitch, Long> {
     public List<SalesPitch> findSalesPitchByCompanyId(Long companyId);
+
+    public List<SalesPitch> findSalesPitchByWorkspaceId(Long workspaceId);
 }
