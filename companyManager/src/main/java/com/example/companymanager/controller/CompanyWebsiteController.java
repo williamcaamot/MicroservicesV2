@@ -27,7 +27,10 @@ public class CompanyWebsiteController {
 
 
     @PostMapping
-    public ResponseEntity<HashMap<String, String>> SaveCompanyWebsite(@RequestBody CompanyWebsiteDTO websiteDTO){
+    public ResponseEntity<HashMap<String, String>> SaveCompanyWebsite(
+            @RequestBody CompanyWebsiteDTO websiteDTO
+
+    ){
         HashMap<String, String> result = new HashMap<>();
         try{
             System.out.println(websiteDTO.getCompanyWebsite());
