@@ -7,8 +7,7 @@ import {Company} from "./components/Company";
 import {LoadingScreen} from "./app/LoadingScreen";
 import Login from "./app/auth/Login";
 import Register from "./app/auth/Register";
-import {Leads} from "./app/Leads";
-import {AILeadAssist} from "./app/AILeadAssist";
+import {SalesPitches} from "./app/SalesPitches.tsx";
 import {Dashboard} from "./app/Dashboard";
 import {AppContext} from "./context/AppContext";
 import WorkspaceSettings from "./app/WorkspaceSettings";
@@ -62,7 +61,6 @@ function AppRoutes(){
         <Route path={"/workspace/:workspaceId/settings"} Component={WorkspaceSettings}/>
         <Route path={"/workspace/:workspaceId/company"} Component={CompanyManager}/>
         <Route path={"/workspace/:workspaceId/company/:companyId"} Component={Company}/>
-        <Route path={"/workspace/:workspaceId/leads"} Component={Leads}/>
-        <Route path={"/workspace/:workspaceId/aileadassist"} Component={AILeadAssist}/>
+        <Route path={"/workspace/:workspaceId/leads"} Component={SalesPitches}/>
     </Routes>
 }
