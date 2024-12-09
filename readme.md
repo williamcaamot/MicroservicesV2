@@ -8,6 +8,7 @@ This is the way I recommend.
 
 Visit localhost:8500, to KV storage, and provide the API keys as described in the word document. The service will need a few seconds to refresh the keys from Consul (automatically).
 
+Application can be seen in localhost:5173
 
 ## 2. Use Docker compose with images from dockerhub
 > docker compose -f docker-compose.dockerhub.yml up -d

@@ -12,10 +12,8 @@ services:
   # CONSUL IMPORTER & CONSUL                   #
   ##############################################
   consul-importer:
-    container_name: mc_consul_importer
-    build:
-      context: "./docker/consul" #Find the config file in there and use base64 encoder for the values
-      dockerfile: Dockerfile
+    container_name: ms_consul_importer
+    image: williamcaamot/ms_consul_importer
     depends_on:
       - consul
     networks:
@@ -37,7 +35,7 @@ services:
   ##############################################
   postgres:
     image: postgres:15-alpine
-    container_name: ms_dev_postgres
+    container_name: ms_postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -136,7 +134,7 @@ services:
   ms-frontend:
     image: williamcaamot/ms_frontend:latest
     ports:
-      - "80:3000"
+      - "5173:5173"
     networks:
       - microservices-network
     deploy:
