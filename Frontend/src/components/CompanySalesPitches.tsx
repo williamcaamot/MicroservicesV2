@@ -40,7 +40,7 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
                         break;
                     }
                     // Wait 1.5 seconds before next poll
-                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    //await new Promise(resolve => setTimeout(resolve, 1500));
                 } else {
                     setIsPolling(false);
                     break;
@@ -69,12 +69,20 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
                 createdAt: new Date().toISOString(),
                 createdBy: "System",
             };
-            setSalesPitches((prev: SalesPitchType) => prev ? [...prev, dummyPitch] : [dummyPitch]);
+
+            setSalesPitches((prev: SalesPitchType[]) => prev ? [...prev, dummyPitch] : [dummyPitch]);
         }
 
         setIsPolling(true);
-        pollSalesPitches();
-    }, [isGeneratingSalesPitchLoading]);
+
+        // Start polling
+        const interval = setInterval(() => {
+            pollSalesPitches();
+        }, 1500); // Adjust interval as needed
+
+        // Cleanup function to stop polling
+        return () => clearInterval(interval);
+    }, [isGeneratingSalesPitchLoading, pollSalesPitches, companyId, workspaceId]);
 
     if (isSalesPitchesLoading) {
         return (

@@ -155,8 +155,9 @@ export function Company() {
         } catch (e) {
             console.log(e)
         }
-
-        setIsGeneratingSalesPitchLoading(false);
+        setTimeout(() => {
+            setIsGeneratingSalesPitchLoading(false);
+        }, 2000)
     }
 
 
