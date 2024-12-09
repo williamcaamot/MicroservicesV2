@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import Button from "./Button";
 import Modal from "./common/Modal";
 import button from "./Button";
+import CompanySalesPitches from "./CompanySalesPitches.tsx";
 
 export function Company() {
 
@@ -249,7 +250,7 @@ export function Company() {
 
                     </div>
                 </div>
-
+                <CompanySalesPitches/>
                 <div className="mt-8 text-sm text-gray-500">
                     <p>Created: {company.createdAt || 'Not specified'}</p>
                     <p>Last Updated: {company.updatedAt || 'Not specified'}</p>
