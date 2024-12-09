@@ -140,7 +140,7 @@ jobs:
         id: build-docker-image
         run: |
           ls -la 
-          docker build docker/consul/ -f docker/consul/Dockerfile -t williamcaamot/mc_consul_importer:latest
+          docker build docker/consul/ -f docker/consul/Dockerfile -t williamcaamot/ms_consul_importer:latest
       - name: push the docker image
         id: push-docker-image
-        run: docker push ${{secrets.DOCKERHUBUSERNAME}}/mc_consul_importer:latest
+        run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_consul_importer:latest
