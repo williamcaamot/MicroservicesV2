@@ -1,12 +1,17 @@
 import SalesPitchCard, {SalesPitchType} from "./common/SalesPitchCard.tsx";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
+import Button from "./Button.tsx";
+import {b} from "vite/dist/node/types.d-aGj9QkWt";
 
-const CompanySalesPitches = ({isGeneratingSalesPitchLoading}) => {
+const CompanySalesPitches = () => {
     const {companyId, workspaceId} = useParams();
     const [salesPitches, setSalesPitches] = useState<SalesPitchType[] | undefined>(undefined);
     const [isSalesPitchesLoading, setIsSalesPitchesLoading] = useState(false);
     const [isPolling, setIsPolling] = useState<boolean>(true);
+    const [isGeneratingSalesPitch, setIsGeneratingSalesPitch] = useState<boolean>(false)
+
+    const isPollingRef = useRef(false);
 
     async function fetchSalesPitches() {
         setIsSalesPitchesLoading(true);
@@ -25,73 +30,84 @@ const CompanySalesPitches = ({isGeneratingSalesPitchLoading}) => {
         setIsSalesPitchesLoading(false);
     }
 
+    useEffect(() => {
+        fetchSalesPitches()
+    }, []);
 
+    async function handleGenerateSalesPitch() {
+        setIsGeneratingSalesPitch(true);
+        try {
+            const res = await fetch(`/api/v1/workspace/${workspaceId}/company/salespitch`, {
+                method: "POST",
+                headers: {
+                    "content-type": "Application/JSON"
+                },
+                body: JSON.stringify({
+                    companyId: companyId
+                })
+            });
+            setTimeout(() => {
+                setIsGeneratingSalesPitch(false);
+                const dummyPitch: SalesPitchType = {
+                    salesPitchId: Date.now(),
+                    companyId: Number(companyId),
+                    workspaceId: Number(workspaceId),
+                    salesPitch: "",
+                    prompt: "",
+                    complete: false,
+                    createdAt: new Date().toISOString(),
+                    createdBy: "System",
+                };
+                setSalesPitches((prev: SalesPitchType[]) => prev ? [...prev, dummyPitch] : [dummyPitch]);
+                setIsPolling(true);
+                isPollingRef.current = true;
+                alert("Sales pitch is generating! Please wait until it's finished!")
+                pollSalesPitches();
+            }, 3000)
+        } catch (e) {
+            setIsGeneratingSalesPitch(false)
+            console.log(e)
+        }
+    }
 
     async function pollSalesPitches() {
-        while (isPolling) {
-            console.log("polling")
+        console.log("Polling sales pitches");
+        console.log("Ispolling: " + isPolling)
+        console.log("isPolling (ref):", isPollingRef.current);
+
+        const poll = async () => {
+            if (!isPollingRef.current) return; // Stop if polling is false
+
             try {
                 const res = await fetch(`/api/v1/salespitch/${workspaceId}/company/${companyId}`);
                 if (res.ok) {
                     const data = await res.json();
                     setSalesPitches(data);
 
-                    let allComplete = true;
-                    for (let i = 0; i < data.length; i++) {
-                        //console.log(data[i].complete)
-                        if (!data[i].complete) {
-                            allComplete = false;
-                        }
-                    }
-                    console.log(allComplete)
+                    const allComplete = data.every((pitch) => pitch.complete);
+                    console.log("All complete:", allComplete);
+
                     if (allComplete) {
-                        setIsPolling(false);
+                        isPollingRef.current = false;
                         return;
                     }
-                    //Wait 1.5 seconds before next poll
-                    //await new Promise(resolve => setTimeout(resolve, 1500));
                 } else {
-                    console.log("Res not ok")
-                    setIsPolling(false);
-                    break;
+                    console.log("Response not OK");
+                    isPollingRef.current = false;
+                    return;
                 }
             } catch (e) {
                 console.error(e);
-                setIsPolling(false);
-                break;
+                isPollingRef.current = false;
+                return;
             }
-        }
+
+            // Continue polling after a delay
+            setTimeout(poll, 1500);
+        };
+
+        poll();
     }
-
-    useEffect(() => {
-        fetchSalesPitches()
-    }, []);
-
-    useEffect(() => {
-        if (isGeneratingSalesPitchLoading) {
-            const dummyPitch: SalesPitchType = {
-                salesPitchId: Date.now(),
-                companyId: Number(companyId),
-                workspaceId: Number(workspaceId),
-                salesPitch: "",
-                prompt: "",
-                complete: false,
-                createdAt: new Date().toISOString(),
-                createdBy: "System",
-            };
-            setSalesPitches((prev: SalesPitchType[]) => prev ? [...prev, dummyPitch] : [dummyPitch]);
-        }
-        setIsPolling(true);
-
-        // Start polling
-        const interval = setInterval(() => {
-            if(isPolling){
-                pollSalesPitches();
-            }
-        }, 1500); // Adjust interval as needed
-        // Cleanup function to stop polling
-        return () => clearInterval(interval);
-    }, [isGeneratingSalesPitchLoading]);
 
 
 
@@ -110,9 +126,13 @@ const CompanySalesPitches = ({isGeneratingSalesPitchLoading}) => {
     return (
         <div className="mx-auto py-4">
             <div className="bg-white rounded-lg shadow-lg border p-6">
+                <div className={"flex gap-4"}>
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
                     Sales Pitches
                 </h2>
+                <Button variant={"outlined"} onClick={() => handleGenerateSalesPitch()}
+                        loading={isGeneratingSalesPitch}>Generate sales pitch</Button>
+                </div>
                 {salesPitches?.length < 1 && <div className="text-center py-12">
                     <p className="text-gray-500 text-lg">
                         No sales pitches yet. Try generating one!

@@ -139,31 +139,6 @@ export function Company() {
         }
     }
 
-    async function generateSalesPitch() {
-        setIsGeneratingSalesPitchLoading(true);
-        try {
-            const res = await fetch(`/api/v1/workspace/${workspaceId}/company/salespitch`, {
-                method: "POST",
-                headers: {
-                    "content-type": "Application/JSON"
-                },
-                body: JSON.stringify({
-                    companyId: companyId
-                })
-            });
-            const data = await res.json();
-            setTimeout(() => {
-                setIsGeneratingSalesPitchLoading(false);
-                alert("The sales pitch is generating, please see below!")
-            }, 2000)
-        } catch (e) {
-            setIsGeneratingSalesPitchLoading(false)
-            console.log(e)
-        }
-
-    }
-
-
     useEffect(() => {
         fetchCompany()
     }, []);
@@ -211,8 +186,7 @@ export function Company() {
                             loading={isFetchingCompanyEmailsLoading}>Find email addresses for this company</Button>
                     <Button variant={"outlined"} onClick={() => fetchCompanyPhonenumbers()}
                             loading={isFetchingPhonenumbersLoading}>Find phone numbers for this company</Button>
-                    <Button variant={"outlined"} onClick={() => generateSalesPitch()}
-                            loading={isGeneratingSalesPitchLoading}>Generate sales pitch</Button>
+
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
                     <div className="space-y-4 border rounded p-2">
