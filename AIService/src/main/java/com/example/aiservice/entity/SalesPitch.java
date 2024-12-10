@@ -31,6 +31,4 @@ public class SalesPitch extends BaseEntity{
     private String prompt;
 
     private boolean isComplete;
-
-
 }

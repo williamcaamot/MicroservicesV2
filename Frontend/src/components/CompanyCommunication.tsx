@@ -23,7 +23,7 @@ export default function CompanyCommunication(){
     const [isSavingLoading, setIsSavingLoading] = useState<boolean>(false)
 
 
-    const [activeSender, setActiveSender] = useState<"me" | "them">("me");
+    const [activeSender, setActiveSender] = useState<string>("me");
     const [activeMessage, setActiveMessage] = useState<String | undefined>("");
 
     const [messages, setMessages] = useState<CommunicationMessage[]>([])
@@ -60,6 +60,7 @@ export default function CompanyCommunication(){
                 })
             });
 
+
             if (res.ok) {
                 const newMessage = await res.json() as CommunicationMessage;
                 setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -92,6 +93,8 @@ export default function CompanyCommunication(){
                 <div className="bg-gray-50 rounded-lg shadow-md">
                     {/* Messages Area - Scrollable */}
                     <div className="h-96 overflow-y-auto p-4 space-y-4">
+
+                        {messages && messages.length < 1 && <h3 className={"text-2xl text-zinc-800"}>No communication yet! You can write down your communication with this company below to keep track of it!</h3>}
                         {messages && messages.map((message) => (
                             <div
                                 key={message.messageId}
@@ -115,10 +118,10 @@ export default function CompanyCommunication(){
                         <div className="flex space-x-2">
                             <select
                                 className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                onChange={(event) => setActiveMessage(event.target.value)}
+                                onChange={(event) => setActiveSender(event.target.value)}
                             >
-                                <option value="US">ME</option>
-                                <option value="THEM">THEM</option>
+                                <option value="me">ME</option>
+                                <option value="them">THEM</option>
                             </select>
                             <input
                                 value={activeMessage}
@@ -130,7 +133,7 @@ export default function CompanyCommunication(){
                             <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
                             onClick={handleSaveCommunicationMessage}
                             >
-                                Send
+                                Add
                             </button>
                         </div>
                     </div>

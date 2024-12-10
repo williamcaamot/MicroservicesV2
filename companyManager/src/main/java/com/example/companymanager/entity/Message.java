@@ -25,7 +25,7 @@ public class Message extends BaseEntity {
     @Column
     private Long workspaceId;
 
-    @Column
+    @Column(length = 20480)
     private String message;
 
     @Column
