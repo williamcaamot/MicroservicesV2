@@ -23,6 +23,12 @@ public class GatewayConfig {
                                         .setStatuses(HttpStatus.SERVICE_UNAVAILABLE)
                                         .setMethods(HttpMethod.GET, HttpMethod.DELETE)))
                         .uri("lb://CompanyManager"))
+                .route("CompanyManagerCommunication", r -> r.path("/api/v1/communication/**")
+                        .filters(f -> f.filter(filter) // Ensure this line is present
+                                .retry(config -> config.setRetries(3)
+                                        .setStatuses(HttpStatus.SERVICE_UNAVAILABLE)
+                                        .setMethods(HttpMethod.GET, HttpMethod.DELETE)))
+                        .uri("lb://CompanyManager"))
                 .route("CompanyManagerCompany", r -> r.path("/api/v1/company/**")
                         .filters(f -> f.filter(filter)
                                 .retry(config -> config.setRetries(3)

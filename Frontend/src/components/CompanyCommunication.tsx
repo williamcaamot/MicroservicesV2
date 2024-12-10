@@ -1,7 +1,39 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
+import ErrorMessage from "./common/ErrorMessage.tsx";
+
+
+interface communication{
+
+}
 
 
 export default function CompanyCommunication(){
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const {companyId, workspaceId} = useParams();
+    const [error, setError] = useState<string | undefined>(undefined)
+
+    async function fetchCompanyCommunication(){
+        setIsLoading(true)
+        try{
+            const res = await fetch(`/api/v1/communication/${workspaceId}/company/${companyId}`)
+            const data = await res.json();
+            console.log(data)
+            if(!res.ok){
+                setError("Something went wrong! Please try again!")
+            }
+        }catch (e) {
+            console.log(e)
+            setError(e.message)
+        }
+        setIsLoading(false)
+    }
+
+    useEffect(() => {
+        fetchCompanyCommunication()
+    }, []);
+
+
 
     const [messages] = useState([
         { id: 1, text: "Hey, how are you?", sender: "them" },
@@ -11,17 +43,22 @@ export default function CompanyCommunication(){
         { id: 5, text: "Would you like to discuss them over coffee?", sender: "them" }
     ]);
 
+
+
     return (
         <div className="bg-white rounded-lg shadow-lg border p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 Company Communication
             </h2>
         <div className="w-full max-w-2xl mx-auto">
+
+            {error && <ErrorMessage message={error} onClose={() => setError(undefined)}/>}
+
             {/* Message Container */}
             <div className="bg-gray-50 rounded-lg shadow-md">
                 {/* Messages Area - Scrollable */}
                 <div className="h-96 overflow-y-auto p-4 space-y-4">
-                    {messages.map((message) => (
+                    {messages && messages.map((message) => (
                         <div
                             key={message.id}
                             className={`flex ${message.sender === 'me' ? 'justify-end' : 'justify-start'}`}
