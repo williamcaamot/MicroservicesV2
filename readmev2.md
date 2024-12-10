@@ -8,11 +8,20 @@
   overview should accurately describe the project implementation.
 
 ## User stories
-- [ ] a list of user stories that allow an examiner to assess the functionality developed in the
-  project (think of scenarios that the examiner can run to see what functionality you have
-  implemented).
-  The implementation of project specific user stories will be based on the user stories present in
-  this list.
+- [ ] a list of user stories that allow an examiner to assess the functionality developed in the project (think of scenarios that the examiner can run to see what functionality you have implemented). The implementation of project specific user stories will be based on the user stories present in this list.
+
+
+### Actual user stories
+These are the prioritized user stories from Arbeidskrav:
+- [X] As a user I want to be able to search for relevant businesses and save them.
+- [X] As a user I want to be able to find relevant websites for a company with Google Search.
+- [X] As a user I want to be able to generate sales pitches using AI.
+
+Additionaly, I have completed these user stories:
+- [X] As a user I want to be able to find relevant emails from a company website (Webscraper Service)
+- [X] As a user I want to be able to find relevant phone numbers from a company website (Webscraper Service)
+- [X] As a user I want to be able to manage my work in different workspaces, where each workspace have a different title and description used by the AI service for better pitches.
+
 
 ## Architecture diagram
 - [ ] a diagram showing the architecture of the system. This should show what services the

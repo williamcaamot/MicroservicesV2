@@ -12,17 +12,22 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Workspace extends BaseEntity{
+public class Communication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "workspace_id")
+    private Long communicationId;
+
+    @Column
+    private Long companyId;
+
+    @Column
     private Long workspaceId;
 
-    private Long owningAccountId;
+    @Column
+    private String message;
 
-    private String name;
-
-    private String productDescription;
-
+    @Column
+    private String sender;
 }
