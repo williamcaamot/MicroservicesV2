@@ -18,7 +18,7 @@ export default function Message({message, handleDeleteMessage}: MessageProps){
             {/* Delete button - shown on left for received messages */}
             {message.sender !== 'me' && (
                 <button
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-400 hover:text-red-500 p-1 rounded"
+                    className="group-hover:opacity-100 duration-200 text-gray-400 hover:text-red-500 p-1 rounded"
                     onClick={() => handleDeleteMessage(message.messageId)}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,7 +41,7 @@ export default function Message({message, handleDeleteMessage}: MessageProps){
             {/* Delete button - shown on right for sent messages */}
             {message.sender === 'me' && (
                 <button
-                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-400 hover:text-red-500 p-1 rounded"
+                    className="group-hover:opacity-100duration-200 text-gray-400 hover:text-red-500 p-1 rounded"
                     onClick={() => handleDeleteMessage(message.messageId)}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
