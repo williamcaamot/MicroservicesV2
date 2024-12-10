@@ -55,6 +55,9 @@ public class CommunicationController {
             @RequestHeader("accountid") Long accountId,
             @RequestBody Communication communication
     ){
+        communication.setCompanyId(companyId);
+        communication.setWorkspaceId(workspaceId);
+
         return communicationService.saveCommunication(communication, accountId);
     }
 
