@@ -75,6 +75,25 @@ export default function CompanyCommunication(){
         setIsSavingLoading(false);
     }
 
+    async function handleDeleteMessage(messageId: number){
+        try {
+            const res = await fetch(`/api/v1/communication/${workspaceId}/company/${companyId}/communication/${messageId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            });
+            if (res.ok) {
+                setMessages((prevMessages) => prevMessages.filter((message) => message.messageId !== messageId));
+                alert("Successfully deleted message!")
+            } else {
+                setError(`Failed to delete message! Try again`);
+            }
+        } catch (e: any) {
+            setError("Something went wrong: " + e.message);
+        }
+    }
+
 
     useEffect(() => {
         fetchCompanyCommunication()
@@ -96,7 +115,7 @@ export default function CompanyCommunication(){
                     <div className="h-96 overflow-y-auto p-4 space-y-4">
 
                         {messages && messages.length < 1 && <h3 className={"text-2xl text-zinc-800"}>No communication yet! You can write down your communication with this company below to keep track of it!</h3>}
-                        {messages && messages.map((message) => (<Message message={message}/>
+                        {messages && messages.map((message) => (<Message message={message} handleDeleteMessage={handleDeleteMessage}/>
                         ))}
                     </div>
 

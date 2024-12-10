@@ -60,14 +60,14 @@ public class CommunicationController {
         return communicationService.saveCommunication(communication, accountId);
     }
 
-    @DeleteMapping(path = "/company/{companyId}/communication/{communicationId}")
+    @DeleteMapping(path = "/company/{companyId}/communication/{messageId}")
     public void deleteCommunication(
             @PathVariable Long workspaceId,
             @PathVariable Long companyId,
-            @PathVariable Long communicationId,
+            @PathVariable Long messageId,
             @RequestHeader("accountid") Long accountId
 
     ){
-        communicationService.deleteCommunication(workspaceId, communicationId, companyId, accountId);
+        communicationService.deleteCommunication(workspaceId, messageId, companyId, accountId);
     }
 }
