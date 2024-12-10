@@ -95,9 +95,8 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
     }
 
     return (
-        <div className="bg-gray-50">
-            <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div className="bg-white rounded-lg shadow-sm p-6">
+            <div className="mx-auto py-4">
+                <div className="bg-white rounded-lg shadow-lg border p-6">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">
                         Sales Pitches
                     </h2>
@@ -125,7 +124,6 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
                         ))}
                     </div>
                 </div>
-            </div>
         </div>
     );
 };

@@ -10,25 +10,26 @@ import java.time.LocalDateTime;
 
 @Component
 public class AuditEntityListener {
-    private static final String ACCOUNT_ID_HEADER = "accountid";
 
-    @Autowired
-    private HttpServletRequest request;
+    private static final ThreadLocal<String> currentUser = new ThreadLocal<>();
+
+    public static void setCurrentUser(String username) {
+        currentUser.set(username);
+    }
+
+    public static void clear() {
+        currentUser.remove();
+    }
 
     @PrePersist
     public void prePersist(BaseEntity entity) {
         entity.setCreatedAt(LocalDateTime.now());
-        entity.setCreatedBy(getCurrentUsername());
+        entity.setCreatedBy(currentUser.get() != null ? currentUser.get() : "system");
     }
 
     @PreUpdate
     public void preUpdate(BaseEntity entity) {
         entity.setUpdatedAt(LocalDateTime.now());
-        entity.setUpdatedBy(getCurrentUsername());
-    }
-
-    private String getCurrentUsername() {
-        String accountId = request.getHeader(ACCOUNT_ID_HEADER);
-        return accountId != null ? accountId : "system";
+        entity.setUpdatedBy(currentUser.get() != null ? currentUser.get() : "system");
     }
 }

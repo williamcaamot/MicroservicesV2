@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class RabbitMQService {
 
-    private final RabbitTemplate rabbitTemplate;
+    private RabbitTemplate rabbitTemplate;
     private final OpenAIChatGPTService openAIChatGPTService;
 
     private final SalesPitchRepo salesPitchRepo;

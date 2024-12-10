@@ -16,7 +16,7 @@ public class Communication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "workspace_id")
+    @Column(name = "communication_id")
     private Long communicationId;
 
     @Column

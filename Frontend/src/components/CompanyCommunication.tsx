@@ -12,6 +12,10 @@ export default function CompanyCommunication(){
     ]);
 
     return (
+        <div className="bg-white rounded-lg shadow-lg border p-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Company Communication
+            </h2>
         <div className="w-full max-w-2xl mx-auto">
             {/* Message Container */}
             <div className="bg-gray-50 rounded-lg shadow-md">
@@ -49,6 +53,7 @@ export default function CompanyCommunication(){
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 
