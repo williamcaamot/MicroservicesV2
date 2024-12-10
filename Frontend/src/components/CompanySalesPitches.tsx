@@ -2,8 +2,8 @@ import SalesPitchCard, {SalesPitchType} from "./common/SalesPitchCard.tsx";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
-const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
-    const { companyId, workspaceId } = useParams();
+const CompanySalesPitches = ({isGeneratingSalesPitchLoading}) => {
+    const {companyId, workspaceId} = useParams();
     const [salesPitches, setSalesPitches] = useState<SalesPitchType[] | undefined>(undefined);
     const [isSalesPitchesLoading, setIsSalesPitchesLoading] = useState(false);
     const [isPolling, setIsPolling] = useState<boolean>(true);
@@ -25,23 +25,33 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
         setIsSalesPitchesLoading(false);
     }
 
+
+
     async function pollSalesPitches() {
         while (isPolling) {
+            console.log("polling")
             try {
                 const res = await fetch(`/api/v1/salespitch/${workspaceId}/company/${companyId}`);
                 if (res.ok) {
                     const data = await res.json();
                     setSalesPitches(data);
 
-                    // Check if all sales pitches are complete
-                    const allComplete = data.every(pitch => pitch.isComplete);
+                    let allComplete = true;
+                    for (let i = 0; i < data.length; i++) {
+                        //console.log(data[i].complete)
+                        if (!data[i].complete) {
+                            allComplete = false;
+                        }
+                    }
+                    console.log(allComplete)
                     if (allComplete) {
                         setIsPolling(false);
-                        break;
+                        return;
                     }
-                    // Wait 1.5 seconds before next poll
+                    //Wait 1.5 seconds before next poll
                     //await new Promise(resolve => setTimeout(resolve, 1500));
                 } else {
+                    console.log("Res not ok")
                     setIsPolling(false);
                     break;
                 }
@@ -69,20 +79,23 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
                 createdAt: new Date().toISOString(),
                 createdBy: "System",
             };
-
             setSalesPitches((prev: SalesPitchType[]) => prev ? [...prev, dummyPitch] : [dummyPitch]);
         }
-
         setIsPolling(true);
 
         // Start polling
         const interval = setInterval(() => {
-            pollSalesPitches();
+            if(isPolling){
+                pollSalesPitches();
+            }
         }, 1500); // Adjust interval as needed
-
         // Cleanup function to stop polling
         return () => clearInterval(interval);
-    }, [isGeneratingSalesPitchLoading, pollSalesPitches, companyId, workspaceId]);
+    }, [isGeneratingSalesPitchLoading]);
+
+
+
+
 
     if (isSalesPitchesLoading) {
         return (
@@ -95,35 +108,35 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
     }
 
     return (
-            <div className="mx-auto py-4">
-                <div className="bg-white rounded-lg shadow-lg border p-6">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                        Sales Pitches
-                    </h2>
-                    {salesPitches?.length < 1 && <div className="text-center py-12">
+        <div className="mx-auto py-4">
+            <div className="bg-white rounded-lg shadow-lg border p-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                    Sales Pitches
+                </h2>
+                {salesPitches?.length < 1 && <div className="text-center py-12">
+                    <p className="text-gray-500 text-lg">
+                        No sales pitches yet. Try generating one!
+                    </p>
+                </div>}
+
+
+                {!salesPitches && (
+                    <div className="text-center py-12">
                         <p className="text-gray-500 text-lg">
                             No sales pitches yet. Try generating one!
                         </p>
-                    </div>}
-
-
-                    {!salesPitches && (
-                        <div className="text-center py-12">
-                            <p className="text-gray-500 text-lg">
-                                No sales pitches yet. Try generating one!
-                            </p>
-                        </div>
-                    )}
-
-                    <div className="space-y-6 flex flex-wrap">
-                        {salesPitches?.map((salesPitch) => (
-                            <SalesPitchCard
-                                key={salesPitch.salesPitchId}
-                                salesPitch={salesPitch}
-                            />
-                        ))}
                     </div>
+                )}
+
+                <div className="space-y-6 flex flex-wrap">
+                    {salesPitches?.map((salesPitch) => (
+                        <SalesPitchCard
+                            key={salesPitch.salesPitchId}
+                            salesPitch={salesPitch}
+                        />
+                    ))}
                 </div>
+            </div>
         </div>
     );
 };
