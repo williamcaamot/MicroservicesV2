@@ -101,16 +101,10 @@ const CompanySalesPitches = () => {
                 isPollingRef.current = false;
                 return;
             }
-
-            // Continue polling after a delay
             setTimeout(poll, 1500);
         };
-
         poll();
     }
-
-
-
 
 
     if (isSalesPitchesLoading) {
