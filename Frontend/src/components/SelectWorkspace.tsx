@@ -91,7 +91,7 @@ export function SelectWorkspace() {
                 {workspaces && workspaces.map((workspace, index) => (
                     <div
                         key={index}
-                        onClick={() => navigate(`/app/workspace/${workspace.workspaceId}`)}
+                        onClick={() => navigate(`/app/workspace/${workspace.workspaceId}/company`)}
                         className="bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-4 cursor-pointer transition duration-300 ease-in-out"
                     >
                         <h3 className="font-semibold text-lg text-gray-800 mb-2">{workspace.name}</h3>

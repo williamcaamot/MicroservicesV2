@@ -15,12 +15,12 @@ import IconAddressCard from "./icons/IconAddressCard";
 import IconSettingsOutline from "./icons/IconSettingsOutline";
 
 const tabs = [
-    {
+    /*{
         title: "Dashboard",
         url: "/app",
         icon:  <IconLayoutDashboard width={"1.4em"} height={"1.4em"}/>,
         iconActive: <IconBxsDashboard width={"1.4em"} height={"1.4em"}/>
-    },
+    }*/,
     {
         title: "Workspace Settings",
         url: "/app/workspaceSetting",
@@ -69,10 +69,10 @@ export default function Layout({children}) {
                         <img src={"/logo.png"}/>
                     </div>
                     <ul className="space-y-2 p-4">
-                        <li onClick={() => {navigate(`/app/workspace/${workspaceId}`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconLayoutDashboard width={"1.4em"} height={"1.4em"}/></span> Dashboard</a></li>
-                        <li onClick={() => {navigate(`/app/workspace/${workspaceId}/settings`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconSettingsOutline width={"1.4em"} height={"1.4em"}/></span>Workspace Settings</a></li>
                         <li onClick={() => {navigate(`/app/workspace/${workspaceId}/company`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconListCircleOutline width={"1.4em"} height={"1.4em"}/></span>Selskaper</a></li>
+                        {/*<li onClick={() => {navigate(`/app/workspace/${workspaceId}`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconLayoutDashboard width={"1.4em"} height={"1.4em"}/></span> Dashboard</a></li>*/}
                         <li onClick={() => {navigate(`/app/workspace/${workspaceId}/leads`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconNotification width={"1.4em"} height={"1.4em"}/></span>All Sales Pitches</a></li>
+                        <li onClick={() => {navigate(`/app/workspace/${workspaceId}/settings`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconSettingsOutline width={"1.4em"} height={"1.4em"}/></span>Workspace Settings</a></li>
                         <li onClick={() => {navigate(`/app`)}}><a className="cursor-pointer flex py-2 px-4 text-gray-700 hover:bg-gray-200 rounded"><span className={"pt-0.5 pr-2"}><IconAddressCard width={"1.4em"} height={"1.4em"}/></span>Change workspace</a></li>
                     </ul>
                 </nav>

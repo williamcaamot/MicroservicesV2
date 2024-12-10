@@ -57,7 +57,7 @@ export default function App() {
 function AppRoutes(){
     return<Routes>
         <Route path={"/"} Component={SelectWorkspace}/>
-        <Route path={"/workspace/:workspaceId"} Component={Dashboard}/>
+        {/*<Route path={"/workspace/:workspaceId"} Component={Dashboard}/>*/}
         <Route path={"/workspace/:workspaceId/settings"} Component={WorkspaceSettings}/>
         <Route path={"/workspace/:workspaceId/company"} Component={CompanyManager}/>
         <Route path={"/workspace/:workspaceId/company/:companyId"} Component={Company}/>

@@ -104,7 +104,7 @@ export default function CompanySearchV2({ handleSelectCompany, searchTerm = "", 
             <Input
                 displayLabel={false}
                 isLoading={isLoading}
-                placeholder={"Søk etter selskap"}
+                placeholder={"Search for companies"}
                 type={"text"}
                 value={searchTerm}
                 onChange={setSearchTerm}
