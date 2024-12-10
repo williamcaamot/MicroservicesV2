@@ -23,6 +23,9 @@ export function Company() {
     const [isAddingPhone, setIsAddingPhone] = useState(false);
     const [newPhone, setNewPhone] = useState('');
 
+    const [isEditingWebsite, setIsEditingWebsite] = useState(false);
+    const [newWebsite, setNewWebsite] = useState('');
+
     async function fetchCompany() {
         try {
             const result = await fetch(`/api/v1/workspace/${workspaceId}/company/${companyId}`)
@@ -202,6 +205,33 @@ export function Company() {
         }
     }
 
+    async function handleUpdateWebsite(e) {
+        e.preventDefault();
+
+        const updatedCompany = {
+            ...company,
+            hjemmeside: newWebsite
+        };
+
+        try {
+            const result = await fetch(`/api/v1/workspace/${workspaceId}/company`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedCompany)
+            });
+
+            const data = await result.json();
+            if (result.ok) {
+                setCompany(updatedCompany);
+                setIsEditingWebsite(false);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
 
     useEffect(() => {
         fetchCompany()
@@ -256,7 +286,51 @@ export function Company() {
                     <div className="space-y-4 border rounded p-2">
                         <InfoItem label="Organization Number" value={company.organisasjonsnummer}/>
                         <InfoItem label="Workspace ID" value={company.workspaceId}/>
-                        <InfoItem label="Website" value={company.hjemmeside || 'Not specified'}/>
+                        <div>
+                            <div className="flex items-center gap-2 mb-2">
+                                <h2 className="text-xl font-semibold text-gray-700">Website</h2>
+                                <button
+                                    onClick={() => setIsEditingWebsite(!isEditingWebsite)}
+                                    className="text-blue-500 hover:text-blue-600 p-1 rounded-full hover:bg-blue-50"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            {isEditingWebsite ? (
+                                <form onSubmit={handleUpdateWebsite} className="mb-3 flex gap-2">
+                                    <input
+                                        type="url"
+                                        value={newWebsite}
+                                        onChange={(e) => setNewWebsite(e.target.value)}
+                                        placeholder="Enter website URL"
+                                        className="flex-1 border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    <button
+                                        type="submit"
+                                        className="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-600 transition-colors"
+                                    >
+                                        Save
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            setIsEditingWebsite(false);
+                                            setNewWebsite(company.hjemmeside || '');
+                                        }}
+                                        className="text-gray-500 hover:text-gray-700 px-3 py-1 rounded-lg text-sm"
+                                    >
+                                        Cancel
+                                    </button>
+                                </form>
+                            ) : (
+                                <p className="text-gray-600">
+                                    {company.hjemmeside || 'No website added'}
+                                </p>
+                            )}
+                        </div>
                         <div>
                             <div className="flex items-center gap-2 mb-2">
                                 <h2 className="text-xl font-semibold text-gray-700">Email addresses</h2>
