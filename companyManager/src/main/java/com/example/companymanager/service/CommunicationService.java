@@ -100,20 +100,26 @@ public class CommunicationService {
         }
     }
 
-    public void deleteCommunication(Communication communication, Long accountId) {
-        Workspace workspace = workspaceRepository.findById(communication.getWorkspaceId()).orElseThrow(() -> new EntityNotFoundException("Could not find Workspace with ID: " + communication.getWorkspaceId()));
+    public void deleteCommunication(
+            Long workspaceId,
+            Long communicationId,
+            Long companyId,
+            Long accountId
+
+    ) {
+        Workspace workspace = workspaceRepository.findById(workspaceId).orElseThrow(() -> new EntityNotFoundException("Could not find Workspace with ID: " + workspaceId));
         if (!Objects.equals(workspace.getOwningAccountId(), accountId)) {
             throw new NoPermissionException();
         }
-        Company company = companyRepository.findById(communication.getCompanyId()).orElseThrow(() -> new EntityNotFoundException("Could not find company with id: " + communication.getCompanyId()));
+        Company company = companyRepository.findById(companyId).orElseThrow(() -> new EntityNotFoundException("Could not find company with id: " + companyId));
         if (!Objects.equals(company.getWorkspaceId(), workspace.getWorkspaceId())) {
             throw new NoPermissionException();
         }
-        if (communicationRepository.existsById(communication.getCommunicationId())) {
-            communicationRepository.deleteById(communication.getCommunicationId());
+        if (communicationRepository.existsById(communicationId)) {
+            communicationRepository.deleteById(communicationId);
             return;
         } else {
-            throw new EntityNotFoundException("Could not find communication with ID: " + communication.getCommunicationId());
+            throw new EntityNotFoundException("Could not find communication with ID: " + communicationId);
         }
 
     }
