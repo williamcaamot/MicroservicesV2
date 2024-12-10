@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 
 const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
     const { companyId, workspaceId } = useParams();
-    const [salesPitches, setSalesPitches] = useState<SalesPitchType | undefined>(undefined);
+    const [salesPitches, setSalesPitches] = useState<SalesPitchType[] | undefined>(undefined);
     const [isSalesPitchesLoading, setIsSalesPitchesLoading] = useState(false);
     const [isPolling, setIsPolling] = useState<boolean>(true);
 
@@ -86,7 +86,7 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
 
     if (isSalesPitchesLoading) {
         return (
-            <div className="min-h-screen bg-gray-50 p-6">
+            <div className="bg-gray-50 p-6">
                 <div className="animate-pulse flex space-y-4">
                     <div className="h-4 bg-gray-200 rounded w-1/4"></div>
                 </div>
@@ -95,12 +95,18 @@ const CompanySalesPitches = ({ isGeneratingSalesPitchLoading }) => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="bg-gray-50">
             <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="bg-white rounded-lg shadow-sm p-6">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6">
                         Sales Pitches
                     </h2>
+                    {salesPitches?.length < 1 && <div className="text-center py-12">
+                        <p className="text-gray-500 text-lg">
+                            No sales pitches yet. Try generating one!
+                        </p>
+                    </div>}
+
 
                     {!salesPitches && (
                         <div className="text-center py-12">
