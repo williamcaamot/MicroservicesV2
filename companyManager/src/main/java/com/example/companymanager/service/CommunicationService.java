@@ -2,7 +2,7 @@ package com.example.companymanager.service;
 
 
 import com.example.companymanager.Exception.NoPermissionException;
-import com.example.companymanager.entity.Communication;
+import com.example.companymanager.entity.Message;
 import com.example.companymanager.entity.Company;
 import com.example.companymanager.entity.Workspace;
 import com.example.companymanager.repository.CommunicationRepository;
@@ -37,7 +37,7 @@ public class CommunicationService {
 
 
 
-    public Communication getCommunicationById(Long communicationId, Long workspaceId, Long accountId, Long companyId){
+    public Message getCommunicationById(Long communicationId, Long workspaceId, Long accountId, Long companyId){
         Workspace workspace = workspaceRepository.findById(workspaceId).orElseThrow(() -> new EntityNotFoundException("Could not find Workspace with ID: " + workspaceId));
         if (!Objects.equals(workspace.getOwningAccountId(), accountId)) {
             throw new NoPermissionException();
@@ -49,7 +49,7 @@ public class CommunicationService {
         return communicationRepository.findById(communicationId).orElseThrow(() -> new EntityNotFoundException("Could not find communication with ID: " + communicationId));
     }
 
-    public List<Communication> getCommunicationsByCompanyId(Long workspaceId, Long accountId, Long companyId){
+    public List<Message> getCommunicationsByCompanyId(Long workspaceId, Long accountId, Long companyId){
         Workspace workspace = workspaceRepository.findById(workspaceId).orElseThrow(() -> new EntityNotFoundException("Could not find Workspace with ID: " + workspaceId));
         if (!Objects.equals(workspace.getOwningAccountId(), accountId)) {
             throw new NoPermissionException();
@@ -62,7 +62,7 @@ public class CommunicationService {
     }
 
 
-    public List<Communication> getCommunicationsByWorkspaceId(Long workspaceId, Long accountId){
+    public List<Message> getCommunicationsByWorkspaceId(Long workspaceId, Long accountId){
         Workspace workspace = workspaceRepository.findById(workspaceId).orElseThrow(() -> new EntityNotFoundException("Could not find Workspace with ID: " + workspaceId));
         if (!Objects.equals(workspace.getOwningAccountId(), accountId)) {
             throw new NoPermissionException();
@@ -71,7 +71,7 @@ public class CommunicationService {
     }
 
 
-    public Communication saveCommunication(Communication communication, Long accountId){
+    public Message saveCommunication(Message communication, Long accountId){
         Workspace workspace = workspaceRepository.findById(communication.getWorkspaceId()).orElseThrow(() -> new EntityNotFoundException("Could not find Workspace with ID: " + communication.getWorkspaceId()));
         if (!Objects.equals(workspace.getOwningAccountId(), accountId)) {
             throw new NoPermissionException();
@@ -84,7 +84,7 @@ public class CommunicationService {
     }
 
 
-    public Communication updateCommunication(Communication communication, Long accountId){
+    public Message updateCommunication(Message communication, Long accountId){
         Workspace workspace = workspaceRepository.findById(communication.getWorkspaceId()).orElseThrow(() -> new EntityNotFoundException("Could not find Workspace with ID: " + communication.getWorkspaceId()));
         if (!Objects.equals(workspace.getOwningAccountId(), accountId)) {
             throw new NoPermissionException();
@@ -93,10 +93,10 @@ public class CommunicationService {
         if(!Objects.equals(company.getWorkspaceId(), workspace.getWorkspaceId())){
             throw new NoPermissionException();
         }
-        if(communicationRepository.existsById(communication.getCommunicationId())){
+        if(communicationRepository.existsById(communication.getMessageId())){
             return communicationRepository.save(communication);
         }else {
-            throw new EntityNotFoundException("Could not find communication with ID: " + communication.getCommunicationId());
+            throw new EntityNotFoundException("Could not find communication with ID: " + communication.getMessageId());
         }
     }
 

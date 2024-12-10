@@ -1,12 +1,11 @@
 package com.example.companymanager.controller;
 
 
-import com.example.companymanager.entity.Communication;
+import com.example.companymanager.entity.Message;
 import com.example.companymanager.service.CommunicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,7 +20,7 @@ public class CommunicationController {
     }
 
     @GetMapping
-    public List<Communication> getCommunicationsByWorkspaceId(
+    public List<Message> getCommunicationsByWorkspaceId(
             @PathVariable Long workspaceId,
             @RequestHeader("accountid") Long accountId
     ) {
@@ -29,7 +28,7 @@ public class CommunicationController {
     }
 
     @GetMapping(path = "/company/{companyId}")
-    public List<Communication> getCommunicationsByCompanyId(
+    public List<Message> getCommunicationsByCompanyId(
             @PathVariable Long workspaceId,
             @PathVariable Long companyId,
             @RequestHeader("accountid") Long accountId
@@ -39,7 +38,7 @@ public class CommunicationController {
 
 
     @GetMapping(path = "/company/{companyId}/communication/{communicationId}")
-    public Communication getCommunicationsById(
+    public Message getCommunicationsById(
             @PathVariable Long workspaceId,
             @PathVariable Long companyId,
             @PathVariable Long communicationId,
@@ -49,11 +48,11 @@ public class CommunicationController {
     }
 
     @PostMapping(path = "/company/{companyId}")
-    public Communication saveCommunucation(
+    public Message saveCommunucation(
             @PathVariable Long workspaceId,
             @PathVariable Long companyId,
             @RequestHeader("accountid") Long accountId,
-            @RequestBody Communication communication
+            @RequestBody Message communication
     ){
         communication.setCompanyId(companyId);
         communication.setWorkspaceId(workspaceId);

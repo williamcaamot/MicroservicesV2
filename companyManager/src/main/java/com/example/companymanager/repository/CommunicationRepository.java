@@ -1,18 +1,16 @@
 package com.example.companymanager.repository;
 
-import com.example.companymanager.entity.Communication;
-import com.example.companymanager.entity.Company;
+import com.example.companymanager.entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public interface CommunicationRepository extends JpaRepository<Communication, Long> {
+public interface CommunicationRepository extends JpaRepository<Message, Long> {
 
-    public List<Communication> getCommunicationByCompanyId(Long companyId);
+    public List<Message> getCommunicationByCompanyId(Long companyId);
 
-    public List<Communication> getCommunicationByWorkspaceId(Long workspaceId);
+    public List<Message> getCommunicationByWorkspaceId(Long workspaceId);
 
 }

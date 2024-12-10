@@ -4,7 +4,7 @@ import ErrorMessage from "./common/ErrorMessage.tsx";
 
 
 interface CommunicationMessage{
-    communicationId?: number,
+    messageId?: number,
     companyId?: number,
     workspaceId?: number,
     message?: string,
@@ -34,7 +34,7 @@ export default function CompanyCommunication(){
         try{
             const res = await fetch(`/api/v1/communication/${workspaceId}/company/${companyId}`)
             const data = await res.json() as CommunicationMessage[];
-            console.log(data)
+            setMessages(data)
             if(!res.ok){
                 setError("Something went wrong! Please try again!")
             }
@@ -94,7 +94,7 @@ export default function CompanyCommunication(){
                     <div className="h-96 overflow-y-auto p-4 space-y-4">
                         {messages && messages.map((message) => (
                             <div
-                                key={message.id}
+                                key={message.messageId}
                                 className={`flex ${message.sender === 'me' ? 'justify-end' : 'justify-start'}`}
                             >
                                 <div
@@ -104,7 +104,7 @@ export default function CompanyCommunication(){
                                             : 'bg-gray-200 text-gray-800 rounded-bl-none'
                                     }`}
                                 >
-                                    {message.text}
+                                    {message.message}
                                 </div>
                             </div>
                         ))}

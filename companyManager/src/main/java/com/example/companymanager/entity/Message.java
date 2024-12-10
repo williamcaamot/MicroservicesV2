@@ -12,12 +12,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Communication extends BaseEntity {
+public class Message extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "communication_id")
-    private Long communicationId;
+    @Column(name = "message_id")
+    private Long messageId;
 
     @Column
     private Long companyId;
