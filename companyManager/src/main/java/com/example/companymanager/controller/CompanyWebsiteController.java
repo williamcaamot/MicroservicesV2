@@ -33,10 +33,6 @@ public class CompanyWebsiteController {
     ){
         HashMap<String, String> result = new HashMap<>();
         try{
-            System.out.println(websiteDTO.getCompanyWebsite());
-            System.out.println(websiteDTO.getWorkspaceId());
-            System.out.println(websiteDTO.getAccountId());
-
             companyWebsiteService.SaveCompanyWebsite(websiteDTO);
 
             result.put("success", "Successfully set the website");

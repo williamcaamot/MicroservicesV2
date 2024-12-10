@@ -22,14 +22,33 @@ public class CompanyController {
     }
 
     @PostMapping(path = "")
-    public ResponseEntity<Company> saveCompany(@PathVariable Long workspaceId, @RequestBody Company company) {
+    public ResponseEntity<Company> saveCompany(
+            @PathVariable Long workspaceId,
+            @RequestBody Company company,
+            @RequestHeader("accountid") Long accountId
+    ) {
 
         company.setWorkspaceId(workspaceId);
         return ResponseEntity.status(HttpStatus.CREATED).body(companyService.saveCompany(company));
     }
 
+    @PutMapping(path = "")
+    public ResponseEntity<Company> updateCompany(
+            @PathVariable Long workspaceId,
+            @RequestBody Company company,
+            @RequestHeader("accountid") Long accountId
+    ) {
+
+        company.setWorkspaceId(workspaceId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(companyService.updateCompany(company));
+    }
+
+
     @GetMapping(path = "")
-    public ResponseEntity<List<Company>> getCompanies(@PathVariable Long workspaceId) {
+    public ResponseEntity<List<Company>> getCompanies(
+            @PathVariable Long workspaceId,
+            @RequestHeader("accountid") Long accountId
+    ) {
         System.out.println("Workspace ID");
         System.out.println(workspaceId);
 
@@ -37,16 +56,20 @@ public class CompanyController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
-        System.out.println("Request reaching delete controller endpoint");
+    public ResponseEntity<Void> deleteCompany(
+            @PathVariable Long id,
+            @RequestHeader("accountid") Long accountId
+    ) {
         companyService.deleteCompany(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Company> getCompanyById(@PathVariable Long id) {
-        System.out.println("Reaching the get mapping of company");
+    public ResponseEntity<Company> getCompanyById(
+            @PathVariable Long id,
+            @RequestHeader("accountid") Long accountId
+    ) {
         return ResponseEntity.status(HttpStatus.OK).body(companyService.getCompanyById(id));
     }
 

@@ -16,7 +16,12 @@ export function Company() {
     const [isFetchingWebsitesLoading, setIsFetchingWebsitesLoading] = useState<boolean>(false);
     const [isFetchingCompanyEmailsLoading, setIsFetchingCompanyEmailsLoading] = useState<boolean>(false);
     const [isFetchingPhonenumbersLoading, setIsFetchingPhonenumbersLoading] = useState<boolean>(false)
-    const [isGeneratingSalesPitchLoading, setIsGeneratingSalesPitchLoading] = useState<boolean>(false);
+
+    const [isAddingEmail, setIsAddingEmail] = useState<boolean>(false);
+    const [newEmail, setNewEmail] = useState('');
+
+    const [isAddingPhone, setIsAddingPhone] = useState(false);
+    const [newPhone, setNewPhone] = useState('');
 
     async function fetchCompany() {
         try {
@@ -139,6 +144,65 @@ export function Company() {
         }
     }
 
+    async function handleAddEmail(e) {
+        e.preventDefault();
+        if (!newEmail) return;
+
+        const updatedCompany = {
+            ...company,
+            emailAddresses: [...company.emailAddresses, newEmail]
+        };
+
+        try {
+            const result = await fetch(`/api/v1/workspace/${workspaceId}/company`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedCompany)
+            });
+
+            const data = await result.json();
+            if (result.ok) {
+                setCompany(updatedCompany);
+                setNewEmail('');
+                setIsAddingEmail(false);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    async function handleAddPhone(e) {
+        e.preventDefault();
+        if (!newPhone) return;
+
+        const updatedCompany = {
+            ...company,
+            phonenumbers: [...company.phonenumbers, newPhone]
+        };
+
+        try {
+            const result = await fetch(`/api/v1/workspace/${workspaceId}/company`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedCompany)
+            });
+
+            const data = await result.json();
+            if (result.ok) {
+                setCompany(updatedCompany);
+                setNewPhone('');
+                setIsAddingPhone(false);
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+
     useEffect(() => {
         fetchCompany()
     }, []);
@@ -194,7 +258,43 @@ export function Company() {
                         <InfoItem label="Workspace ID" value={company.workspaceId}/>
                         <InfoItem label="Website" value={company.hjemmeside || 'Not specified'}/>
                         <div>
-                            <h2 className="text-xl font-semibold text-gray-700 mb-2">Email addresses</h2>
+                            <div className="flex items-center gap-2 mb-2">
+                                <h2 className="text-xl font-semibold text-gray-700">Email addresses</h2>
+                                <button
+                                    onClick={() => setIsAddingEmail(!isAddingEmail)}
+                                    className="text-blue-500 hover:text-blue-600 p-1 rounded-full hover:bg-blue-50"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            {isAddingEmail && (
+                                <form onSubmit={handleAddEmail} className="mb-3 flex gap-2">
+                                    <input
+                                        type="email"
+                                        value={newEmail}
+                                        onChange={(e) => setNewEmail(e.target.value)}
+                                        placeholder="Enter new email address"
+                                        className="flex-1 border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    <button
+                                        type="submit"
+                                        className="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-600 transition-colors"
+                                    >
+                                        Add
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsAddingEmail(false)}
+                                        className="text-gray-500 hover:text-gray-700 px-3 py-1 rounded-lg text-sm"
+                                    >
+                                        Cancel
+                                    </button>
+                                </form>
+                            )}
+
                             <ul className="list-disc list-inside text-gray-600">
                                 {company.emailAddresses && company.emailAddresses.map((item, index) => (
                                     <li key={index} className="mb-1">{item}</li>
@@ -202,7 +302,43 @@ export function Company() {
                             </ul>
                         </div>
                         <div>
-                            <h2 className="text-xl font-semibold text-gray-700 mb-2">Phone numbers</h2>
+                            <div className="flex items-center gap-2 mb-2">
+                                <h2 className="text-xl font-semibold text-gray-700">Phone numbers</h2>
+                                <button
+                                    onClick={() => setIsAddingPhone(!isAddingPhone)}
+                                    className="text-blue-500 hover:text-blue-600 p-1 rounded-full hover:bg-blue-50"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            {isAddingPhone && (
+                                <form onSubmit={handleAddPhone} className="mb-3 flex gap-2">
+                                    <input
+                                        type="tel"
+                                        value={newPhone}
+                                        onChange={(e) => setNewPhone(e.target.value)}
+                                        placeholder="Enter new phone number"
+                                        className="flex-1 border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    />
+                                    <button
+                                        type="submit"
+                                        className="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-600 transition-colors"
+                                    >
+                                        Add
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsAddingPhone(false)}
+                                        className="text-gray-500 hover:text-gray-700 px-3 py-1 rounded-lg text-sm"
+                                    >
+                                        Cancel
+                                    </button>
+                                </form>
+                            )}
+
                             <ul className="list-disc list-inside text-gray-600">
                                 {company.phonenumbers && company.phonenumbers.map((item, index) => (
                                     <li key={index} className="mb-1">{item}</li>
