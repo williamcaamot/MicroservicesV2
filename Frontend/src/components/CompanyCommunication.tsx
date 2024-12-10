@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import ErrorMessage from "./common/ErrorMessage.tsx";
+import Message from "./common/Message.tsx";
 
 
-interface CommunicationMessage{
+export interface CommunicationMessage{
     messageId?: number,
     companyId?: number,
     workspaceId?: number,
@@ -95,21 +96,7 @@ export default function CompanyCommunication(){
                     <div className="h-96 overflow-y-auto p-4 space-y-4">
 
                         {messages && messages.length < 1 && <h3 className={"text-2xl text-zinc-800"}>No communication yet! You can write down your communication with this company below to keep track of it!</h3>}
-                        {messages && messages.map((message) => (
-                            <div
-                                key={message.messageId}
-                                className={`flex ${message.sender === 'me' ? 'justify-end' : 'justify-start'}`}
-                            >
-                                <div
-                                    className={`max-w-[70%] rounded-lg p-3 ${
-                                        message.sender === 'me'
-                                            ? 'bg-blue-500 text-white rounded-br-none'
-                                            : 'bg-gray-200 text-gray-800 rounded-bl-none'
-                                    }`}
-                                >
-                                    {message.message}
-                                </div>
-                            </div>
+                        {messages && messages.map((message) => (<Message message={message}/>
                         ))}
                     </div>
 
