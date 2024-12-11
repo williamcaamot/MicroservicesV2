@@ -52,6 +52,7 @@ Authentication Service manages user authentication using JWT (JSON Web Token). J
 #### Gateway
 The Gateway acts as a single point of entry for the entire application. It handles request authentication, routing, and forwarding requests to the appropriate microservices.
 
+
 ## User stories - A list of user stories that allow an examiner to assess the functionality developed in the project (think of scenarios that the examiner can run to see what functionality you have implemented). The implementation of project specific user stories will be based on the user stories present in this list.
 
 These are the prioritized user stories from Arbeidskrav:
@@ -68,7 +69,7 @@ Additionaly, I have completed these user stories:
 
 
 ## Architecture diagram - A diagram showing the architecture of the system. This should show what services the project contains and what type of communication they have between them (synchronous or asynchronous).
-
+![Architecture diagram](/architecture.png)
 
 ## Additional notes
 This was made as a solo-project.
