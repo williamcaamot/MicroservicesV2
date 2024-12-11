@@ -25,11 +25,12 @@ The project is called "Dealflow", which is meant as a business-to-business (B2B)
 
 When dealing with B2B sales, there are a few processes that Dealflow simplifies; First, it simplifies the process of finding companies to sell to. Second, it simplifies the process of finding contact infromation. Third, it simplifies the process of writing a personalized sales pitch to companies, at last it allows to save all communication with a company.
 
-Finding companies can be done directly inside Dealflow with the company search that is integrated with Brønnøysundregisterne for accurate and up to date information. You can find contact details, such as website, email addresses and phone numbers directly in the platform through a Google integration and a web scraping service. Personalized saled pitches can be generated through an integration with OpenAI's ChatGPT-4, and communication with the company can be saved directly in the platform, to keep track of what has been communicated.
+Finding companies can be done directly inside Dealflow with the company search that is integrated with Brønnøysundregisterne for accurate and up to date information. You can find contact details, such as website, email addresses and phone numbers directly in the platform through a Google integration and a web scraping service. Personalized sales pitches can be generated through an integration with OpenAI's ChatGPT-4, and communication with the company can be saved directly in the platform, to keep track of what has been communicated.
 
-Users will be able to register and sign in, and then organize all their work within different workspaces, and each user can create as many workspaces as they want.
+Users are be able to register and sign in, and then organize all their work within different workspaces, and each user can create as many workspaces as they want.
 
-The project will be created with microservices to be scalable, flexible, resilient and easier maintainability because of smaller independent codebases.
+The project is built with microservices architecture to be scalable, flexible, resilient and easier maintainability because of smaller independent codebases.
+
 ### Technical description
 The project is implemented through multiple microservices, CompanyManager, AIService, WebScraperService and Authentication. These all handle their respective parts of the application. Functionality has been split in accordance with microservices principles; loose coupling of services, single responsebility, and independence. 
 
@@ -37,7 +38,6 @@ Additionaly, Consul has been implemented for centralized configuration, service 
 
 ## User stories - A list of user stories that allow an examiner to assess the functionality developed in the project (think of scenarios that the examiner can run to see what functionality you have implemented). The implementation of project specific user stories will be based on the user stories present in this list.
 
-### Actual user stories
 These are the prioritized user stories from Arbeidskrav:
 - [X] As a user I want to be able to search for relevant businesses and save them.
 - [X] As a user I want to be able to find relevant websites for a company with Google Search directly from the appplication.
@@ -57,7 +57,7 @@ Additionaly, I have completed these user stories:
 ## Additional notes
 This was made as a solo-project.
 
-### Microservices specific requirements
+# Microservices specific requirements
 Required (but not sufficient) for E:
 - [X] Use multiple services, that fulfill different functionality and communicate with each
 other

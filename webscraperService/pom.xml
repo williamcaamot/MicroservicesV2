@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>webscraperServiceV2</artifactId>
+    <artifactId>webscraperService</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>webscraperServiceV2</name>
     <description>webscraperServiceV2</description>
