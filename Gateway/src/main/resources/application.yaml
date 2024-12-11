@@ -45,8 +45,8 @@ spring:
     import: "optional:consul:"
 logging:
   level:
-    org.springframework.cloud.gateway: DEBUG
-    com.ecwid.consul: DEBUG
+    org.springframework.cloud.gateway: info
+    com.ecwid.consul: info
 
 management:
   endpoints:
