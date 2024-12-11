@@ -49,8 +49,8 @@ public class CompanyController {
             @PathVariable Long workspaceId,
             @RequestHeader("accountid") Long accountId
     ) {
-        System.out.println("Workspace ID");
-        System.out.println(workspaceId);
+        //System.out.println("Workspace ID");
+        //System.out.println(workspaceId);
 
         return ResponseEntity.status(HttpStatus.OK).body(companyService.getAllCompanies(workspaceId));
     }

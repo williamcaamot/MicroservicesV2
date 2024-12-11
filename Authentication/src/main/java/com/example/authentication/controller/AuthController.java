@@ -79,7 +79,7 @@ public class AuthController {
 
     @PostMapping(path = "/signout")
     public ResponseEntity<?> signout(HttpServletResponse response){
-        System.out.println("Signing out");
+        //System.out.println("Signing out");
         Cookie cookie = new Cookie("jwt", null);
         cookie.setHttpOnly(true); // Make it HTTP-only
         cookie.setPath("/"); // Cookie is available across the entire site

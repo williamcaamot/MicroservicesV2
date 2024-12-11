@@ -40,7 +40,7 @@ public class RabbitMQService {
             ObjectMapper objectMapper = new ObjectMapper();
             PutSalesPitchDTO dto = objectMapper.readValue(json, PutSalesPitchDTO.class);
 
-            System.out.println("Deserialized DTO: " + dto);
+            //System.out.println("Deserialized DTO: " + dto);
 
             String prompt = "You are now going to generate a sales pitch for me. It should be written in English, and you should only provide me with the sales pitch and nothing more." +
                     " The pitch is going to be sent via e-mail to a company called " +

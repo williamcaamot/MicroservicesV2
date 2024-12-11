@@ -32,9 +32,25 @@ Users are be able to register and sign in, and then organize all their work with
 The project is built with microservices architecture to be scalable, flexible, resilient and easier maintainability because of smaller independent codebases.
 
 ### Technical description
-The project is implemented through multiple microservices, CompanyManager, AIService, WebScraperService and Authentication. These all handle their respective parts of the application. Functionality has been split in accordance with microservices principles; loose coupling of services, single responsebility, and independence. 
+The project is implemented through multiple microservices, CompanyManager, AIService, WebScraperService and Authentication. These all handle their respective parts of the application. Functionality has been split in accordance with microservices principles; loose coupling of services, single responsebility, and independence.
 
-Additionaly, Consul has been implemented for centralized configuration, service discovery and health checks. API Gateway through Spring Cloud Gateway has been implemented as a single point of access for the entire application. A Load Balancer has also been implemented to ensure that scalability is possible. A message queue (RabbitMQ) has been implemented to handle asynchronous communication for services that need this. At last, all services has been containerized and a CI pipeline has been set up to automatically build and publish images to dockerhub.  
+Additionaly, Consul has been implemented for centralized configuration, service discovery and health checks. API Gateway through Spring Cloud Gateway has been implemented as a single point of access for the entire application. A Load Balancer has also been implemented to ensure that scalability is possible. A message queue (RabbitMQ) has been implemented to handle asynchronous communication for services that need this. At last, all services has been containerized and a CI pipeline has been set up to automatically build and publish images to dockerhub.
+
+### Short description of functionality in services
+#### CompanyManager Service
+CompanyManager Service handles managing Workspaces, Companies, searching through Brønnøysundregistrene, and saving Communication with companies. It serves as the central repository for all company-related data, including contact details and interactions.
+
+#### AIService
+AI Service handles generating and persisiting sales pitches, also handles API calls for fetching these sales pitches from the React Client.
+
+#### Webscraper Service
+WebscraperService handles Google Search, scraping Email addresses and Phone numbers. These data are persisted in the CompanyManager, which aligns well with the role of CompanyManager which is to store and manage company-related data.
+
+#### Authentication Service
+Authentication Service manages user authentication using JWT (JSON Web Token). JWT allows the Gateway to authenticate requests without directly calling the Auth Service (reduces latency and load on auth service). The Auth Service is responsible for user sign-in, registration, and sign-out processes.
+
+#### Gateway
+The Gateway acts as a single point of entry for the entire application. It handles request authentication, routing, and forwarding requests to the appropriate microservices.
 
 ## User stories - A list of user stories that allow an examiner to assess the functionality developed in the project (think of scenarios that the examiner can run to see what functionality you have implemented). The implementation of project specific user stories will be based on the user stories present in this list.
 

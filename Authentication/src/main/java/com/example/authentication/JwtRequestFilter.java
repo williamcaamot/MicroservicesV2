@@ -24,8 +24,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-        System.out.println("doing filter internal");
-
 
         // Retrieve JWT from the cookie
         Cookie[] cookies = request.getCookies();
@@ -34,7 +32,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("jwt")) {
                     jwt = cookie.getValue();
-                    System.out.println("Cookie JWT value: " + jwt);
+                    //System.out.println("Cookie JWT value: " + jwt);
                     break;
                 }
             }
