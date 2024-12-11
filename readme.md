@@ -99,3 +99,16 @@ check
 Required (but not sufficient) for A:
 - [X] The project has a means of containerization – building container images from the
 existing services and getting such containers running and interacting with each other.
+
+## References
+- For Authentication: https://medium.com/@rajithgama/spring-cloud-gateway-security-with-jwt-23045ba59b8a
+- Logo was created with Looka.com
+
+# Google search
+- Email service accont:  pg3402@microservices-436410.iam.gserviceaccount.com
+- Unique ID service account: 108969935334828963980
+- Google custom search API key:  AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow
+
+# Useful URLs
+> - Consul: http://localhost:8500/ui/dc1/services
+> - RabbitMQ: http://localhost:15672

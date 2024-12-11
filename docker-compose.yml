@@ -134,7 +134,7 @@ services:
       - rabbitmq
       - consul
     deploy:
-      replicas: 1
+      replicas: 2
   ms-aiservice:
     build:
       context: ./AIService
@@ -151,9 +151,8 @@ services:
       - rabbitmq
       - consul
     deploy:
-      replicas: 1
+      replicas: 2
 
-  # TODO This has to use a dockerfile and build files and then make an image
   ms-frontend:
     build:
       context: ./Frontend

@@ -116,7 +116,7 @@ services:
       - rabbitmq
       - consul
     deploy:
-      replicas: 1
+      replicas: 2
   ms-aiservice:
     image: williamcaamot/ms_aiservice:latest
     ports:
@@ -130,7 +130,7 @@ services:
       - rabbitmq
       - consul
     deploy:
-      replicas: 1
+      replicas: 2
   ms-frontend:
     image: williamcaamot/ms_frontend:latest
     ports:
