@@ -1,9 +1,9 @@
 # PGR3403 - Microservices Exam - Dealflow
 
 ## Instructions on how to build, start and run the project
-In all of these cases, there needs to be supplied API keys for Google and OpenAI. I have not checked in these API keys, and if they are not provided, the application still works but will not provide results when using serviced that require these API keys.
+In all of these cases, there needs to be supplied API keys for Google and OpenAI. I have not checked in these API keys, and if they are not provided, the application still works but will not provide results when using functionality to find websites and Sales pitch generation.
 ## 1. Use Docker compose to build images locally
-This is the way I recommend.
+#### Recommended
 > docker compose up --build -d
 
 Visit localhost:8500, to KV storage, and provide the API keys as described in the word document. The service will need a few seconds to refresh the keys from Consul (automatically).

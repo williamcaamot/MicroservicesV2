@@ -2,7 +2,7 @@
 # CONFIG FOR LOCAL                           #
 ##############################################
 openai:
-  api-key: "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"
+  api-key: ""
 
 server:
   port: 0  # This tells Spring Boot to use a random available port

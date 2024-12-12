@@ -80,7 +80,7 @@ jobs:
         id: build-docker-image
         run: |
           ls -la 
-          docker build webscraperServiceV2/ -f webscraperServiceV2/Dockerfile -t williamcaamot/ms_webscraperservice:latest
+          docker build webscraperService/ -f webscraperService/Dockerfile -t williamcaamot/ms_webscraperservice:latest
       - name: push the docker image
         id: push-docker-image
         run: docker push ${{secrets.DOCKERHUBUSERNAME}}/ms_webscraperservice:latest
