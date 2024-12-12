@@ -14,16 +14,16 @@ Application can be seen in localhost:5173
 > docker compose -f docker-compose.dockerhub.yml up -d
 
 ## 3. Use Docker compose to only run RabbitMQ, Consul and DB, then start each service with maven
-For this version of running the services, Consul Config is not enabled, and health checks will not work (consul is containerized and cannot access services running locally on the machine, that are not containerized)
+For this version of running the services, Consul Config is disabled, config is gotten from the application.yaml file. Be sure to add the API keys to these files.
 
 > docker compose -f docker-compose.dev.yml up -d
 
 
 ## Project overview - An overview of the project (the one from the arbeidskrav may be used as a basis). The overview should accurately describe the project implementation.
 ### Project description
-The project is called "Dealflow", which is meant as a business-to-business (B2B) software as a service (SaaS). It's functionality is meant to simplify the process of finding relevant companies to sell to. It can be a time consuming and cumbersome task to search for and find relevant companies to sell to, when doing Business to Business Sales. This SaaS is meant to be targeted towards small and medium-sized businesses and solopreneurs.
+The project is called "Dealflow", which is a business-to-business (B2B) software as a service (SaaS). It's functionality simplifies the process of finding relevant companies to sell to. It can be a time consuming and cumbersome task to search for and find relevant companies to sell to, when doing Business to Business Sales. This SaaS is targeted towards small and medium-sized businesses and solopreneurs.
 
-When dealing with B2B sales, there are a few processes that Dealflow simplifies; First, it simplifies the process of finding companies to sell to. Second, it simplifies the process of finding contact infromation. Third, it simplifies the process of writing a personalized sales pitch to companies, at last it allows to save all communication with a company.
+When dealing with B2B sales, there are a few processes that Dealflow simplifies; First, it simplifies the process of finding companies to sell to. Second, it simplifies the process of finding contact infromation (website, email, phone numbers). Third, it simplifies the process of writing a personalized sales pitch to companies, at last it allows to save all communication with a company.
 
 Finding companies can be done directly inside Dealflow with the company search that is integrated with Brønnøysundregisterne for accurate and up to date information. You can find contact details, such as website, email addresses and phone numbers directly in the platform through a Google integration and a web scraping service. Personalized sales pitches can be generated through an integration with OpenAI's ChatGPT-4, and communication with the company can be saved directly in the platform, to keep track of what has been communicated.
 
