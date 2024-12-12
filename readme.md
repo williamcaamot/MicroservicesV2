@@ -2,6 +2,12 @@
 
 ## Instructions on how to build, start and run the project
 In all of these cases, there needs to be supplied API keys for Google and OpenAI. I have not checked in these API keys, and if they are not provided, the application still works but will not provide results when using functionality to find websites and Sales pitch generation.
+
+#### Demo user
+There has been set up some demo data with these credentials:
+- Username: test
+- Password: abcd1234
+
 ## 1. Use Docker compose to build images locally
 #### Recommended
 > docker compose up --build -d
@@ -17,7 +23,7 @@ Provide the API keys for WebscraperService and AIService as described in the PDF
 
 Application can be seen in localhost:5173
 
-## 3. Use Docker compose to only run RabbitMQ, Consul and DB, then start each service with maven
+## 3. Use Docker compose to only run RabbitMQ, Consul and DB, then start each service individually with maven
 For this version of running the services, Consul Config is disabled, config is gotten from the application.yaml file. Be sure to add the API keys to these files.
 
 > docker compose -f docker-compose.dev.yml up -d
