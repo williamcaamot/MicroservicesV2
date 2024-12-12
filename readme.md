@@ -6,12 +6,16 @@ In all of these cases, there needs to be supplied API keys for Google and OpenAI
 #### Recommended
 > docker compose up --build -d
 
-Visit localhost:8500, to KV storage, and provide the API keys as described in the PDF file named "How to add API keys". The service will need a few seconds to refresh the keys from Consul (automatically).
+Provide the API keys for WebscraperService and AIService as described in the PDF file named "How to add API keys". The service will need a few seconds to refresh the keys from Consul (automatically).
 
 Application can be seen in localhost:5173
 
 ## 2. Use Docker compose with images from dockerhub
 > docker compose -f docker-compose.dockerhub.yml up -d
+
+Provide the API keys for WebscraperService and AIService as described in the PDF file named "How to add API keys". The service will need a few seconds to refresh the keys from Consul (automatically).
+
+Application can be seen in localhost:5173
 
 ## 3. Use Docker compose to only run RabbitMQ, Consul and DB, then start each service with maven
 For this version of running the services, Consul Config is disabled, config is gotten from the application.yaml file. Be sure to add the API keys to these files.
