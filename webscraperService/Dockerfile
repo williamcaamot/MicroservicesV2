@@ -17,10 +17,10 @@ FROM openjdk:21-jdk-slim
 WORKDIR /app
 
 # Copy the jar file from the builder stage
-COPY --from=builder /app/target/webscraperServiceV2-0.0.1-SNAPSHOT.jar /app/
+COPY --from=builder /app/target/webscraperService-0.0.1-SNAPSHOT.jar /app/
 
 # Expose the application port
 EXPOSE 8080
 
 # Run the application # "--spring.profiles.active=production"
-ENTRYPOINT ["java", "-jar", "webscraperServiceV2-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "webscraperService-0.0.1-SNAPSHOT.jar"]
