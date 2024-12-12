@@ -6,7 +6,7 @@ spring:
     name: "Gateway"
   cloud:
     consul:
-      host: localhost
+      host: consul
       port: 8500
       config:
         format: yaml
