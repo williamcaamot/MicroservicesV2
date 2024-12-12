@@ -36,12 +36,18 @@ public class CompanyWebsiteService {
     private final WebClient.Builder webClientBuilder;
 
     @Autowired
-    public CompanyWebsiteService(WebClient.Builder webClientBuilder){
+    public CompanyWebsiteService(WebClient.Builder webClientBuilder) {
         this.webClientBuilder = webClientBuilder;
     }
 
 
     public List<String> getWebsite(String companyName) {
+        if (API_KEY == null || API_KEY.isBlank()) {
+            return List.of("Error: Google API key (API_KEY) is missing.");
+        }
+        if (CX == null || CX.isBlank()) {
+            return List.of("Error: Google CX key is missing.");
+        }
         try {
             String encodedCompanyName = URLEncoder.encode(companyName, StandardCharsets.UTF_8);
             String apiUrl = "https://www.googleapis.com/customsearch/v1?q=" + encodedCompanyName + "&key=" + API_KEY + "&cx=" + CX + "&num=10";
@@ -63,7 +69,6 @@ public class CompanyWebsiteService {
         }
     }
 
-    // Function to extract the website URL from the JSON response
     private List<String> extractWebsiteUrl(String jsonResponse) {
         try {
 
@@ -103,7 +108,7 @@ public class CompanyWebsiteService {
                 .bodyValue(request)
                 .retrieve()
                 .bodyToMono(String.class)
-                .block(); // Blocking call for simplicity
+                .block();
 
         return response;
     }
