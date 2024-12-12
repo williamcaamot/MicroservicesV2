@@ -6,14 +6,14 @@ spring:
     name: "Gateway"
   cloud:
     consul:
-      host: consul
+      host: localhost
       port: 8500
       config:
         format: yaml
         prefixes: config
         data-key: configuration_file
         default-context: ${spring.application.name}
-        enabled: true
+        enabled: false
       discovery:
         enabled: true
         instance-id: ${spring.application.name}-${server.port}
@@ -24,17 +24,23 @@ spring:
           '[/**]':
             allowed-origins:
               - "http://localhost:5173"
+              - "http://localhost:80"
+              - "http://ms-frontend:80"
+              - "http://ms-frontend:5173"
             allowed-headers:
               - "*"
             allowed-methods:
               - "GET"
               - "POST"
               - "OPTIONS"
+              - "DELETE"
+              - "PUT"
+              - "PATCH"
       default-filters:
         - name: Retry
           args:
             retries: 3
-            methods: GET, POST
+            methods: GET, POST, PUT, PATCH, DELETE
   config:
     import: "optional:consul:"
 logging:

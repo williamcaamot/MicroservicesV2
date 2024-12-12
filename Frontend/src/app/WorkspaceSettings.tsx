@@ -88,7 +88,7 @@ export default function WorkspaceSettings() {
             </>}
 
         </div>
-        <Button onClick={() => handleEditWorkspace()} loading={isLoadingSubmit}>Change workspace</Button>
+        <Button onClick={() => handleEditWorkspace()} loading={isLoadingSubmit}>Update workspace</Button>
 
     </Layout>
 }

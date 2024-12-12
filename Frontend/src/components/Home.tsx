@@ -99,7 +99,7 @@ export function Home() {
                     </div>
                     <div className="mt-8 md:mt-0 md:order-1">
                         <p className="text-center text-base text-gray-400">
-                            Kristiania University College - Fall 2024
+                            Exam Fall 2024
                         </p>
                     </div>
                 </div>
