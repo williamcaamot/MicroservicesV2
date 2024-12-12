@@ -25,11 +25,11 @@ The project is called "Dealflow", which is a business-to-business (B2B) software
 
 When dealing with B2B sales, there are a few processes that Dealflow simplifies; First, it simplifies the process of finding companies to sell to. Second, it simplifies the process of finding contact infromation (website, email, phone numbers). Third, it simplifies the process of writing a personalized sales pitch to companies, at last it allows to save all communication with a company.
 
-Finding companies can be done directly inside Dealflow with the company search that is integrated with Brønnøysundregisterne for accurate and up to date information. You can find contact details, such as website, email addresses and phone numbers directly in the platform through a Google integration and a web scraping service. Personalized sales pitches can be generated through an integration with OpenAI's ChatGPT-4, and communication with the company can be saved directly in the platform, to keep track of what has been communicated.
+Finding companies can be done directly inside Dealflow with the company search that is integrated with Brønnøysundregisterne for accurate and up to date information. You can find the company's website directly inside the platform through a Google Search integration (remember to provide API key). Contact details such as email addressess and phone numbers can be found through a click of a button, or they can be set manually if the automatic webscraping service does not provide results. Personalized sales pitches can be generated through an integration with OpenAI's ChatGPT-4. Communication with the company can be saved directly in the platform, to keep track of what has been communicated.
 
 Users are be able to register and sign in, and then organize all their work within different workspaces, and each user can create as many workspaces as they want.
 
-The project is built with microservices architecture to be scalable, flexible, resilient and easier maintainability because of smaller independent codebases.
+The project is built with microservices architecture to be scalable, flexible, resilient and easier maintainability because of smaller independent codebases. The project also uses an event-driven architecture using RabbitMQ to handle asynchronous communication between services, this helps with decoupling and scalability.
 
 ### Technical description
 The project is implemented through multiple microservices, CompanyManager, AIService, WebScraperService and Authentication. These all handle their respective parts of the application. Functionality has been split in accordance with microservices principles; loose coupling of services, single responsebility, and independence.
@@ -38,7 +38,7 @@ Additionaly, Consul has been implemented for centralized configuration, service 
 
 ### Short description of functionality in services
 #### CompanyManager Service
-CompanyManager Service handles managing Workspaces, Companies, searching through Brønnøysundregistrene, and saving Communication with companies. It serves as the central repository for all company-related data, including contact details and interactions.
+CompanyManager Service handles managing Workspaces, Companies, searching through Brønnøysundregistrene, and saving Communication with companies. It serves as the central repository for all company-related data, including contact details and interactions. CompanyManager also sends events to AIService through RabbitMQ for generating sales pitches and persists the results, aligning with the principles of event-driven architecture.
 
 #### AIService
 AI Service handles generating and persisiting sales pitches, also handles API calls for fetching these sales pitches from the React Client.
@@ -47,10 +47,10 @@ AI Service handles generating and persisiting sales pitches, also handles API ca
 WebscraperService handles Google Search, scraping Email addresses and Phone numbers. These data are persisted in the CompanyManager, which aligns well with the role of CompanyManager which is to store and manage company-related data.
 
 #### Authentication Service
-Authentication Service manages user authentication using JWT (JSON Web Token). JWT allows the Gateway to authenticate requests without directly calling the Auth Service (reduces latency and load on auth service). The Auth Service is responsible for user sign-in, registration, and sign-out processes.
+Authentication Service manages user authentication using JWT (JSON Web Token). JWT allows the Gateway to authenticate requests without directly calling the Auth Service (reduces latency and load on auth service). The Auth Service is responsible for user sign-in, registration, and sign-out processes. The AI Service stores user related data such as encrypted passwords, usernames and email addresses.
 
 #### Gateway
-The Gateway acts as a single point of entry for the entire application. It handles request authentication, routing, and forwarding requests to the appropriate microservices.
+The Gateway acts as a single point of entry for the entire application. It handles request authentication, routing, and forwarding requests to the appropriate microservices. Load Balancer has also been set up. Services register in the Consul Service Discovery and the Load Balancer sends requests to different services that are registered.
 
 
 ## User stories - A list of user stories that allow an examiner to assess the functionality developed in the project (think of scenarios that the examiner can run to see what functionality you have implemented). The implementation of project specific user stories will be based on the user stories present in this list.
@@ -104,10 +104,6 @@ existing services and getting such containers running and interacting with each 
 - For Authentication: https://medium.com/@rajithgama/spring-cloud-gateway-security-with-jwt-23045ba59b8a
 - Logo was created with Looka.com
 
-# Google search
-- Email service accont:  pg3402@microservices-436410.iam.gserviceaccount.com
-- Unique ID service account: 108969935334828963980
-- Google custom search API key:  AIzaSyDjUBYwYTQ1vs143c3qO-Eiep8UVDt7dow
 
 # Useful URLs
 > - Consul: http://localhost:8500/ui/dc1/services
