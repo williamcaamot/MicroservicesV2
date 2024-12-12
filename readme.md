@@ -6,7 +6,7 @@ In all of these cases, there needs to be supplied API keys for Google and OpenAI
 #### Recommended
 > docker compose up --build -d
 
-Visit localhost:8500, to KV storage, and provide the API keys as described in the word document. The service will need a few seconds to refresh the keys from Consul (automatically).
+Visit localhost:8500, to KV storage, and provide the API keys as described in the PDF file named "How to add API keys". The service will need a few seconds to refresh the keys from Consul (automatically).
 
 Application can be seen in localhost:5173
 

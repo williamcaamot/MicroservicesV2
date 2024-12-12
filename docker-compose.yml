@@ -120,7 +120,7 @@ services:
       replicas: 1
   ms-webscraperservice:
     build:
-      context: ./webscraperServiceV2
+      context: ./webscraperService
       dockerfile: Dockerfile
     image: williamcaamot/ms_webscraperservice:latest
     ports:
