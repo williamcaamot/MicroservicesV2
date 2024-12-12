@@ -42,11 +42,15 @@ public class CompanyWebsiteService {
 
 
     public List<String> getWebsite(String companyName) {
-        if (API_KEY == null || API_KEY.isBlank()) {
-            return List.of("Error: Google API key (API_KEY) is missing.");
-        }
-        if (CX == null || CX.isBlank()) {
-            return List.of("Error: Google CX key is missing.");
+        if ((API_KEY == null || API_KEY.isBlank()) || (CX == null || CX.isBlank())) {
+            StringBuilder errorMessage = new StringBuilder("Error:");
+            if (API_KEY == null || API_KEY.isBlank()) {
+                errorMessage.append(" Google API key (API_KEY) is missing.");
+            }
+            if (CX == null || CX.isBlank()) {
+                errorMessage.append(" Google CX key is missing.");
+            }
+            return List.of(errorMessage.toString());
         }
         try {
             String encodedCompanyName = URLEncoder.encode(companyName, StandardCharsets.UTF_8);
