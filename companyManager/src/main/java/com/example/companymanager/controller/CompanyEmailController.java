@@ -35,6 +35,8 @@ public class CompanyEmailController {
 
         System.out.println("Getting request to save email");
 
+
+
         Company updatedCompany = companyEmailService.saveCompanyEmail(companyEmailDTO);
         result.put("Emails", (ArrayList<String>) updatedCompany.getEmailAddresses());
 

@@ -19,17 +19,13 @@ class WebscraperServiceV2ApplicationTests {
     @Test
     public void testEmailScraper() {
         try (final WebClient webClient = new WebClient()) {
-            // Disable unnecessary settings
             webClient.getOptions().setCssEnabled(false);
             webClient.getOptions().setJavaScriptEnabled(false);
 
-            // Load the page
             final HtmlPage page = webClient.getPage("https://e24.no/");
 
-            // Get the entire page content as a string
             String pageContent = page.asNormalizedText();
 
-            // Regular expression to find email addresses
             String emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}";
             Pattern pattern = Pattern.compile(emailRegex);
             Matcher matcher = pattern.matcher(pageContent);

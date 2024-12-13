@@ -26,8 +26,8 @@ public class ScraperService {
             String pageHtml = page.asXml();
 
             Matcher matcher = emailPattern.matcher(pageHtml);
-            while (matcher.find()) {
-                result.add(matcher.group());
+            if (matcher.find()) { // Find the first match
+                result.add(matcher.group()); // Add only the first email to the result
             }
 
         } catch (Exception e) {
@@ -36,6 +36,7 @@ public class ScraperService {
         }
         return result;
     }
+
 
     public ArrayList<String> getPhonenumbers(String url) {
         ArrayList<String> result = new ArrayList<>();

@@ -6,6 +6,7 @@ import Modal from "./common/Modal";
 import button from "./Button";
 import CompanySalesPitches from "./CompanySalesPitches.tsx";
 import CompanyCommunication from "./CompanyCommunication.tsx";
+import {data} from "autoprefixer";
 
 export function Company() {
 
@@ -75,8 +76,9 @@ export function Company() {
                     companyId: companyId,
                 })
             });
+            let data;
             if (result.ok) {
-                const data = await result.json();
+                data = await result.json();
                 console.log(data);
                 if (data.length === 0) {
                     alert("Could not find any email addresses!")
@@ -84,6 +86,17 @@ export function Company() {
                     setCompany(prevCompany => ({...prevCompany, emailAddresses: data}))
                 }
             }
+            setTimeout(async() => {
+                let companyToUpdate = company;
+                companyToUpdate.emailAddresses = data;
+                const result2 = await fetch(`/api/v1/workspace/${workspaceId}/company`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(companyToUpdate)
+                });
+            }, 500)
         } catch (e) {
             console.log(e)
         }
@@ -108,8 +121,9 @@ export function Company() {
                     companyId: companyId,
                 })
             });
+            let data;
             if (result.ok) {
-                const data = await result.json();
+                data = await result.json();
                 console.log(data);
                 if (data.length === 0) {
                     alert("Could not find any email addresses!")
@@ -117,6 +131,19 @@ export function Company() {
                     setCompany(prevCompany => ({...prevCompany, phonenumbers: data}))
                 }
             }
+
+            setTimeout(async() => {
+                let companyToUpdate = company;
+                companyToUpdate.phonenumbers = data;
+                const result2 = await fetch(`/api/v1/workspace/${workspaceId}/company`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(companyToUpdate)
+                });
+            }, 500)
+
         } catch (e) {
             console.log(e)
         }
@@ -277,7 +304,7 @@ export function Company() {
                     <Button variant={"outlined"} onClick={() => fetchCompanyWebsites()}
                             loading={isFetchingWebsitesLoading}>Find websites for this company</Button>
                     <Button variant={"outlined"} onClick={() => fetchCompanyEmail()}
-                            loading={isFetchingCompanyEmailsLoading}>Find email addresses for this company</Button>
+                            loading={isFetchingCompanyEmailsLoading}>Find email address for this company</Button>
                     <Button variant={"outlined"} onClick={() => fetchCompanyPhonenumbers()}
                             loading={isFetchingPhonenumbersLoading}>Find phone numbers for this company</Button>
 
@@ -333,7 +360,7 @@ export function Company() {
                         </div>
                         <div>
                             <div className="flex items-center gap-2 mb-2">
-                                <h2 className="text-xl font-semibold text-gray-700">Email addresses</h2>
+                                <h2 className="text-xl font-semibold text-gray-700">Email address</h2>
                                 <button
                                     onClick={() => setIsAddingEmail(!isAddingEmail)}
                                     className="text-blue-500 hover:text-blue-600 p-1 rounded-full hover:bg-blue-50"
