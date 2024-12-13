@@ -4,12 +4,13 @@
 In all of these cases, there needs to be supplied API keys for Google and OpenAI. I have not checked in these API keys, and if they are not provided, the application still works but will not provide results when using functionality to find websites and Sales pitch generation.
 
 #### Demo user
-There has been set up some demo data with these credentials:
+There has been set up some demo data with these credentials, data for this user is automatically loaded into the application when building and running it:
 - Username: test
 - Password: abcd1234
 
-## 1. Use Docker compose to build images locally
-#### Recommended
+## 1. Use Docker compose to build images locally (Recommended!)
+#### Recommended way of building and running
+Run the following command from the project root directory:
 > docker compose up --build -d
 
 Provide the API keys for WebscraperService and AIService as described in the PDF file named "How to add API keys". The service will need a few seconds to refresh the keys from Consul (automatically).
