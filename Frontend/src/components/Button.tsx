@@ -36,8 +36,8 @@ const Button = ({
 
     // Variant-specific classes when button is enabled
     const variantClasses = {
-        filled: "bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white",
-        outlined: "border-2 border-blue-500 text-blue-500 hover:bg-blue-50 active:bg-blue-100",
+        filled: "bg-[#1f729c] hover:bg-[#16506e] active:bg-[#0a4869] text-white",
+        outlined: "border-2 border-[#16506e] text-[#0a4869] hover:[#0a4869] active:bg-[#778d99]",
         ghost: "text-blue-500 hover:bg-blue-50 active:bg-blue-100"
     };
 

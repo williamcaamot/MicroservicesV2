@@ -101,18 +101,18 @@ export default function CompanyCommunication(){
 
 
     return (
-        <div className="bg-white rounded-lg shadow-lg border p-6">
+        <div className="bg-white broder rounded-lg shadow-lg border p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 Company Communication
             </h2>
-            <div className="w-full max-w-2xl mx-auto">
+            <div className="w-full max-w-4xl mx-auto">
 
                 {error && <ErrorMessage message={error} onClose={() => setError(undefined)}/>}
 
                 {/* Message Container */}
-                <div className="bg-gray-50 rounded-lg shadow-md">
+                <div className="bg-gray-50 rounded shadow-md border">
                     {/* Messages Area - Scrollable */}
-                    <div className="h-96 overflow-y-auto p-4 space-y-4">
+                    <div className="h-[500px] overflow-y-auto p-4 space-y-4">
 
                         {messages && messages.length < 1 && <h3 className={"text-2xl text-zinc-800"}>No communication yet! You can write down your communication with this company below to keep track of it!</h3>}
                         {messages && messages.map((message) => (<Message message={message} handleDeleteMessage={handleDeleteMessage}/>
@@ -123,7 +123,7 @@ export default function CompanyCommunication(){
                     <div className="border-t border-gray-200 p-4 bg-white rounded-b-lg">
                         <div className="flex space-x-2">
                             <select
-                                className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 onChange={(event) => setActiveSender(event.target.value)}
                             >
                                 <option value="me">ME</option>
@@ -133,13 +133,13 @@ export default function CompanyCommunication(){
                                 value={activeMessage}
                                 onChange={(event) => setActiveMessage(event.target.value)}
                                 type="text"
-                                placeholder="Type a message..."
-                                className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                placeholder="Write a message..."
+                                className="flex-1 border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
-                            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+                            <button className="bg-[#1B5A7A] text-white px-4 py-2 hover:bg-[#123c52] transition-colors"
                             onClick={handleSaveCommunicationMessage}
                             >
-                                Add
+                                Add Message
                             </button>
                         </div>
                     </div>

@@ -31,7 +31,7 @@ export default function Message({message, handleDeleteMessage}: MessageProps){
             <div
                 className={`max-w-[70%] rounded-lg p-3 ${
                     message.sender === 'me'
-                        ? 'bg-blue-500 text-white rounded-br-none'
+                        ? 'bg-[#1f729c] text-white rounded-br-none'
                         : 'bg-gray-200 text-gray-800 rounded-bl-none'
                 }`}
             >
