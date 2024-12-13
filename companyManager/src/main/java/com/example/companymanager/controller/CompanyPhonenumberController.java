@@ -32,6 +32,15 @@ public class CompanyPhonenumberController {
 
         companyPhonenumberService.saveCompanyPhonenumbers(companyPhonenumberDTO);
 
+
+        System.out.println("in the phone number getting part of CM");
+
+        
+        for (String string:
+             companyPhonenumberDTO.getPhonenumbers()) {
+            System.out.println(string);
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body(result);
 
     }

@@ -26,8 +26,8 @@ public class ScraperService {
             String pageHtml = page.asXml();
 
             Matcher matcher = emailPattern.matcher(pageHtml);
-            if (matcher.find()) { // Find the first match
-                result.add(matcher.group()); // Add only the first email to the result
+            while (matcher.find()) {
+                result.add(matcher.group());
             }
 
         } catch (Exception e) {

@@ -31,7 +31,7 @@ For this version of running the services, Consul Config is disabled, config is g
 
 ## Project overview - An overview of the project (the one from the arbeidskrav may be used as a basis). The overview should accurately describe the project implementation.
 ### Project description
-The project is called "Dealflow", which is a business-to-business (B2B) software as a service (SaaS). It's functionality simplifies the process of finding relevant companies to sell to. It can be a time consuming and cumbersome task to search for and find relevant companies to sell to, when doing Business to Business Sales. This SaaS is targeted towards small and medium-sized businesses and solopreneurs.
+The project is called "Dealflow", which is a business-to-business (B2B) software as a service (SaaS). It's functionality simplifies the process of finding relevant companies to sell to. It can be a time consuming and cumbersome task to search for and find relevant companies to sell to, when doing Business to Business Sales. This SaaS is targeted towards small and medium-sized businesses and solopreneurs, it can be used by different companies that struggle with their B2B sales processes, such as manufacturing businesses, event businesses, or IT businesses just to mention a few.
 
 When dealing with B2B sales, there are a few processes that Dealflow simplifies; First, it simplifies the process of finding companies to sell to. Second, it simplifies the process of finding contact infromation (website, email, phone numbers). Third, it simplifies the process of writing a personalized sales pitch to companies, at last it allows to save all communication with a company.
 

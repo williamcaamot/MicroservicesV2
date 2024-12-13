@@ -86,7 +86,7 @@ export function Company() {
                     setCompany(prevCompany => ({...prevCompany, emailAddresses: data}))
                 }
             }
-            setTimeout(async() => {
+            /*setTimeout(async() => {
                 let companyToUpdate = company;
                 companyToUpdate.emailAddresses = data;
                 const result2 = await fetch(`/api/v1/workspace/${workspaceId}/company`, {
@@ -96,7 +96,7 @@ export function Company() {
                     },
                     body: JSON.stringify(companyToUpdate)
                 });
-            }, 500)
+            }, 500)*/
         } catch (e) {
             console.log(e)
         }
@@ -132,7 +132,7 @@ export function Company() {
                 }
             }
 
-            setTimeout(async() => {
+            /*setTimeout(async() => {
                 let companyToUpdate = company;
                 companyToUpdate.phonenumbers = data;
                 const result2 = await fetch(`/api/v1/workspace/${workspaceId}/company`, {
@@ -142,7 +142,7 @@ export function Company() {
                     },
                     body: JSON.stringify(companyToUpdate)
                 });
-            }, 500)
+            }, 500)*/
 
         } catch (e) {
             console.log(e)

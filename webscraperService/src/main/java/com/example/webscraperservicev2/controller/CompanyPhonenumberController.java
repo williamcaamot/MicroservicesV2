@@ -30,6 +30,8 @@ public class CompanyPhonenumberController {
             @RequestBody GetAndSavePhonenumberDTO getAndSavePhonenumberDTO,
             @RequestHeader("accountid") Long accountId
     ) {
+
+
         getAndSavePhonenumberDTO.setAccountId(accountId);
         ArrayList<String> result = companyPhonenumberService.getAndSavePhonenumbers(getAndSavePhonenumberDTO);
         return ResponseEntity.status(HttpStatus.OK).body(result);

@@ -23,9 +23,10 @@ public class CompanyPhonenumberService {
     }
     public ArrayList<String> getAndSavePhonenumbers(GetAndSavePhonenumberDTO getAndSavePhonenumberDTO){
         ArrayList<String> result = scraperService.getPhonenumbers(getAndSavePhonenumberDTO.getWebsite());
-        if (result.size() > 1){ // No need to call service to store if cannot find any emails
+        if (result.size() < 1){
             return result;
         }
+
 
         Map<String, Object> request = new HashMap<>();
         request.put("accountId", getAndSavePhonenumberDTO.getAccountId());
