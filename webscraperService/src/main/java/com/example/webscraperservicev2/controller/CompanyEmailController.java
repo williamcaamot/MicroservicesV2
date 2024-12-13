@@ -29,6 +29,8 @@ public class CompanyEmailController {
             @RequestBody GetAndSaveEmailsDTO getAndSaveEmailsDTO,
             @RequestHeader("accountid") Long accountId
     ) {
+        System.out.println("Getting and saving emails");
+
         getAndSaveEmailsDTO.setAccountId(accountId);
         ArrayList<String> result = companyEmailService.getAndSaveEmails(getAndSaveEmailsDTO);
         return ResponseEntity.status(HttpStatus.OK).body(result);

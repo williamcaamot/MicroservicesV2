@@ -23,7 +23,10 @@ public class CompanyEmailService {
     public ArrayList<String> getAndSaveEmails(GetAndSaveEmailsDTO getAndSaveEmailsDTO){
         ArrayList<String> result = emailScraperService.getEmails(getAndSaveEmailsDTO.getWebsite());
 
-        if (result.size() > 1){ // No need to call service to store if cannot find any emails
+        System.out.println("Reaching getandsave emails method");
+
+        if (result.isEmpty()){ // No need to call service to store if cannot find any emails
+
             return result;
         }
 
@@ -42,6 +45,8 @@ public class CompanyEmailService {
                 .retrieve()
                 .bodyToMono(String.class)
                 .block(); // Blocking call for simplicity
+
+        System.out.println(response);
 
 
         return result;

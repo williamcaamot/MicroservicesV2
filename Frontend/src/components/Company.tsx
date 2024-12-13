@@ -64,7 +64,7 @@ export function Company() {
         }
         setIsFetchingCompanyEmailsLoading(true);
         try {
-            const result = await fetch(`/api/v1/webscraper/companyemail?companyWebsite=${company.hjemmeside}`, {
+            const result = await fetch(`/api/v1/webscraper/companyemail`, {
                 method: "POST",
                 headers: {
                     "content-type": "Application/JSON"

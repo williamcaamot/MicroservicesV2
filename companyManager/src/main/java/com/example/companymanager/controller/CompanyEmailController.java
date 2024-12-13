@@ -33,6 +33,8 @@ public class CompanyEmailController {
             ){
         HashMap<String, ArrayList<String>> result = new HashMap<>();
 
+        System.out.println("Getting request to save email");
+
         Company updatedCompany = companyEmailService.saveCompanyEmail(companyEmailDTO);
         result.put("Emails", (ArrayList<String>) updatedCompany.getEmailAddresses());
 
